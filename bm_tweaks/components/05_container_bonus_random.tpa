@@ -1,0 +1,93 @@
+INCLUDE ~bm_tweaks/lib/container_macros.tpa~
+
+COPY_EXISTING_REGEXP GLOB ~^.+\.[aA][rR][eE]$~ ~override~
+  PATCH_IF (SOURCE_SIZE > 0xcc) BEGIN
+    READ_SHORT 0x74 cont_num ELSE 0
+    READ_LONG  0x70 cont_off ELSE 0
+    READ_LONG  0x78 item_off ELSE 0
+
+    FOR (container_index = 0 ; container_index < cont_num ; ++container_index) BEGIN
+      SET cont_base = cont_off + (container_index * 0xc0)
+      READ_LONG (cont_base + 0x40) idx_items
+      READ_LONG (cont_base + 0x44) num_items
+
+      SPRINT bonus_item ~~
+      SET has_random = 0
+      SET has_scroll = 0
+      SET has_magic = 0
+      SET has_gem = 0
+      SET has_potion = 0
+      SET has_trinket = 0
+      SET has_weapon = 0
+      SET has_ammo = 0
+      SET best_treasure_tier = 0
+
+      FOR (item_index = 0 ; item_index < num_items ; ++item_index) BEGIN
+        READ_ASCII (item_off + ((idx_items + item_index) * 0x14)) item_ref (8) NULL
+
+        PATCH_IF ("%item_ref%" STRING_COMPARE_REGEXP ~^[Rr][Nn][Dd]~ = 0) BEGIN
+          SET has_random = 1
+
+          PATCH_IF ("%item_ref%" STRING_COMPARE_CASE ~RNDTRE01~ = 0) BEGIN
+            PATCH_IF (best_treasure_tier < 1) BEGIN SET best_treasure_tier = 1 END
+          END ELSE PATCH_IF ("%item_ref%" STRING_COMPARE_CASE ~RNDTRE02~ = 0 OR "%item_ref%" STRING_COMPARE_CASE ~RNDTRE06~ = 0) BEGIN
+            PATCH_IF (best_treasure_tier < 2) BEGIN SET best_treasure_tier = 2 END
+          END ELSE PATCH_IF ("%item_ref%" STRING_COMPARE_CASE ~RNDTRE03~ = 0 OR "%item_ref%" STRING_COMPARE_CASE ~RNDTRE07~ = 0) BEGIN
+            PATCH_IF (best_treasure_tier < 3) BEGIN SET best_treasure_tier = 3 END
+          END ELSE PATCH_IF ("%item_ref%" STRING_COMPARE_CASE ~SODTRE08~ = 0) BEGIN
+            PATCH_IF (best_treasure_tier < 4) BEGIN SET best_treasure_tier = 4 END
+          END ELSE PATCH_IF ("%item_ref%" STRING_COMPARE_CASE ~SODTRE09~ = 0) BEGIN
+            PATCH_IF (best_treasure_tier < 5) BEGIN SET best_treasure_tier = 5 END
+          END ELSE PATCH_IF ("%item_ref%" STRING_COMPARE_CASE ~RNDTRE04~ = 0 OR "%item_ref%" STRING_COMPARE_CASE ~RNDTRE08~ = 0) BEGIN
+            PATCH_IF (best_treasure_tier < 6) BEGIN SET best_treasure_tier = 6 END
+          END ELSE PATCH_IF ("%item_ref%" STRING_COMPARE_CASE ~RNDTRE05~ = 0 OR "%item_ref%" STRING_COMPARE_CASE ~RNDTRE09~ = 0 OR "%item_ref%" STRING_COMPARE_CASE ~SODTRE07~ = 0) BEGIN
+            PATCH_IF (best_treasure_tier < 7) BEGIN SET best_treasure_tier = 7 END
+          END
+
+          PATCH_IF ("%item_ref%" STRING_COMPARE_REGEXP ~^[Rr][Nn][Dd][Ss][Cc][Rr]~ = 0) BEGIN SET has_scroll = 1 END
+          PATCH_IF ("%item_ref%" STRING_COMPARE_REGEXP ~^[Rr][Nn][Dd][Mm][Aa][Gg]~ = 0) BEGIN SET has_magic = 1 END
+          PATCH_IF ("%item_ref%" STRING_COMPARE_REGEXP ~^[Rr][Nn][Dd][Gg][Ee][Mm]~ = 0) BEGIN SET has_gem = 1 END
+          PATCH_IF ("%item_ref%" STRING_COMPARE_REGEXP ~^[Rr][Nn][Dd][Pp][Tt][Nn]~ = 0) BEGIN SET has_potion = 1 END
+          PATCH_IF ("%item_ref%" STRING_COMPARE_REGEXP ~^[Rr][Nn][Dd][Tt][Rr][Ii]~ = 0) BEGIN SET has_trinket = 1 END
+          PATCH_IF ("%item_ref%" STRING_COMPARE_REGEXP ~^[Rr][Nn][Dd][Ww][Ee][Pp]~ = 0) BEGIN SET has_weapon = 1 END
+          PATCH_IF ("%item_ref%" STRING_COMPARE_REGEXP ~^[Rr][Nn][Dd][Aa][Rr][Oo]~ = 0) BEGIN SET has_ammo = 1 END
+        END
+      END
+
+      PATCH_IF (has_random = 1) BEGIN
+        PATCH_IF (has_trinket = 1) BEGIN
+          SPRINT bonus_item ~RNDTRI01~
+        END ELSE PATCH_IF (has_scroll = 1) BEGIN
+          SPRINT bonus_item ~RNDSCR01~
+        END ELSE PATCH_IF (has_magic = 1) BEGIN
+          SPRINT bonus_item ~RNDMAG01~
+        END ELSE PATCH_IF (has_potion = 1) BEGIN
+          SPRINT bonus_item ~RNDPTN01~
+        END ELSE PATCH_IF (has_gem = 1) BEGIN
+          SPRINT bonus_item ~RNDGEM01~
+        END ELSE PATCH_IF (has_weapon = 1) BEGIN
+          SPRINT bonus_item ~RNDWEP04~
+        END ELSE PATCH_IF (has_ammo = 1) BEGIN
+          SPRINT bonus_item ~RNDARO02~
+        END ELSE BEGIN
+          PATCH_IF (best_treasure_tier >= 7) BEGIN
+            SPRINT bonus_item ~RNDTRE04~
+          END ELSE PATCH_IF (best_treasure_tier >= 5) BEGIN
+            SPRINT bonus_item ~RNDTRE03~
+          END ELSE PATCH_IF (best_treasure_tier >= 3) BEGIN
+            SPRINT bonus_item ~RNDTRE02~
+          END ELSE PATCH_IF (best_treasure_tier >= 1) BEGIN
+            SPRINT bonus_item ~RNDTRE01~
+          END
+        END
+
+        PATCH_IF ("%bonus_item%" STRING_COMPARE_CASE ~~ != 0) BEGIN
+          SPRINT item_to_add ~%bonus_item%~
+          LPM BM_ADD_CONTAINER_ITEM
+          READ_LONG 0x70 cont_off
+          READ_LONG 0x78 item_off
+        END
+      END
+    END
+  END
+BUT_ONLY_IF_IT_CHANGES

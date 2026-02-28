@@ -1,0 +1,45 @@
+DEFINE_PATCH_MACRO BM_ADD_CONTAINER_ITEM BEGIN
+  PATCH_IF (container_index >= 0 AND "%item_to_add%" STRING_COMPARE_CASE ~~ != 0) BEGIN
+    READ_SHORT 0x74 cont_num ELSE 0
+    READ_SHORT 0x76 item_num_total ELSE 0
+    READ_LONG  0x70 cont_off ELSE 0
+    READ_LONG  0x78 item_off ELSE 0
+
+    PATCH_IF (container_index < cont_num) BEGIN
+      SET cont_base = cont_off + (container_index * 0xc0)
+      READ_LONG (cont_base + 0x40) idx_items
+      READ_LONG (cont_base + 0x44) num_items
+
+      SET insert_idx = idx_items + num_items
+      SET insert_off = item_off + (insert_idx * 0x14)
+
+      INSERT_BYTES insert_off 0x14
+      WRITE_ASCIIE insert_off ~%item_to_add%~ #8
+      WRITE_SHORT  (insert_off + 0x08) 0
+      WRITE_SHORT  (insert_off + 0x0a) 0
+      WRITE_SHORT  (insert_off + 0x0c) 0
+      WRITE_SHORT  (insert_off + 0x0e) 0
+      WRITE_LONG   (insert_off + 0x10) 0
+
+      WRITE_SHORT 0x76 (item_num_total + 1)
+      WRITE_LONG  (cont_base + 0x44) (num_items + 1)
+
+      FOR (other_index = 0 ; other_index < cont_num ; ++other_index) BEGIN
+        PATCH_IF (other_index != container_index) BEGIN
+          SET other_base = cont_off + (other_index * 0xc0)
+          READ_LONG (other_base + 0x40) other_idx
+          PATCH_IF (other_idx >= insert_idx) BEGIN
+            WRITE_LONG (other_base + 0x40) (other_idx + 1)
+          END
+        END
+      END
+
+      PATCH_FOR_EACH off IN 0x7c 0x84 0x88 0x90 0xa0 0xa8 0xb0 0xb8 0xbc 0xc0 0xc4 0xcc BEGIN
+        READ_LONG off off_check
+        PATCH_IF (off_check >= insert_off AND off_check > 0) BEGIN
+          WRITE_LONG off (off_check + 0x14)
+        END
+      END
+    END
+  END
+END

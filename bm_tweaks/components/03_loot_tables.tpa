@@ -1,0 +1,62 @@
+// Primary target: RNDTRES.2DA, which is what live creature RNDTRE## refs
+// resolve against in this install. Support tables get a light touch only.
+
+COPY_EXISTING ~rndtres.2da~ ~override~
+  REPLACE_TEXTUALLY
+    ~^SODTRE07[^\r\n]*$~
+    ~SODTRE07 BDRING07 BDRING09 BDRING12 BDAMUL25 BDAMUL24   *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *~
+  REPLACE_TEXTUALLY
+    ~^RNDTRI01[^\r\n]*$~
+    ~RNDTRI01 RING10   RING11   RING14   AMUL05   AMUL06   BDAMUL24   *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *~
+  REPLACE_TEXTUALLY
+    ~^RNDTRI02[^\r\n]*$~
+    ~RNDTRI02 RING13   RING15   RING12   RING16   BDAMUL25 BDRING12   BDRING07   *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *~
+  REPLACE_TEXTUALLY
+    ~^RNDTRI03[^\r\n]*$~
+    ~RNDTRI03 RING17   RING18   RING19   AMUL11   BDRING07   BDAMUL25 BDRING12   *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *        *~
+  REPLACE_TEXTUALLY
+    ~cdrdarow arow01   arow01   arow01   arow01   arow01   arow01   arow01   arow01   arow01   cdhqarow~
+    ~cdrdarow arow01   arow01   arow01   arow01   CDHQAROW arow01   arow01   arow01   arow01   cdhqarow~
+  REPLACE_TEXTUALLY
+    ~cdrdbolt bolt01   bolt01   bolt01   bolt01   bolt01   bolt01   bolt01   bolt01   bolt01   cdhqbolt~
+    ~cdrdbolt bolt01   bolt01   bolt01   bolt01   CDHQBOLT bolt01   bolt01   bolt01   bolt01   cdhqbolt~
+  REPLACE_TEXTUALLY
+    ~cdrdgnl  halb01   halb01   halb01   halb01   halb01   halb01   halb01   cdhqhalb halb01   halb01   halb01   halb01   halb01   halb01   halb01   cdhqhalb halb01   halb01   halb01   halb01   halb01   halb01   halb01   cdhqhalb cdax2h1  cdax2h1  cdax2h1  cdax2h1  cdax2h1  cdax2h1  cdax2h1  cdhqax2h sw1h04~
+    ~cdrdgnl  halb01   halb01   halb01   halb01   halb01   halb01   halb01   cdhqhalb halb01   halb01   halb01   halb01   halb01   halb01   halb01   cdhqhalb halb01   halb01   halb01   halb01   halb01   halb01   halb01   cdhqhalb CDAX2H2  cdax2h1  cdax2h1  cdax2h1  cdax2h1  cdax2h1  cdax2h1  cdhqax2h CDHQSW1L~
+  REPLACE_TEXTUALLY
+    ~cdrdlman halb01   halb01   halb01   halb01   halb01   halb01   halb01   cdhqhalb halb01   halb01   halb01   halb01   halb01   halb01   halb01   cdhqhalb halb01   halb01   halb01   halb01   halb01   halb01   halb01   cdhqhalb cdax2h1  cdax2h1  cdax2h1  cdax2h1  cdax2h1  cdax2h1  cdax2h1  cdhqax2h staf01~
+    ~cdrdlman halb01   halb01   halb01   halb01   halb01   halb01   halb01   cdhqhalb halb01   halb01   halb01   halb01   halb01   halb01   halb01   cdhqhalb halb01   halb01   halb01   halb01   halb01   halb01   halb01   cdhqhalb CDAX2H2  cdax2h1  cdax2h1  cdax2h1  cdax2h1  cdax2h1  cdax2h1  cdhqax2h CDHQSTAF~
+  REPLACE_TEXTUALLY
+    ~cdrd2hm  halb01   halb01   halb01   halb01   halb01   halb01   halb01   cdhqhalb sper01   sper01   sper01   sper01   sper01   sper01   sper01   cdhqsper staf01   staf01   staf01   staf01   staf01   staf01   staf01   cdhqstaf sw2h01   sw2h01   sw2h01   sw2h01   sw2h01   sw2h01   sw2h01   cdhqsw2h cdax2h1~
+    ~cdrd2hm  halb01   halb01   halb01   halb01   halb01   halb01   halb01   cdhqhalb sper01   sper01   sper01   sper01   sper01   sper01   sper01   cdhqsper staf01   staf01   staf01   staf01   staf01   staf01   staf01   cdhqstaf CDHQSW2H sw2h01   sw2h01   sw2h01   sw2h01   sw2h01   sw2h01   cdhqsw2h CDAX2H2~
+  REPLACE_TEXTUALLY
+    ~cdrdlbw  bow03    bow03    bow03    bow03    bow03    bow03    bow03    cdhqlbow bow03    bow03    bow03    bow03    bow03    bow03    bow03    cdhqlbow bow03~
+    ~cdrdlbw  bow03    bow03    bow03    bow03    CDHQLBOW bow03    bow03    cdhqlbow bow03    bow03    bow03    bow03    bow03    bow03    bow03    cdhqlbow bow03~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~rndscrol.2da~ ~override~
+  REPLACE_TEXTUALLY
+    ~1st      SCRL6N   SCRL6T   SCRL70   scrl66   dvscrl73~
+    ~1st      SCRL6N   DVSCRL73 SCRL70   scrl66   dvscrl73~
+  REPLACE_TEXTUALLY
+    ~1st_BG1  SCRL84   SCRL70   SCRL70   scrl66   dvscrl73~
+    ~1st_BG1  SCRL84   DVSCRL73 SCRL70   scrl66   dvscrl73~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~rndequip.2da~ ~override~
+  REPLACE_TEXTUALLY
+    ~3rd       PLAT14    PLAT10    CHAN05    LEAT15    LEAT12    SHLD30    STAF18    HAMM08    SW1H02    SW1H05    SW1H22    SPER02    SW2H02    SW1H09    SW1H42    SW1H41    BLUN21    XBOW07    XBOW09    BOW16~
+    ~3rd       PLAT14    PLAT10    CHAN05    LEAT15    LEAT12    SHLD30    STAF18    HAMM08    SW1H02    SW1H05    SW1H22    SPER02    CDHQSW2H  CDHQSW1L  SW1H42    SW1H41    BLUN21    XBOW07    XBOW09    CDHQLBOW~
+  REPLACE_TEXTUALLY
+    ~3rd_BG1  PLAT14    PLAT10    CHAN05    LEAT15    LEAT12    SHLD30    STAF18    HAMM08    SW1H02    SW1H05    SW1H22    SPER02    SW2H02    BDSW1H13 SW1H42   SW1H41   BLUN21   XBOW07   XBOW09   BOW16~
+    ~3rd_BG1  PLAT14    PLAT10    CHAN05    LEAT15    LEAT12    SHLD30    STAF18    HAMM08    SW1H02    SW1H05    SW1H22    SPER02    CDHQSW2H  BDSW1H13 CDHQSW1L SW1H41   BLUN21   XBOW07   XBOW09   CDHQLBOW~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~rndwep.2da~ ~override~
+  REPLACE_TEXTUALLY
+    ~3rd      PLAT14   PLAT10   CHAN05   LEAT15   LEAT12   SHLD30   STAF18   HAMM08   SW1H02   SW1H05   SW1H22   SPER02   SW2H02   SW1H09   SW1H42   SW1H41   BLUN21   XBOW07   XBOW09   BOW16~
+    ~3rd      PLAT14   PLAT10   CHAN05   LEAT15   LEAT12   SHLD30   STAF18   HAMM08   SW1H02   SW1H05   SW1H22   SPER02   CDHQSW2H CDHQSW1L SW1H42   SW1H41   BLUN21   XBOW07   XBOW09   CDHQLBOW~
+  REPLACE_TEXTUALLY
+    ~3rd_BG1  PLAT14   PLAT10   CHAN05   LEAT15   LEAT12   SHLD30   STAF18   HAMM08   SW1H02   SW1H05   SW1H22   SPER02   SW2H02   BDSW1H13 SW1H42   SW1H41   BLUN21   XBOW07   XBOW09   BOW16~
+    ~3rd_BG1  PLAT14   PLAT10   CHAN05   LEAT15   LEAT12   SHLD30   STAF18   HAMM08   SW1H02   SW1H05   SW1H22   SPER02   CDHQSW2H BDSW1H13 CDHQSW1L SW1H41   BLUN21   XBOW07   XBOW09   CDHQLBOW~
+BUT_ONLY_IF_IT_CHANGES

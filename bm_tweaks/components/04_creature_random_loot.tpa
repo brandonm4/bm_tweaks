@@ -1,0 +1,32 @@
+COPY_EXISTING_REGEXP GLOB ~^.+\.[cC][rR][eE]$~ ~override~
+  PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
+    READ_LONG  0x14 xp
+    READ_LONG  0x2bc item_off
+    READ_LONG  0x2c0 item_num
+    SET has_rnd_loot = 0
+
+    FOR (index = 0 ; index < item_num ; ++index) BEGIN
+      READ_ASCII (item_off + (index * 0x14)) item_check
+      PATCH_IF ("%item_check%" STRING_COMPARE_REGEXP ~^[Rr][Nn][Dd]~ = 0) BEGIN
+        SET has_rnd_loot = 1
+        SET index = item_num
+      END
+    END
+
+    PATCH_IF (has_rnd_loot = 0) BEGIN
+      SPRINT rnd_item ~RNDTRE09~
+      PATCH_IF (xp <  7000) BEGIN SPRINT rnd_item ~RNDTRE08~ END
+      PATCH_IF (xp <  3000) BEGIN SPRINT rnd_item ~SODTRE09~ END
+      PATCH_IF (xp <  1500) BEGIN SPRINT rnd_item ~SODTRE08~ END
+      PATCH_IF (xp <   500) BEGIN SPRINT rnd_item ~RNDTRE07~ END
+      PATCH_IF (xp <   100) BEGIN SPRINT rnd_item ~RNDTRE06~ END
+      PATCH_IF (xp <    25) BEGIN SPRINT rnd_item ~RNDTRE01~ END
+
+      ADD_CRE_ITEM ~%rnd_item%~ #0 #0 #0 ~NONE~ ~INV~
+
+      PATCH_IF (xp >= 7000) BEGIN
+        ADD_CRE_ITEM ~SODTRE07~ #0 #0 #0 ~NONE~ ~INV~
+      END
+    END
+  END
+BUT_ONLY_IF_IT_CHANGES

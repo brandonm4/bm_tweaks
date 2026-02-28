@@ -1,0 +1,9 @@
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+    READ_SHORT 0x1c type
+    PATCH_IF (type = 19 OR type = 20) BEGIN
+      READ_LONG 0x1e unus
+      WRITE_LONG 0x1e (unus BAND BNOT (BIT7 BOR BIT8))
+    END
+  END
+BUT_ONLY_IF_IT_CHANGES

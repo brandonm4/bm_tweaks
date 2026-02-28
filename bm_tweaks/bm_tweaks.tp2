@@ -1,0 +1,28 @@
+BACKUP ~bm_tweaks/backup~
+AUTHOR ~Brandon Mathis~
+
+LOAD ~bm_tweaks/lib/container_macros.tpa~
+
+BEGIN ~Small/Large swords usable by Cleric + Cleric/Mage~
+INCLUDE ~bm_tweaks/components/00_swords.tpa~
+
+BEGIN ~Remove CDTweaks Arcane ASF (cdtmis*.eff) from items~
+INCLUDE ~bm_tweaks/components/01_remove_asf.tpa~
+
+BEGIN ~Lightning Bolt: classic projectile + ground targeting (all abilities)~
+INCLUDE ~bm_tweaks/components/02_lightning_bolt.tpa~
+
+BEGIN ~Conservative random loot table expansion for EET~
+INCLUDE ~bm_tweaks/components/03_loot_tables.tpa~
+
+BEGIN ~Add random treasure placeholders to creatures that lack any random loot~
+INCLUDE ~bm_tweaks/components/04_creature_random_loot.tpa~
+
+BEGIN ~Add conservative bonus random loot to containers that already use RND*~
+INCLUDE ~bm_tweaks/components/05_container_bonus_random.tpa~
+
+BEGIN ~Add random loot to empty containers, scaled by area power~
+INCLUDE ~bm_tweaks/components/06_container_empty_random.tpa~
+
+BEGIN ~Add flavored random loot to non-empty containers that lacked RND entries~
+INCLUDE ~bm_tweaks/components/07_container_filled_random.tpa~

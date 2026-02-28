@@ -1,0 +1,4 @@
+*
+!.gitignore
+!bm_tweaks/
+!bm_tweaks/**

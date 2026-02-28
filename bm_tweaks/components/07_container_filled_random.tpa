@@ -1,0 +1,3 @@
+INCLUDE ~bm_tweaks/lib/container_macros.tpa~
+
+INCLUDE ~bm_tweaks/generated/nonrandom_container_assignments.tpa~
