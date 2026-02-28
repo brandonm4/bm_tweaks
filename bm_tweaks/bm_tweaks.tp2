@@ -6,7 +6,7 @@ LOAD ~bm_tweaks/lib/container_macros.tpa~
 BEGIN ~Small/Large swords usable by Cleric + Cleric/Mage~
 INCLUDE ~bm_tweaks/components/00_swords.tpa~
 
-BEGIN ~Remove CDTweaks Arcane ASF (cdtmis*.eff) from items~
+BEGIN ~Standalone arcane spell failure for armor and shields~
 INCLUDE ~bm_tweaks/components/01_remove_asf.tpa~
 
 BEGIN ~Lightning Bolt: classic projectile + ground targeting (all abilities)~

@@ -1,0 +1,192 @@
+DEFINE_PATCH_MACRO ~bm_set_legacy_magic_bonus~ BEGIN
+// Generated fallback enchantment lookup for legacy items with +N only in name text.
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~BDCHAN01~ = 0)) BEGIN
+  SET magic_bonus = 2
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~BDCHAN02~ = 0)) BEGIN
+  SET magic_bonus = 3
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~BDCHAN04~ = 0)) BEGIN
+  SET magic_bonus = 3
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~BDCHAN05~ = 0)) BEGIN
+  SET magic_bonus = 2
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~BDCHAN06~ = 0)) BEGIN
+  SET magic_bonus = 2
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~BDCHANGH~ = 0)) BEGIN
+  SET magic_bonus = 1
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~BDLEAT01~ = 0)) BEGIN
+  SET magic_bonus = 2
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~BDLEAT02~ = 0)) BEGIN
+  SET magic_bonus = 2
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~BDLEAT03~ = 0)) BEGIN
+  SET magic_bonus = 2
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~BDLEAT06~ = 0)) BEGIN
+  SET magic_bonus = 1
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~BDPLAT01~ = 0)) BEGIN
+  SET magic_bonus = 1
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~BDPLAT03~ = 0)) BEGIN
+  SET magic_bonus = 2
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~BDSHLD05~ = 0)) BEGIN
+  SET magic_bonus = 3
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~BDSHLD06~ = 0)) BEGIN
+  SET magic_bonus = 2
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~BDSHLD07~ = 0)) BEGIN
+  SET magic_bonus = 2
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~CHAN02~ = 0)) BEGIN
+  SET magic_bonus = 1
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~CHAN03~ = 0)) BEGIN
+  SET magic_bonus = 2
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~CHAN05~ = 0)) BEGIN
+  SET magic_bonus = 1
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~CHAN06~ = 0)) BEGIN
+  SET magic_bonus = 4
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~CHAN07~ = 0)) BEGIN
+  SET magic_bonus = 3
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~CHAN08~ = 0)) BEGIN
+  SET magic_bonus = 2
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~CHAN21~ = 0)) BEGIN
+  SET magic_bonus = 3
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~ISHLD02~ = 0)) BEGIN
+  SET magic_bonus = 1
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~LEAT02~ = 0)) BEGIN
+  SET magic_bonus = 1
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~LEAT03~ = 0)) BEGIN
+  SET magic_bonus = 2
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~LEAT05~ = 0)) BEGIN
+  SET magic_bonus = 1
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~LEAT06~ = 0)) BEGIN
+  SET magic_bonus = 2
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~LEAT07~ = 0)) BEGIN
+  SET magic_bonus = 2
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~LEAT07_~ = 0)) BEGIN
+  SET magic_bonus = 2
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~LEAT08~ = 0)) BEGIN
+  SET magic_bonus = 3
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~LEAT09~ = 0)) BEGIN
+  SET magic_bonus = 3
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~LEAT11~ = 0)) BEGIN
+  SET magic_bonus = 2
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~LEAT15~ = 0)) BEGIN
+  SET magic_bonus = 2
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~OHCHAN50~ = 0)) BEGIN
+  SET magic_bonus = 2
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~OHLEAT53~ = 0)) BEGIN
+  SET magic_bonus = 3
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~OHPLAT50~ = 0)) BEGIN
+  SET magic_bonus = 2
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~OHSHLD50~ = 0)) BEGIN
+  SET magic_bonus = 2
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~OHSHLD51~ = 0)) BEGIN
+  SET magic_bonus = 3
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~PLAT02~ = 0)) BEGIN
+  SET magic_bonus = 1
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~PLAT05~ = 0)) BEGIN
+  SET magic_bonus = 1
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~PLAT08~ = 0)) BEGIN
+  SET magic_bonus = 3
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~PLAT09~ = 0)) BEGIN
+  SET magic_bonus = 2
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~PLAT10~ = 0)) BEGIN
+  SET magic_bonus = 1
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~PLAT14~ = 0)) BEGIN
+  SET magic_bonus = 1
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~PLAT24~ = 0)) BEGIN
+  SET magic_bonus = 2
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~SHLD02~ = 0)) BEGIN
+  SET magic_bonus = 1
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~SHLD02A~ = 0)) BEGIN
+  SET magic_bonus = 1
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~SHLD04~ = 0)) BEGIN
+  SET magic_bonus = 1
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~SHLD04A~ = 0)) BEGIN
+  SET magic_bonus = 1
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~SHLD06~ = 0)) BEGIN
+  SET magic_bonus = 1
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~SHLD06A~ = 0)) BEGIN
+  SET magic_bonus = 1
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~SHLD06P~ = 0)) BEGIN
+  SET magic_bonus = 1
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~SHLD07~ = 0)) BEGIN
+  SET magic_bonus = 1
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~SHLD07A~ = 0)) BEGIN
+  SET magic_bonus = 1
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~SHLD08P~ = 0)) BEGIN
+  SET magic_bonus = 1
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~SHLD09P~ = 0)) BEGIN
+  SET magic_bonus = 1
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~SHLD17~ = 0)) BEGIN
+  SET magic_bonus = 1
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~SHLD17A~ = 0)) BEGIN
+  SET magic_bonus = 1
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~SHLD19~ = 0)) BEGIN
+  SET magic_bonus = 2
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~SHLD19A~ = 0)) BEGIN
+  SET magic_bonus = 2
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~TTLEAT~ = 0)) BEGIN
+  SET magic_bonus = 1
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~TTSHLD01~ = 0)) BEGIN
+  SET magic_bonus = 1
+END
+PATCH_IF (magic_bonus = 0 AND ("%SOURCE_RES%" STRING_COMPARE_CASE ~VISPLAT2~ = 0)) BEGIN
+  SET magic_bonus = 2
+END
+END
