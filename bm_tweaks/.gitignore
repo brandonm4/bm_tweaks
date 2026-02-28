@@ -1,3 +1,5 @@
 backup/
 staging/backups/
 staging/reports/
+staging/scripts/**/__pycache__/
+staging/scripts/**/*.pyc

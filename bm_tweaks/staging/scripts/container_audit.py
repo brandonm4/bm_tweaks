@@ -4,41 +4,25 @@ from __future__ import annotations
 
 import csv
 import pathlib
-import struct
 
-
-ROOT = pathlib.Path("/Volumes/Data/Games/Baldur's Gate II Enhanced Edition")
-OVERRIDE = ROOT / "override"
-REPORT_DIR = ROOT / "bm_tweaks" / "staging" / "reports"
-
-
-def read_u16(blob: bytes, offset: int) -> int:
-    return struct.unpack_from("<H", blob, offset)[0]
-
-
-def read_u32(blob: bytes, offset: int) -> int:
-    return struct.unpack_from("<I", blob, offset)[0]
-
-
-def read_resref(blob: bytes, offset: int) -> str:
-    raw = blob[offset : offset + 8]
-    return raw.split(b"\0", 1)[0].decode("ascii", errors="ignore")
+from lib.ie_formats import iter_override_casefold, resref, u16, u32
+from lib.paths import OVERRIDE, REPORT_DIR
 
 
 def iter_container_rows(area_path: pathlib.Path):
     blob = area_path.read_bytes()
-    cont_off = read_u32(blob, 0x70)
-    cont_num = read_u16(blob, 0x74)
-    item_off = read_u32(blob, 0x78)
+    cont_off = u32(blob, 0x70)
+    cont_num = u16(blob, 0x74)
+    item_off = u32(blob, 0x78)
 
     for idx in range(cont_num):
         base = cont_off + idx * 192
-        item_index = read_u32(blob, base + 0x40)
-        item_num = read_u32(blob, base + 0x44)
+        item_index = u32(blob, base + 0x40)
+        item_num = u32(blob, base + 0x44)
         items = []
         for item_i in range(item_num):
             item_base = item_off + (item_index + item_i) * 20
-            items.append(read_resref(blob, item_base))
+            items.append(resref(blob, item_base))
         yield {
             "area": area_path.name.upper(),
             "container_index": idx,
@@ -51,11 +35,8 @@ def iter_container_rows(area_path: pathlib.Path):
 def main() -> None:
     REPORT_DIR.mkdir(parents=True, exist_ok=True)
     rows = []
-    for path in sorted(OVERRIDE.glob("*.ARE")):
+    for path in iter_override_casefold(OVERRIDE, "ARE"):
         rows.extend(iter_container_rows(path))
-    for path in sorted(OVERRIDE.glob("*.are")):
-        if not (OVERRIDE / path.name.upper()).exists():
-            rows.extend(iter_container_rows(path))
 
     tsv_path = REPORT_DIR / "container_audit.tsv"
     with tsv_path.open("w", newline="") as fh:

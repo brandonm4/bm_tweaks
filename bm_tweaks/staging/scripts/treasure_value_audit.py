@@ -4,13 +4,10 @@ from __future__ import annotations
 
 import csv
 import math
-import re
 from dataclasses import dataclass
 from pathlib import Path
 
-
-ROOT = Path(__file__).resolve().parents[3]
-OVERRIDE = ROOT / "override"
+from lib.paths import OVERRIDE, ROOT
 
 
 @dataclass(frozen=True)
