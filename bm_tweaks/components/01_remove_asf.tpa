@@ -1,10 +1,9 @@
 // Standalone arcane spell failure:
-// First normalize armor/shield weight by family and enchantment so magical gear
-// does not end up heavier than weaker variants. ASF then equals half the
-// normalized weight, rounded down to the nearest 5%, with reductions for
-// mithril/lightweight gear and drow gear. This also clears the Mage and
-// Mage/Thief usability bits on armor and shields so pure arcane characters can
-// actually equip them.
+// First normalize armor/shield weight by family, material, and enchantment so
+// magical gear does not end up heavier than weaker variants. ASF then equals
+// half the normalized weight, rounded down to the nearest 5%. This also clears
+// the Mage and Mage/Thief usability bits on armor and shields so pure arcane
+// characters can actually equip them.
 
 INCLUDE ~bm_tweaks/generated/asf_magic_bonus.tpa~
 
@@ -57,115 +56,125 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.[iI][tT][mM]$~ ~override~
       END
 
       PATCH_IF (is_clothing = 0) BEGIN
-        SET is_light_material = 0
+        // Material weight progression:
+        // adamantite 75%, bronze 100%, elven steel/lightweight/mithril/drow 50%,
+        // fine steel 90%, gold 200%, iron 125%, silver 100%.
+        SET material_pct = 100
         PATCH_IF (
-          ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Mm]ithr[ia]l.*~ = 0) OR
-          ("%identified_desc%" STRING_COMPARE_REGEXP ~.*[Mm]ithr[ia]l.*~ = 0) OR
-          ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Ee]lven [Cc]hain.*~ = 0) OR
-          ("%identified_desc%" STRING_COMPARE_REGEXP ~.*[Ee]lven [Cc]hain.*~ = 0) OR
-          ("%identified_name%" STRING_COMPARE_REGEXP ~.*lightweight.*~ = 0) OR
-          ("%identified_desc%" STRING_COMPARE_REGEXP ~.*lightweight.*~ = 0) OR
-          ("%identified_name%" STRING_COMPARE_REGEXP ~.*light weight.*~ = 0) OR
-          ("%identified_desc%" STRING_COMPARE_REGEXP ~.*light weight.*~ = 0) OR
-          ("%identified_desc%" STRING_COMPARE_REGEXP ~.*low encumbrance.*~ = 0)
+          ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Gg]old.*~ = 0)
         ) BEGIN
-          SET is_light_material = 1
+          SET material_pct = 200
+        END ELSE PATCH_IF (
+          ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Mm]ithr[ia]l.*~ = 0) OR
+          ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Ee]lven [Ss]teel.*~ = 0) OR
+          ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Ee]lven [Cc]hain.*~ = 0) OR
+          ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Dd]row.*~ = 0) OR
+          ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Dd]arkmail.*~ = 0) OR
+          ("%identified_name%" STRING_COMPARE_REGEXP ~.*lightweight.*~ = 0) OR
+          ("%identified_name%" STRING_COMPARE_REGEXP ~.*light weight.*~ = 0)
+        ) BEGIN
+          SET material_pct = 50
+        END ELSE PATCH_IF (
+          ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Aa]damantite.*~ = 0)
+        ) BEGIN
+          SET material_pct = 75
+        END ELSE PATCH_IF (
+          ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Ff]ine [Ss]teel.*~ = 0)
+        ) BEGIN
+          SET material_pct = 90
+        END ELSE PATCH_IF (
+          ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Ii]ron.*~ = 0)
+        ) BEGIN
+          SET material_pct = 125
+        END ELSE PATCH_IF (
+          ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Bb]ronze.*~ = 0) OR
+          ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Ss]ilver.*~ = 0)
+        ) BEGIN
+          SET material_pct = 100
         END
         PATCH_IF (
-          (is_light_material = 0) AND (
+          (material_pct = 100) AND (
             ("%SOURCE_RES%" STRING_COMPARE_CASE ~PLAT09~ = 0) OR
-            ("%SOURCE_RES%" STRING_COMPARE_CASE ~BDCHANEL~ = 0)
+            ("%SOURCE_RES%" STRING_COMPARE_CASE ~BDCHANEL~ = 0) OR
+            ("%SOURCE_RES%" STRING_COMPARE_CASE ~DWPLAT01~ = 0) OR
+            ("%SOURCE_RES%" STRING_COMPARE_CASE ~DWCHAN01~ = 0) OR
+            ("%SOURCE_RES%" STRING_COMPARE_CASE ~DWCHAN02~ = 0) OR
+            ("%SOURCE_RES%" STRING_COMPARE_CASE ~DWSHLD01~ = 0)
           )
         ) BEGIN
-          SET is_light_material = 1
+          SET material_pct = 50
         END
 
         SET magic_bonus = enchantment
         LPM ~bm_set_legacy_magic_bonus~
 
         SET normalized_weight = weight
-        PATCH_IF (is_light_material > 0) BEGIN
-          // Lightweight materials should actually weigh less, not just avoid the
-          // standard armor-family normalization ladder.
-          SET normalized_weight = weight / 2
-        END ELSE BEGIN
-          PATCH_IF (item_type = 12) BEGIN
-            PATCH_IF (
-              ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Ll]arge [Ss]hield.*~ = 0) OR
-              ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Tt]ower [Ss]hield.*~ = 0) OR
-              (weight >= 12)
-            ) BEGIN
-              SET normalized_weight = 15
-            END ELSE PATCH_IF (
-              ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Mm]edium [Ss]hield.*~ = 0) OR
-              ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Kk]ite [Ss]hield.*~ = 0) OR
-              (weight >= 5)
-            ) BEGIN
-              SET normalized_weight = 7
-            END ELSE BEGIN
-              SET normalized_weight = 3
-            END
+        PATCH_IF (item_type = 12) BEGIN
+          PATCH_IF (
+            ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Ll]arge [Ss]hield.*~ = 0) OR
+            ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Tt]ower [Ss]hield.*~ = 0) OR
+            (weight >= 12)
+          ) BEGIN
+            SET normalized_weight = 15
+          END ELSE PATCH_IF (
+            ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Mm]edium [Ss]hield.*~ = 0) OR
+            ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Kk]ite [Ss]hield.*~ = 0) OR
+            (weight >= 5)
+          ) BEGIN
+            SET normalized_weight = 7
           END ELSE BEGIN
-            PATCH_IF (
-              ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Ff]ull [Pp]late.*~ = 0) OR
-              ("%identified_desc%" STRING_COMPARE_REGEXP ~.*[Ff]ull [Pp]late.*~ = 0)
-            ) BEGIN
-              SET normalized_weight = 70
-            END ELSE PATCH_IF (
-              ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Pp]late.*~ = 0) OR
-              ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Ff]ield [Pp]late.*~ = 0) OR
-              ("%identified_desc%" STRING_COMPARE_REGEXP ~.*[Pp]late.*~ = 0)
-            ) BEGIN
-              SET normalized_weight = 50
-            END ELSE PATCH_IF (
-              ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Ss]plint.*~ = 0) OR
-              ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Bb]anded.*~ = 0) OR
-              ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Cc]hain.*~ = 0) OR
-              ("%identified_name%" STRING_COMPARE_REGEXP ~.*mail.*~ = 0) OR
-              ("%identified_desc%" STRING_COMPARE_REGEXP ~.*[Ss]plint.*~ = 0) OR
-              ("%identified_desc%" STRING_COMPARE_REGEXP ~.*[Bb]anded.*~ = 0) OR
-              ("%identified_desc%" STRING_COMPARE_REGEXP ~.*[Cc]hain.*~ = 0)
-            ) BEGIN
-              SET normalized_weight = 40
-            END ELSE PATCH_IF (
-              ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Ss]tudded.*~ = 0) OR
-              ("%identified_desc%" STRING_COMPARE_REGEXP ~.*[Ss]tudded.*~ = 0)
-            ) BEGIN
-              SET normalized_weight = 25
-            END ELSE PATCH_IF (
-              ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Ll]eather.*~ = 0) OR
-              ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Hh]ide.*~ = 0) OR
-              ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Aa]nkheg.*~ = 0) OR
-              ("%identified_desc%" STRING_COMPARE_REGEXP ~.*[Ll]eather.*~ = 0) OR
-              ("%identified_desc%" STRING_COMPARE_REGEXP ~.*[Hh]ide.*~ = 0) OR
-              ("%identified_desc%" STRING_COMPARE_REGEXP ~.*[Aa]nkheg.*~ = 0)
-            ) BEGIN
-              SET normalized_weight = 20
-            END
+            SET normalized_weight = 3
           END
+        END ELSE BEGIN
+          PATCH_IF (
+            ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Ff]ull [Pp]late.*~ = 0) OR
+            ("%identified_desc%" STRING_COMPARE_REGEXP ~.*[Ff]ull [Pp]late.*~ = 0)
+          ) BEGIN
+            SET normalized_weight = 70
+          END ELSE PATCH_IF (
+            ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Pp]late.*~ = 0) OR
+            ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Ff]ield [Pp]late.*~ = 0) OR
+            ("%identified_desc%" STRING_COMPARE_REGEXP ~.*[Pp]late.*~ = 0)
+          ) BEGIN
+            SET normalized_weight = 50
+          END ELSE PATCH_IF (
+            ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Ss]plint.*~ = 0) OR
+            ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Bb]anded.*~ = 0) OR
+            ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Cc]hain.*~ = 0) OR
+            ("%identified_name%" STRING_COMPARE_REGEXP ~.*mail.*~ = 0) OR
+            ("%identified_desc%" STRING_COMPARE_REGEXP ~.*[Ss]plint.*~ = 0) OR
+            ("%identified_desc%" STRING_COMPARE_REGEXP ~.*[Bb]anded.*~ = 0) OR
+            ("%identified_desc%" STRING_COMPARE_REGEXP ~.*[Cc]hain.*~ = 0)
+          ) BEGIN
+            SET normalized_weight = 40
+          END ELSE PATCH_IF (
+            ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Ss]tudded.*~ = 0) OR
+            ("%identified_desc%" STRING_COMPARE_REGEXP ~.*[Ss]tudded.*~ = 0)
+          ) BEGIN
+            SET normalized_weight = 25
+          END ELSE PATCH_IF (
+            ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Ll]eather.*~ = 0) OR
+            ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Hh]ide.*~ = 0) OR
+            ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Aa]nkheg.*~ = 0) OR
+            ("%identified_desc%" STRING_COMPARE_REGEXP ~.*[Ll]eather.*~ = 0) OR
+            ("%identified_desc%" STRING_COMPARE_REGEXP ~.*[Hh]ide.*~ = 0) OR
+            ("%identified_desc%" STRING_COMPARE_REGEXP ~.*[Aa]nkheg.*~ = 0)
+          ) BEGIN
+            SET normalized_weight = 20
+          END
+        END
 
-          PATCH_IF (magic_bonus > 0) BEGIN
-            SET normalized_weight = normalized_weight - (5 * magic_bonus)
-          END
-          PATCH_IF (normalized_weight < 0) BEGIN
-            SET normalized_weight = 0
-          END
+        SET normalized_weight = (normalized_weight * material_pct) / 100
+        PATCH_IF (magic_bonus > 0) BEGIN
+          SET normalized_weight = normalized_weight - (5 * magic_bonus)
+        END
+        PATCH_IF (normalized_weight < 0) BEGIN
+          SET normalized_weight = 0
         END
         WRITE_LONG 0x4c normalized_weight
 
-        SET drow_reduction = 0
-        PATCH_IF (
-          ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Dd]row.*~ = 0) OR
-          ("%identified_desc%" STRING_COMPARE_REGEXP ~.*[Dd]row.*~ = 0) OR
-          ("%identified_name%" STRING_COMPARE_REGEXP ~.*[Dd]arkmail.*~ = 0) OR
-          ("%identified_desc%" STRING_COMPARE_REGEXP ~.*[Dd]arkmail.*~ = 0)
-        ) BEGIN
-          SET drow_reduction = 20
-        END
-
         SET asf_pct = normalized_weight / 2
         SET asf_pct = (asf_pct / 5) * 5
-        SET asf_pct = asf_pct - drow_reduction
         PATCH_IF (asf_pct < 0) BEGIN
           SET asf_pct = 0
         END
