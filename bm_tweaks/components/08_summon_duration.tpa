@@ -1,0 +1,220 @@
+// Summon Duration Scaling
+//
+// All summoning spells with a flat 3-turn duration, or with coarse round-based
+// level scaling, are reworked so every caster level from true_min to 20 has its
+// own ability block with duration = level * 60 seconds (1 turn per caster level).
+//
+// Spells that already have full per-level coverage simply have their existing
+// durations recalculated by the same formula (converting rounds/level to turns/level).
+//
+// The lvl1 fallback block present in every spell is kept and given the same
+// duration as the true_min block so a caster below the minimum who somehow
+// casts the spell still gets a sensible duration.
+//
+// Duration formula:  dur = caster_level * 60  (seconds)
+// Example:           level 10 -> 600 s -> 2 turns
+//                    level 17 -> 1020 s -> ~3.4 turns
+//
+// Implementation uses:
+//   FJ_SPL_ITM_REINDEX  - normalise SPL layout before any structural changes
+//   ADD_SPELL_HEADER    - clone an existing ability block for each new level tier
+//   ALTER_EFFECT        - patch op-177 (Cast Spell at Point) duration field
+//   GET_OFFSET_ARRAY / GET_OFFSET_ARRAY2 - walk existing headers and effects
+
+// ---------------------------------------------------------------------------
+// BM_SUMMON_SCALE
+//
+// INT_VAR:
+//   true_min  - actual minimum caster level for this spell
+//
+// The function:
+//   Pass 1 - Update op-177 duration on ALL existing ability blocks.
+//             Blocks with min_level <= 1 (fallback) get true_min * 60.
+//   Pass 2 - For each level in [true_min..20] that has no ability block,
+//             clone the last existing block via ADD_SPELL_HEADER and then
+//             set its required_level and op-177 duration.
+// ---------------------------------------------------------------------------
+DEFINE_PATCH_FUNCTION BM_SUMMON_SCALE
+  INT_VAR true_min = 1
+BEGIN
+  // Normalise the file layout first so all offsets are canonical.
+  LPF FJ_SPL_ITM_REINDEX END
+
+  // ------------------------------------------------------------------
+  // Pass 1: update op-177 duration on every existing ability block.
+  // ------------------------------------------------------------------
+  GET_OFFSET_ARRAY ab_arr SPL_V10_HEADERS
+  PHP_EACH ab_arr AS ab_idx => ab_off BEGIN
+    READ_SHORT (ab_off + 0x10) ab_min_lvl
+
+    // Fallback blocks (min_level 0 or 1) use true_min for the duration calc.
+    SET eff_level = (ab_min_lvl <= 1) ? true_min : ab_min_lvl
+    SET new_dur   = eff_level * 60
+
+    GET_OFFSET_ARRAY2 fx_arr ab_off SPL_V10_HEAD_EFFECTS
+    PHP_EACH fx_arr AS fx_idx => fx_off BEGIN
+      PATCH_IF (SHORT_AT fx_off = 177) BEGIN
+        WRITE_LONG (fx_off + 0x0e) new_dur
+      END
+    END
+  END
+
+  // ------------------------------------------------------------------
+  // Pass 2: add one ability block per missing level in [true_min..20].
+  // We re-read abil_num each iteration because ADD_SPELL_HEADER grows it.
+  // We use the LAST header as the copy template each time (copy_header = hc).
+  // ------------------------------------------------------------------
+  FOR (new_lvl = true_min; new_lvl <= 20; ++new_lvl) BEGIN
+    // Check whether a block for this level already exists.
+    SET already_present = 0
+    GET_OFFSET_ARRAY ab_arr SPL_V10_HEADERS
+    PHP_EACH ab_arr AS ab_idx => ab_off BEGIN
+      PATCH_IF (SHORT_AT (ab_off + 0x10) = new_lvl) BEGIN
+        SET already_present = 1
+      END
+    END
+
+    PATCH_IF (already_present = 0) BEGIN
+      // Read the current header count to use as copy_header (1-based last).
+      READ_SHORT 0x68 hc
+
+      // Clone the last header (and all its effects) as a new appended block.
+      LPF ADD_SPELL_HEADER
+        INT_VAR copy_header = hc   // 1-based: clone the current last header
+      RET insert_point             // 0-based index of the newly added header
+      END
+
+      // Set the required_level on the new header.
+      LPF ALTER_HEADER
+        INT_VAR header = insert_point
+                level  = new_lvl
+                silent = 1
+      END
+
+      // Patch the op-177 duration on the new header's effects.
+      SET new_dur = new_lvl * 60
+      GET_OFFSET_ARRAY ab_arr SPL_V10_HEADERS
+      SET  new_ab_off = $ab_arr("%insert_point%")
+      GET_OFFSET_ARRAY2 fx_arr new_ab_off SPL_V10_HEAD_EFFECTS
+      PHP_EACH fx_arr AS fx_idx => fx_off BEGIN
+        PATCH_IF (SHORT_AT fx_off = 177) BEGIN
+          WRITE_LONG (fx_off + 0x0e) new_dur
+        END
+      END
+    END
+  END
+END
+
+
+// ---------------------------------------------------------------------------
+// Helper macro: infer true_min from the spell's existing non-fallback blocks,
+// then call BM_SUMMON_SCALE.  Used for spells whose minimum level can be read
+// directly from the file (Monster Summoning line, animal summoning, etc.).
+// ---------------------------------------------------------------------------
+DEFINE_PATCH_MACRO BM_SUMMON_INFER_AND_SCALE
+BEGIN
+  SET inferred_min = 0
+  GET_OFFSET_ARRAY ab_arr SPL_V10_HEADERS
+  PHP_EACH ab_arr AS ab_idx => ab_off BEGIN
+    READ_SHORT (ab_off + 0x10) ab_lvl
+    PATCH_IF (ab_lvl > 1 AND (inferred_min = 0 OR ab_lvl < inferred_min)) BEGIN
+      SET inferred_min = ab_lvl
+    END
+  END
+  PATCH_IF (inferred_min = 0) BEGIN SET inferred_min = 1 END
+  LPF BM_SUMMON_SCALE INT_VAR true_min = inferred_min END
+END
+
+
+// ===========================================================================
+// true_min values are set EXPLICITLY for every spell — derived from the rule
+// "minimum caster level = spell_level * 2 - 1" (same for wizard and priest):
+//   L1→1  L2→3  L3→5  L4→7  L5→9  L6→11  L7→13  L8→15  L9→17
+//
+// Spell Revisions adds tier blocks starting 2-4 levels ABOVE cast eligibility.
+// Using BM_SUMMON_INFER_AND_SCALE would pick up those tier levels and leave
+// the lowest castable levels without a correctly-timed block.
+// ===========================================================================
+
+// --- Level 1 spells (true_min 1) ---
+ACTION_FOR_EACH spl IN SPWI107  SPPR119 BEGIN
+  COPY_EXISTING ~%spl%.spl~ ~override~
+    LPF BM_SUMMON_SCALE INT_VAR true_min = 1 END
+  BUT_ONLY
+END
+
+// --- Level 2 spells (true_min 3) ---
+ACTION_FOR_EACH spl IN SPWI216  SPPR220 BEGIN
+  COPY_EXISTING ~%spl%.spl~ ~override~
+    LPF BM_SUMMON_SCALE INT_VAR true_min = 3 END
+  BUT_ONLY
+END
+
+// --- Level 3 spells (true_min 5) ---
+ACTION_FOR_EACH spl IN SPWI309  SPPR320 BEGIN
+  COPY_EXISTING ~%spl%.spl~ ~override~
+    LPF BM_SUMMON_SCALE INT_VAR true_min = 5 END
+  BUT_ONLY
+END
+
+// --- Level 4 spells (true_min 7) ---
+ACTION_FOR_EACH spl IN SPWI407  SPWI423  SPPR402  SPPR410 BEGIN
+  COPY_EXISTING ~%spl%.spl~ ~override~
+    LPF BM_SUMMON_SCALE INT_VAR true_min = 7 END
+  BUT_ONLY
+END
+
+// --- Level 5 spells (true_min 9) ---
+ACTION_FOR_EACH spl IN
+  SPWI504  SPWI501  SPWI516  SPWI520  SPWI521  SPWI526  SPPR501
+BEGIN
+  COPY_EXISTING ~%spl%.spl~ ~override~
+    LPF BM_SUMMON_SCALE INT_VAR true_min = 9 END
+  BUT_ONLY
+END
+
+// --- Innate: Summon Deva (SPCL923/935) — granted from level 10 ---
+ACTION_FOR_EACH spl IN SPCL923  SPCL935 BEGIN
+  COPY_EXISTING ~%spl%.spl~ ~override~
+    LPF BM_SUMMON_SCALE INT_VAR true_min = 10 END
+  BUT_ONLY
+END
+
+// --- Level 6 spells (true_min 11) ---
+ACTION_FOR_EACH spl IN
+  SPWI610  SPWI619  SPWI620  SPWI621  SPWI622  SPWI624  SPWI633
+  SPPR602  SPPR605  SPPR617  SPPR618
+BEGIN
+  COPY_EXISTING ~%spl%.spl~ ~override~
+    LPF BM_SUMMON_SCALE INT_VAR true_min = 11 END
+  BUT_ONLY
+END
+
+// --- Level 7 spells (true_min 13) ---
+ACTION_FOR_EACH spl IN
+  SPWI706  SPWI707  SPWI717  SPWI718  SPWI719
+  SPPR703  SPPR716
+BEGIN
+  COPY_EXISTING ~%spl%.spl~ ~override~
+    LPF BM_SUMMON_SCALE INT_VAR true_min = 13 END
+  BUT_ONLY
+END
+
+// --- Level 8 spells (true_min 15) ---
+ACTION_FOR_EACH spl IN SPWI806  SPWI807 BEGIN
+  COPY_EXISTING ~%spl%.spl~ ~override~
+    LPF BM_SUMMON_SCALE INT_VAR true_min = 15 END
+  BUT_ONLY
+END
+
+// --- Level 9 spells (true_min 17) ---
+COPY_EXISTING ~spwi905.spl~ ~override~
+  LPF BM_SUMMON_SCALE INT_VAR true_min = 17 END
+BUT_ONLY
+
+// --- Summon Deva / Fallen Deva innates — restricted to level 20 ---
+ACTION_FOR_EACH spl IN SPPR726  SPPR727 BEGIN
+  COPY_EXISTING ~%spl%.spl~ ~override~
+    LPF BM_SUMMON_SCALE INT_VAR true_min = 20 END
+  BUT_ONLY
+END

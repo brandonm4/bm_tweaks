@@ -43,7 +43,7 @@ def main() -> None:
     for row in empty_rows:
         area = row["area"]
         if area not in stats_by_area:
-            stats_by_area[area] = area_power(area, cre_xp)
+            stats_by_area[area] = area_power(area, area_dir, cre_xp)
             flavor_by_area[area] = area_loot_flavor(area, area_dir)
         stats = stats_by_area[area]
         item = pick_empty_container_item(area, int(row["container_index"]), stats.top_avg_xp, flavor_by_area[area])

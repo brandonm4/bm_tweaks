@@ -1,10 +1,16 @@
 BACKUP ~bm_tweaks/backup~
 AUTHOR ~Brandon Mathis~
 
-LOAD ~bm_tweaks/lib/container_macros.tpa~
+ALWAYS
+  INCLUDE ~bm_tweaks/lib/container_macros.tpa~
+  INCLUDE ~bm_tweaks/lib/spl_itm_macros.tpa~
+END
 
 BEGIN ~Small/Large swords usable by Cleric + Cleric/Mage~
 INCLUDE ~bm_tweaks/components/00_swords.tpa~
+
+BEGIN ~Allow God Talos Necromancer specialization in swords~
+INCLUDE ~bm_tweaks/components/00a_godtalos_necromancer_weapprof.tpa~
 
 BEGIN ~Standalone arcane spell failure for armor and shields~
 INCLUDE ~bm_tweaks/components/01_remove_asf.tpa~
@@ -26,3 +32,14 @@ INCLUDE ~bm_tweaks/components/06_container_empty_random.tpa~
 
 BEGIN ~Add flavored random loot to non-empty containers that lacked RND entries~
 INCLUDE ~bm_tweaks/components/07_container_filled_random.tpa~
+
+BEGIN ~Summon duration scaling: 1 turn per caster level (level 1-20)~
+INCLUDE ~bm_tweaks/components/08_summon_duration.tpa~
+
+BEGIN ~Animate Dead duration scaling: 1 hour per caster level (level 1-20)~
+INCLUDE ~bm_tweaks/components/09_animate_duration.tpa~
+BEGIN ~Ensure all wizard and cleric spells have scroll items~
+INCLUDE ~bm_tweaks/components/10_spell_scrolls.tpa~
+
+BEGIN ~Add a scroll scribing kit for known wizard and cleric spells~
+INCLUDE ~bm_tweaks/components/11_scroll_crafting.tpa~

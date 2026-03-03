@@ -1,0 +1,131 @@
+// Component 10: Ensure all arcane (SPWI) and divine (SPPR) spells have scroll items
+//
+// Creates BMWI###.itm / BMPR###.itm for each spell that lacks one.
+// Template: SCRL1R.itm (Wraithform scroll -- has cast + learn abilities)
+// Usability: arcane 0x60725e80, divine 0x004f2840
+//
+// Only create scrolls for spells that are visible in the spellbook. Hidden/internal
+// spells are listed in HIDESPL.2DA and must not get learnable scroll items.
+
+OUTER_SET _wi_created = 0
+OUTER_SET _pr_created = 0
+
+// Native scrolls should win. Only generate BM.. fallback scrolls for book-facing
+// spells that do not already have a non-BM scroll item pointing at them.
+COPY_EXISTING_REGEXP ~^.+\.itm$~ ~override~
+  READ_SHORT 0x1c _item_type
+  PATCH_IF (_item_type = 11) BEGIN
+    TEXT_SPRINT _item ~%SOURCE_RES%~
+    TO_UPPER _item
+    PATCH_IF ("%_item%" STRING_COMPARE_REGEXP ~^BM(WI|PR)[0-9][0-9][0-9]$~ != 0) BEGIN
+      READ_LONG  0x64 _ab_off
+      READ_SHORT 0x68 _ab_cnt
+      READ_LONG  0x6a _fx_off
+      FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+        READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+        READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+        FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+          READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+          PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+            // Scroll spell effects use 7-char spell resrefs plus a trailing NUL.
+            READ_ASCII  (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) _spell_ref (7)
+            TO_UPPER _spell_ref
+            PATCH_IF (~%_spell_ref%~ STRING_COMPARE_CASE ~~ != 0) BEGIN
+              INNER_ACTION BEGIN
+                OUTER_SET EVAL ~bm_native_scroll_%_spell_ref%~ = 1
+              END
+            END
+          END
+        END
+      END
+    END
+  END
+BUT_ONLY
+
+// ── Arcane scrolls ────────────────────────────────────────────────────────────
+
+COPY_EXISTING_REGEXP ~^SPWI[0-9][0-9][0-9]\.spl$~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  TEXT_SPRINT _res ~%SOURCE_RES%~
+  TO_UPPER _res
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      OUTER_PATCH_SAVE _scroll_res ~%_res%~ BEGIN
+        REPLACE_TEXTUALLY ~^SP~ ~BM~
+      END
+      ACTION_IF
+        (NOT VARIABLE_IS_SET EVAL ~bm_native_scroll_%_res%~) AND
+        (NOT FILE_CONTAINS_EVALUATED (~HIDESPL.2DA~ ~^%_res%[ %TAB%]~)) AND
+        (NOT FILE_EXISTS_IN_GAME ~%_scroll_res%.itm~)
+      THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/%_scroll_res%.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~%_res%~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+PRINT ~[bm_tweaks] spell_scrolls: created %_wi_created% arcane spell scrolls.~
+
+
+// ── Divine scrolls ────────────────────────────────────────────────────────────
+
+COPY_EXISTING_REGEXP ~^SPPR[0-9][0-9][0-9]\.spl$~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  TEXT_SPRINT _res ~%SOURCE_RES%~
+  TO_UPPER _res
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      OUTER_PATCH_SAVE _scroll_res ~%_res%~ BEGIN
+        REPLACE_TEXTUALLY ~^SP~ ~BM~
+      END
+      ACTION_IF
+        (NOT VARIABLE_IS_SET EVAL ~bm_native_scroll_%_res%~) AND
+        (NOT FILE_CONTAINS_EVALUATED (~HIDESPL.2DA~ ~^%_res%[ %TAB%]~)) AND
+        (NOT FILE_EXISTS_IN_GAME ~%_scroll_res%.itm~)
+      THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/%_scroll_res%.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~%_res%~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+PRINT ~[bm_tweaks] spell_scrolls: created %_pr_created% divine spell scrolls.~

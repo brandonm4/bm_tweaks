@@ -1,0 +1,32 @@
+COPY_EXISTING ~weapprof.2da~ ~override~
+  COUNT_2DA_COLS prof_col_count
+  COUNT_2DA_ROWS 1 prof_row_count
+  SET total_col_count = prof_col_count + 1
+
+  SET godtalos_col = 0
+
+  FOR (col = 1; col < total_col_count; ++col) BEGIN
+    READ_2DA_ENTRY 0 col total_col_count prof_col_name
+
+    PATCH_IF (~%prof_col_name%~ STRING_EQUAL_CASE ~A7_MK_GODTALOS_NECROMANCER~) BEGIN
+      SET godtalos_col = col
+    END
+  END
+
+  PATCH_IF (godtalos_col > 0) BEGIN
+    FOR (row = 1; row < prof_row_count; ++row) BEGIN
+      READ_2DA_ENTRY row 0 total_col_count prof_row_name
+
+      PATCH_IF (
+        ~%prof_row_name%~ STRING_EQUAL_CASE ~LARGE_SWORD~
+        OR ~%prof_row_name%~ STRING_EQUAL_CASE ~SMALL_SWORD~
+        OR ~%prof_row_name%~ STRING_EQUAL_CASE ~BG1_LARGE_SWORD~
+        OR ~%prof_row_name%~ STRING_EQUAL_CASE ~BG1_SMALL_SWORD~
+      ) BEGIN
+        SET_2DA_ENTRY row godtalos_col total_col_count ~2~
+      END
+    END
+  END ELSE BEGIN
+    PATCH_PRINT ~bm_tweaks: skipping God Talos Necromancer sword proficiency tweak because A7_MK_GODTALOS_NECROMANCER was not found in weapprof.2da~
+  END
+BUT_ONLY_IF_IT_CHANGES

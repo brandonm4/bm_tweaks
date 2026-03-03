@@ -35,8 +35,8 @@ def load_cre_xp() -> dict[str, int]:
     return xp_by_cre
 
 
-def area_power(area_name: str, cre_xp: dict[str, int]) -> AreaStats:
-    blob = (OVERRIDE / area_name).read_bytes()
+def area_power(area_name: str, area_dir: Path, cre_xp: dict[str, int]) -> AreaStats:
+    blob = (area_dir / area_name).read_bytes()
     refs: list[str] = []
 
     actor_off = u32(blob, 0x54)
@@ -240,14 +240,16 @@ def write_assignment_outputs(
         fh.write(f"// {preface}\n\n")
         for area in sorted(grouped):
             sample = grouped[area][0]
+            fh.write(f'ACTION_IF FILE_EXISTS_IN_GAME ~{area}~ BEGIN\n')
             fh.write(
-                f'COPY_EXISTING ~{area}~ ~override~ // top_avg_xp={sample["top_avg_xp"]} max_xp={sample["max_xp"]}\n'
+                f'  COPY_EXISTING ~{area}~ ~override~ // top_avg_xp={sample["top_avg_xp"]} max_xp={sample["max_xp"]}\n'
             )
             for row in sorted(grouped[area], key=lambda r: int(r["container_index"])):
-                fh.write(f'  SET container_index = {row["container_index"]}\n')
-                fh.write(f'  SPRINT item_to_add ~{row["item"]}~\n')
-                fh.write("  LPM BM_ADD_CONTAINER_ITEM\n")
-            fh.write("BUT_ONLY_IF_IT_CHANGES\n\n")
+                fh.write(f'    SET container_index = {row["container_index"]}\n')
+                fh.write(f'    SPRINT item_to_add ~{row["item"]}~\n')
+                fh.write("    LPM BM_ADD_CONTAINER_ITEM\n")
+            fh.write("  BUT_ONLY_IF_IT_CHANGES\n")
+            fh.write("END\n\n")
 
     by_item = Counter(str(row["item"]) for row in assignments)
     by_family = Counter(str(row["area"])[:2] for row in assignments)

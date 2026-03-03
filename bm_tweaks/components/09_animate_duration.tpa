@@ -1,0 +1,185 @@
+// Animate Dead / Create Undead Duration Scaling
+//
+// Animate and undead-creation spells are reworked so every caster level from
+// true_min to 20 has its own ability block with duration = level * 300 seconds
+// (1 hour per caster level, since BG2 displays 1 hour = 300 s).
+//
+// Spell Revisions is already installed and has done two things to some of
+// these spells:
+//   - Added per-level ability blocks (SPWI505, SPWI801) at 1 round/level
+//     (level * 6 s).  We update those durations to level * 300.
+//   - Replaced simple op177 structures with large inline creature-property
+//     effect blocks (SPWI801, SPWI802) where EVERY effect shares the same
+//     duration.  We update all of them uniformly.
+//
+// Duration formula:  dur = caster_level * 300  (seconds)
+// Example:           level 11 ->  3300 s -> 11 hours
+//                    level 20 ->  6000 s -> 20 hours
+//
+// Threshold rule: only effects with dur > 30 are touched.
+// This preserves animation / sound effects (dur 1, 2, 6, 24 s) while
+// catching all real summon-lifetime durations (54 s+, or flat 2400 s).
+//
+// Spells patched:
+//   SPWI505  Animate Dead (Wiz 5)   - SR already per-level; update formula
+//   SPWI601  Create Undead (Wiz 6)  - flat 8h, op177->SPSTALK
+//   SPWI801  Create Greater Undead (Wiz 8) - SR per-level; add 15-16
+//   SPWI802  Create Greater Undead (SR alt) - flat 8h, 54-effect block
+//   SPPR301  Animate Dead (Priest 3) - tier blocks at 7/9/12; fill gaps from lvl 5
+//   SPPR619  Summon Greater Undead (Priest 6) - flat 8h, op177->SPANDL15
+//
+// Skipped:
+//   SPPR313  wrapper spell (op146->SPPR313E); duration not set here
+//   SPPR303  targeting / cleanup spell; not an animate spell
+
+// ---------------------------------------------------------------------------
+// BM_ANIMATE_SCALE
+//
+// INT_VAR:
+//   true_min - actual minimum caster level for this spell
+//
+// Pass 1 - Update every effect with dur > 30 on existing ability blocks.
+//          Fallback blocks (min_level <= 1) use true_min for the calc.
+// Pass 2 - Clone-and-append one block for each level in [true_min..20]
+//          that is not already present.
+// ---------------------------------------------------------------------------
+DEFINE_PATCH_FUNCTION BM_ANIMATE_SCALE
+  INT_VAR true_min = 1
+BEGIN
+  LPF FJ_SPL_ITM_REINDEX END
+
+  // ------------------------------------------------------------------
+  // Pass 1: update all non-trivial durations on existing blocks.
+  // ------------------------------------------------------------------
+  GET_OFFSET_ARRAY ab_arr SPL_V10_HEADERS
+  PHP_EACH ab_arr AS ab_idx => ab_off BEGIN
+    READ_SHORT (ab_off + 0x10) ab_min_lvl
+    SET eff_level = (ab_min_lvl <= 1) ? true_min : ab_min_lvl
+    SET new_dur   = eff_level * 300
+
+    GET_OFFSET_ARRAY2 fx_arr ab_off SPL_V10_HEAD_EFFECTS
+    PHP_EACH fx_arr AS fx_idx => fx_off BEGIN
+      READ_LONG (fx_off + 0x0e) cur_dur
+      PATCH_IF (cur_dur > 30) BEGIN
+        WRITE_LONG (fx_off + 0x0e) new_dur
+      END
+    END
+  END
+
+  // ------------------------------------------------------------------
+  // Pass 2: add one ability block per missing level in [true_min..20].
+  // ------------------------------------------------------------------
+  FOR (new_lvl = true_min; new_lvl <= 20; ++new_lvl) BEGIN
+    SET already_present = 0
+    GET_OFFSET_ARRAY ab_arr SPL_V10_HEADERS
+    PHP_EACH ab_arr AS ab_idx => ab_off BEGIN
+      PATCH_IF (SHORT_AT (ab_off + 0x10) = new_lvl) BEGIN
+        SET already_present = 1
+      END
+    END
+
+    PATCH_IF (already_present = 0) BEGIN
+      READ_SHORT 0x68 hc
+
+      LPF ADD_SPELL_HEADER
+        INT_VAR copy_header = hc
+      RET insert_point
+      END
+
+      LPF ALTER_HEADER
+        INT_VAR header = insert_point
+                level  = new_lvl
+                silent = 1
+      END
+
+      // Update all non-trivial durations in the new block.
+      SET new_dur   = new_lvl * 300
+      GET_OFFSET_ARRAY ab_arr SPL_V10_HEADERS
+      SET new_ab_off = $ab_arr("%insert_point%")
+      GET_OFFSET_ARRAY2 fx_arr new_ab_off SPL_V10_HEAD_EFFECTS
+      PHP_EACH fx_arr AS fx_idx => fx_off BEGIN
+        READ_LONG (fx_off + 0x0e) cur_dur
+        PATCH_IF (cur_dur > 30) BEGIN
+          WRITE_LONG (fx_off + 0x0e) new_dur
+        END
+      END
+    END
+  END
+END
+
+
+// ---------------------------------------------------------------------------
+// Helper macro: infer true_min from existing non-fallback blocks, then scale.
+// ---------------------------------------------------------------------------
+DEFINE_PATCH_MACRO BM_ANIMATE_INFER_AND_SCALE
+BEGIN
+  SET inferred_min = 0
+  GET_OFFSET_ARRAY ab_arr SPL_V10_HEADERS
+  PHP_EACH ab_arr AS ab_idx => ab_off BEGIN
+    READ_SHORT (ab_off + 0x10) ab_lvl
+    PATCH_IF (ab_lvl > 1 AND (inferred_min = 0 OR ab_lvl < inferred_min)) BEGIN
+      SET inferred_min = ab_lvl
+    END
+  END
+  PATCH_IF (inferred_min = 0) BEGIN SET inferred_min = 1 END
+  LPF BM_ANIMATE_SCALE INT_VAR true_min = inferred_min END
+END
+
+
+// ===========================================================================
+// Wizard: Animate Dead (level 5)  —  true_min = 9  (L5 wizard spell)
+// SR already added per-level blocks 10-20 at 1 round/level (level * 6 s).
+// true_min is explicit because SR's tier system starts at 10, not 9;
+// using the infer macro would leave level 9 without a correctly-timed block.
+// Pass 1 updates the formula to 1 hour/level; Pass 2 adds the missing lvl 9.
+// ===========================================================================
+COPY_EXISTING ~spwi505.spl~ ~override~
+  LPF BM_ANIMATE_SCALE INT_VAR true_min = 9 END
+BUT_ONLY
+
+// ===========================================================================
+// Wizard: Create Undead (level 6)
+// Single flat 8h block, op177 -> SPSTALK.  Full per-level coverage added.
+// ===========================================================================
+COPY_EXISTING ~spwi601.spl~ ~override~
+  LPF BM_ANIMATE_SCALE INT_VAR true_min = 11 END
+BUT_ONLY
+
+// ===========================================================================
+// Wizard: Create Greater Undead (level 8)
+// SR added blocks 17-20 at 1 round/level.
+// Update formula and fill the missing 15-16 blocks.
+// ===========================================================================
+COPY_EXISTING ~spwi801.spl~ ~override~
+  LPF BM_ANIMATE_SCALE INT_VAR true_min = 15 END
+BUT_ONLY
+
+// ===========================================================================
+// Wizard: Create Greater Undead SR alternate (spwi802)
+// Single flat 8h block with 54 inline creature-property effects.
+// All dur > 30 effects updated; full per-level blocks 15-20 added.
+// ===========================================================================
+COPY_EXISTING ~spwi802.spl~ ~override~
+  LPF BM_ANIMATE_SCALE INT_VAR true_min = 15 END
+BUT_ONLY
+
+// ===========================================================================
+// Priest: Animate Dead (sppr301, 3rd level priest spell)
+// Minimum caster level = 5.  SR added tier blocks at 7 / 9 / 12 for creature
+// quality (SPANDEAD -> SPANDL12), all flat 8h.  We add blocks for 5-20,
+// filling the gaps 5, 6, 8, 10, 11, 13-20, and update all durations.
+// New blocks clone the last existing block (SPANDL12 tier) with scaled dur.
+// true_min is explicit (5) because SR's first tier block at 7 does not
+// reflect cast eligibility.
+// ===========================================================================
+COPY_EXISTING ~sppr301.spl~ ~override~
+  LPF BM_ANIMATE_SCALE INT_VAR true_min = 5 END
+BUT_ONLY
+
+// ===========================================================================
+// Priest: Summon Greater Undead (sppr619, level 6)
+// Single flat 8h block, op177 -> SPANDL15.  Full per-level coverage added.
+// ===========================================================================
+COPY_EXISTING ~sppr619.spl~ ~override~
+  LPF BM_ANIMATE_SCALE INT_VAR true_min = 11 END
+BUT_ONLY

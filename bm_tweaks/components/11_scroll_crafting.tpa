@@ -1,0 +1,246 @@
+DEFINE_ACTION_FUNCTION ~BM_ADD_SCROLLKIT_TO_STORES~
+  STR_VAR
+    ~item_resref~ = ~~
+BEGIN
+  ACTION_FOR_EACH _store IN
+    ~INN2616~ ~HIGHHEDG~ ~STO0703~
+    ~RIBALD~ ~RIBALD3~ ~SCROLLS~
+    ~OHNMHSM~ ~OHNSCRME~
+    ~ODDROW22~ ~ODDROW25~ ~ODDUER01~ ~ODDUER02~
+    ~25SPELL~ ~25SPELL2~
+  BEGIN
+    ACTION_IF FILE_EXISTS_IN_GAME ~%_store%.sto~ BEGIN
+      COPY_EXISTING ~%_store%.sto~ ~override~
+        ADD_STORE_ITEM ~%item_resref%~ #1 #0 #0 ~IDENTIFIED~ #1
+    END
+  END
+END
+
+OUTER_SET bm_scrollcraft_arcane_count = 0
+OUTER_SET bm_scrollcraft_divine_count = 0
+OUTER_SPRINT bm_scrollkit_append ""
+INCLUDE ~bm_tweaks/generated/BMSCRKIT_native_map.tpa~
+
+COPY_EXISTING_REGEXP ~^SPWI[0-9][0-9][0-9]\.spl$~ ~override~
+  READ_LONG 0x08 _name
+  READ_LONG 0x50 _desc
+  TEXT_SPRINT _spell ~%SOURCE_RES%~
+  TO_UPPER _spell
+  PATCH_IF (_name > 0 AND _name != 0xffffffff AND _desc > 0 AND _desc != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF NOT FILE_CONTAINS_EVALUATED (~HIDESPL.2DA~ ~^%_spell%[ %TAB%]~) THEN BEGIN
+        OUTER_SET _level = 0
+        ACTION_IF ("%_spell%" STRING_COMPARE_REGEXP ~^SPWI1[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 1 END
+        ACTION_IF ("%_spell%" STRING_COMPARE_REGEXP ~^SPWI2[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 2 END
+        ACTION_IF ("%_spell%" STRING_COMPARE_REGEXP ~^SPWI3[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 3 END
+        ACTION_IF ("%_spell%" STRING_COMPARE_REGEXP ~^SPWI4[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 4 END
+        ACTION_IF ("%_spell%" STRING_COMPARE_REGEXP ~^SPWI5[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 5 END
+        ACTION_IF ("%_spell%" STRING_COMPARE_REGEXP ~^SPWI6[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 6 END
+        ACTION_IF ("%_spell%" STRING_COMPARE_REGEXP ~^SPWI7[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 7 END
+        ACTION_IF ("%_spell%" STRING_COMPARE_REGEXP ~^SPWI8[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 8 END
+        ACTION_IF ("%_spell%" STRING_COMPARE_REGEXP ~^SPWI9[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 9 END
+        ACTION_IF (_level > 0) THEN BEGIN
+          OUTER_TEXT_SPRINT _scroll_item ~~
+          ACTION_PHP_EACH bm_scrollcraft_native AS _native_spell => _native_item BEGIN
+            ACTION_IF ("%_native_spell%" STRING_COMPARE_CASE "%_spell%" = 0) THEN BEGIN
+              OUTER_TEXT_SPRINT _scroll_item ~%_native_item%~
+            END
+          END
+          ACTION_IF ("%_scroll_item%" STRING_COMPARE_CASE ~~ = 0) THEN BEGIN
+            OUTER_PATCH_SAVE _scroll_item ~%_spell%~ BEGIN
+              REPLACE_TEXTUALLY ~^SP~ ~BM~
+            END
+          END
+          ACTION_IF
+            ("%_scroll_item%" STRING_COMPARE_REGEXP ~^BMWI[0-9][0-9][0-9]$~ = 0) AND
+            (NOT FILE_EXISTS_IN_GAME ~%_scroll_item%.itm~)
+          THEN BEGIN
+            COPY_EXISTING ~SCRL1R.itm~ ~override/%_scroll_item%.itm~
+              WRITE_LONG 0x08 %_name%
+              WRITE_LONG 0x0c %_name%
+              WRITE_LONG 0x50 0xffffffff
+              WRITE_LONG 0x54 %_desc%
+              READ_LONG 0x64 _ab_off
+              READ_SHORT 0x68 _ab_cnt
+              READ_LONG 0x6a _fx_off
+              FOR (_ab = 0; _ab < _ab_cnt; _ab += 1) BEGIN
+                READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+                READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+                FOR (_fx = 0; _fx < _fx_cnt; _fx += 1) BEGIN
+                  READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+                  PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                    WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~%_spell%~ #8
+                  END
+                END
+              END
+            BUT_ONLY_IF_IT_CHANGES
+          END
+          ACTION_IF FILE_EXISTS_IN_GAME ~%_scroll_item%.itm~ THEN BEGIN
+            COPY_EXISTING ~%_scroll_item%.itm~ ~override~
+              READ_LONG 0x34 _store_price
+              READ_LONG 0x0c _scroll_name_strref
+            BUT_ONLY
+            ACTION_IF (_scroll_name_strref > 0 AND _scroll_name_strref != 0xffffffff) THEN BEGIN
+              OUTER_SET _craft_price = (_store_price / 10)
+              ACTION_IF (_craft_price < 1) THEN BEGIN
+                OUTER_SET _craft_price = 1
+              END
+              OUTER_SET _gold_minus_one = (_craft_price - 1)
+              OUTER_SET _craft_time = (_level * 300)
+              OUTER_SET bm_scrollcraft_arcane_count = (bm_scrollcraft_arcane_count + 1)
+              OUTER_SPRINT bm_scrollkit_append "%bm_scrollkit_append%APPEND ~BMSCRKIT~
+  IF ~~ THEN BEGIN ~bm_scrollkit_arcane_circle_%_level%~
+    IF ~HaveKnownSpellRES(~%_spell%~)~ THEN REPLY #%_scroll_name_strref% GOTO ~bm_scrollkit_confirm_%_spell%~
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_confirm_%_spell%~
+    SAY ~Scribe this scroll for %_craft_price% gold? This takes %_level% hours.~
+      IF ~PartyGoldGT(%_gold_minus_one%)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(%_craft_price%)
+AdvanceTime(%_craft_time%)
+GiveItemCreate(~%_scroll_item%~,Myself,1,0,0)~ EXIT
+      IF ~!PartyGoldGT(%_gold_minus_one%)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_%_spell%~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_%_level%~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_%_spell%~
+    SAY ~You need %_craft_price% gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_%_level%~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+END
+"
+            END
+          END
+        END
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING_REGEXP ~^SPPR[0-9][0-9][0-9]\.spl$~ ~override~
+  READ_LONG 0x08 _name
+  READ_LONG 0x50 _desc
+  TEXT_SPRINT _spell ~%SOURCE_RES%~
+  TO_UPPER _spell
+  PATCH_IF (_name > 0 AND _name != 0xffffffff AND _desc > 0 AND _desc != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF NOT FILE_CONTAINS_EVALUATED (~HIDESPL.2DA~ ~^%_spell%[ %TAB%]~) THEN BEGIN
+        OUTER_SET _level = 0
+        ACTION_IF ("%_spell%" STRING_COMPARE_REGEXP ~^SPPR1[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 1 END
+        ACTION_IF ("%_spell%" STRING_COMPARE_REGEXP ~^SPPR2[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 2 END
+        ACTION_IF ("%_spell%" STRING_COMPARE_REGEXP ~^SPPR3[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 3 END
+        ACTION_IF ("%_spell%" STRING_COMPARE_REGEXP ~^SPPR4[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 4 END
+        ACTION_IF ("%_spell%" STRING_COMPARE_REGEXP ~^SPPR5[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 5 END
+        ACTION_IF ("%_spell%" STRING_COMPARE_REGEXP ~^SPPR6[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 6 END
+        ACTION_IF ("%_spell%" STRING_COMPARE_REGEXP ~^SPPR7[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 7 END
+        ACTION_IF ("%_spell%" STRING_COMPARE_REGEXP ~^SPPR8[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 8 END
+        ACTION_IF ("%_spell%" STRING_COMPARE_REGEXP ~^SPPR9[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 9 END
+        ACTION_IF (_level > 0) THEN BEGIN
+          OUTER_TEXT_SPRINT _scroll_item ~~
+          ACTION_PHP_EACH bm_scrollcraft_native AS _native_spell => _native_item BEGIN
+            ACTION_IF ("%_native_spell%" STRING_COMPARE_CASE "%_spell%" = 0) THEN BEGIN
+              OUTER_TEXT_SPRINT _scroll_item ~%_native_item%~
+            END
+          END
+          ACTION_IF ("%_scroll_item%" STRING_COMPARE_CASE ~~ = 0) THEN BEGIN
+            OUTER_PATCH_SAVE _scroll_item ~%_spell%~ BEGIN
+              REPLACE_TEXTUALLY ~^SP~ ~BM~
+            END
+          END
+          ACTION_IF
+            ("%_scroll_item%" STRING_COMPARE_REGEXP ~^BMPR[0-9][0-9][0-9]$~ = 0) AND
+            (NOT FILE_EXISTS_IN_GAME ~%_scroll_item%.itm~)
+          THEN BEGIN
+            COPY_EXISTING ~SCRL1R.itm~ ~override/%_scroll_item%.itm~
+              WRITE_LONG 0x08 %_name%
+              WRITE_LONG 0x0c %_name%
+              WRITE_LONG 0x50 0xffffffff
+              WRITE_LONG 0x54 %_desc%
+              WRITE_LONG 0x1e 0x004f2840
+              WRITE_SHORT 0x68 1
+              READ_LONG 0x64 _ab_off
+              READ_LONG 0x6a _fx_off
+              READ_SHORT (_ab_off + 0x1e) _fx_cnt
+              READ_SHORT (_ab_off + 0x20) _fx_idx
+              FOR (_fx = 0; _fx < _fx_cnt; _fx += 1) BEGIN
+                READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+                PATCH_IF (_op = 146) BEGIN
+                  WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~%_spell%~ #8
+                END
+              END
+            BUT_ONLY_IF_IT_CHANGES
+          END
+          ACTION_IF FILE_EXISTS_IN_GAME ~%_scroll_item%.itm~ THEN BEGIN
+            COPY_EXISTING ~%_scroll_item%.itm~ ~override~
+              READ_LONG 0x34 _store_price
+              READ_LONG 0x0c _scroll_name_strref
+            BUT_ONLY
+            ACTION_IF (_scroll_name_strref > 0 AND _scroll_name_strref != 0xffffffff) THEN BEGIN
+              OUTER_SET _craft_price = (_store_price / 10)
+              ACTION_IF (_craft_price < 1) THEN BEGIN
+                OUTER_SET _craft_price = 1
+              END
+              OUTER_SET _gold_minus_one = (_craft_price - 1)
+              OUTER_SET _craft_time = (_level * 300)
+              OUTER_SET bm_scrollcraft_divine_count = (bm_scrollcraft_divine_count + 1)
+              OUTER_SPRINT bm_scrollkit_append "%bm_scrollkit_append%APPEND ~BMSCRKIT~
+  IF ~~ THEN BEGIN ~bm_scrollkit_divine_circle_%_level%~
+    IF ~HaveKnownSpellRES(~%_spell%~)~ THEN REPLY #%_scroll_name_strref% GOTO ~bm_scrollkit_confirm_%_spell%~
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_confirm_%_spell%~
+    SAY ~Scribe this scroll for %_craft_price% gold? This takes %_level% hours.~
+      IF ~PartyGoldGT(%_gold_minus_one%)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(%_craft_price%)
+AdvanceTime(%_craft_time%)
+GiveItemCreate(~%_scroll_item%~,Myself,1,0,0)~ EXIT
+      IF ~!PartyGoldGT(%_gold_minus_one%)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_%_spell%~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_%_level%~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_%_spell%~
+    SAY ~You need %_craft_price% gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_%_level%~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+END
+"
+            END
+          END
+        END
+      END
+    END
+  END
+BUT_ONLY
+
+COMPILE ~bm_tweaks/generated/BMSCRKIT_full.d~
+
+COPY_EXISTING ~MISC01.ITM~ ~override/BMSCRKIT.ITM~
+  SAY NAME1 ~Scroll Scribing Kit~
+  SAY NAME2 ~Scroll Scribing Kit~
+  SAY UNIDENTIFIED_DESC ~A well-stocked kit for turning known wizard and priest spells into scrolls.~
+  SAY IDENTIFIED_DESC ~A kit of inks, vellum, and binding tools for scribing scrolls. It creates book-facing wizard and priest scrolls for one tenth of the scroll's listed store price.~
+  WRITE_LONG 0x34 2000
+  WRITE_SHORT 0x38 1
+  WRITE_SHORT 0x42 10
+  WRITE_LONG 0x4c 10
+  READ_LONG 0x18 _item_flags
+  WRITE_LONG 0x18 (_item_flags BOR BIT11)
+BUT_ONLY_IF_IT_CHANGES
+
+OUTER_SET bm_scrollkit_interact_strref = RESOLVE_STR_REF(~Use the scroll scribing kit.~)
+COPY_EXISTING ~ITEMDIAL.2DA~ ~override~
+  COUNT_2DA_ROWS 3 _itemdial_rows
+  INSERT_2DA_ROW %_itemdial_rows% 3 ~BMSCRKIT %bm_scrollkit_interact_strref% BMSCRKIT~
+
+LAUNCH_ACTION_FUNCTION ~BM_ADD_SCROLLKIT_TO_STORES~
+  STR_VAR
+    ~item_resref~ = ~BMSCRKIT~
+END
+
+PRINT ~[bm_tweaks] scroll_crafting: registered %bm_scrollcraft_arcane_count% wizard scrolls and %bm_scrollcraft_divine_count% priest scrolls for crafting.~
