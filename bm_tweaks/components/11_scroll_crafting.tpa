@@ -1,5 +1,3 @@
-INCLUDE ~bm_tweaks/lib/spl_itm_macros.tpa~
-
 DEFINE_ACTION_FUNCTION ~BM_ADD_SCROLLKIT_TO_STORES~
   STR_VAR
     ~item_resref~ = ~~
@@ -20,10 +18,6 @@ END
 
 OUTER_SET bm_scrollcraft_arcane_count = 0
 OUTER_SET bm_scrollcraft_divine_count = 0
-OUTER_SPRINT bm_scrollkit_append ""
-OUTER_PATCH_SAVE bm_scrollkit_dq ~ ~ BEGIN
-  WRITE_BYTE 0 34
-END
 INCLUDE ~bm_tweaks/generated/BMSCRKIT_native_map.tpa~
 
 COPY_EXISTING_REGEXP ~^SPWI[0-9][0-9][0-9]\.spl$~ ~override~
@@ -86,37 +80,7 @@ COPY_EXISTING_REGEXP ~^SPWI[0-9][0-9][0-9]\.spl$~ ~override~
               READ_LONG 0x0c _scroll_name_strref
             BUT_ONLY
             ACTION_IF (_scroll_name_strref > 0 AND _scroll_name_strref != 0xffffffff) THEN BEGIN
-              OUTER_SET _craft_price = (_store_price / 10)
-              ACTION_IF (_craft_price < 1) THEN BEGIN
-                OUTER_SET _craft_price = 1
-              END
-              OUTER_SET _gold_minus_one = (_craft_price - 1)
-              OUTER_SET _craft_time = (_level * 300)
               OUTER_SET bm_scrollcraft_arcane_count = (bm_scrollcraft_arcane_count + 1)
-              OUTER_SPRINT bm_scrollkit_append "%bm_scrollkit_append%APPEND ~BMSCRKIT~
-  IF ~~ THEN BEGIN ~bm_scrollkit_arcane_circle_%_level%~
-    IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES(%bm_scrollkit_dq%%_spell%%bm_scrollkit_dq%))~ THEN REPLY #%_scroll_name_strref% GOTO ~bm_scrollkit_confirm_%_spell%~
-  END
-
-  IF ~~ THEN BEGIN ~bm_scrollkit_confirm_%_spell%~
-    SAY ~Scribe this scroll for %_craft_price% gold? This takes %_level% hours.~
-      IF ~PartyGoldGT(%_gold_minus_one%)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(%_craft_price%)
-AdvanceTime(%_craft_time%)
-GiveItemCreate(%bm_scrollkit_dq%%_scroll_item%%bm_scrollkit_dq%,LastTalkedToBy(Myself),1,0,0)~ EXIT
-      IF ~!PartyGoldGT(%_gold_minus_one%)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_%_spell%~
-      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_%_level%~
-      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
-      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
-  END
-
-  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_%_spell%~
-    SAY ~You need %_craft_price% gold to scribe this scroll.~
-      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_%_level%~
-      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
-      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
-  END
-END
-"
             END
           END
         END
@@ -184,37 +148,7 @@ COPY_EXISTING_REGEXP ~^SPPR[0-9][0-9][0-9]\.spl$~ ~override~
               READ_LONG 0x0c _scroll_name_strref
             BUT_ONLY
             ACTION_IF (_scroll_name_strref > 0 AND _scroll_name_strref != 0xffffffff) THEN BEGIN
-              OUTER_SET _craft_price = (_store_price / 10)
-              ACTION_IF (_craft_price < 1) THEN BEGIN
-                OUTER_SET _craft_price = 1
-              END
-              OUTER_SET _gold_minus_one = (_craft_price - 1)
-              OUTER_SET _craft_time = (_level * 300)
               OUTER_SET bm_scrollcraft_divine_count = (bm_scrollcraft_divine_count + 1)
-              OUTER_SPRINT bm_scrollkit_append "%bm_scrollkit_append%APPEND ~BMSCRKIT~
-  IF ~~ THEN BEGIN ~bm_scrollkit_divine_circle_%_level%~
-    IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES(%bm_scrollkit_dq%%_spell%%bm_scrollkit_dq%))~ THEN REPLY #%_scroll_name_strref% GOTO ~bm_scrollkit_confirm_%_spell%~
-  END
-
-  IF ~~ THEN BEGIN ~bm_scrollkit_confirm_%_spell%~
-    SAY ~Scribe this scroll for %_craft_price% gold? This takes %_level% hours.~
-      IF ~PartyGoldGT(%_gold_minus_one%)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(%_craft_price%)
-AdvanceTime(%_craft_time%)
-GiveItemCreate(%bm_scrollkit_dq%%_scroll_item%%bm_scrollkit_dq%,LastTalkedToBy(Myself),1,0,0)~ EXIT
-      IF ~!PartyGoldGT(%_gold_minus_one%)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_%_spell%~
-      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_%_level%~
-      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
-      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
-  END
-
-  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_%_spell%~
-    SAY ~You need %_craft_price% gold to scribe this scroll.~
-      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_%_level%~
-      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
-      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
-  END
-END
-"
             END
           END
         END
