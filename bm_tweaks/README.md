@@ -41,6 +41,7 @@ Use WeiDU from the game root on macOS:
 ```
 
 Replace `0` with the component number you want to reinstall.
+Only designed for post eet_end installation.
 
 ## Repo Notes
 

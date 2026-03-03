@@ -9,10 +9,39 @@ THEN BEGIN bm_scrollkit_busy
     IF ~~ THEN EXIT
 END
 
-IF ~~ THEN BEGIN bm_scrollkit_main
+
+IF ~!Class(LastTalkedToBy(Myself),CLERIC)
+!Class(LastTalkedToBy(Myself),CLERIC_MAGE)
+!Class(LastTalkedToBy(Myself),FIGHTER_CLERIC)
+!Class(LastTalkedToBy(Myself),CLERIC_RANGER)
+!Class(LastTalkedToBy(Myself),CLERIC_THIEF)
+!Class(LastTalkedToBy(Myself),FIGHTER_MAGE_CLERIC)
+!Class(LastTalkedToBy(Myself),SHAMAN)
+!Class(LastTalkedToBy(Myself),MAGE)
+!Class(LastTalkedToBy(Myself),SORCERER)
+!Class(LastTalkedToBy(Myself),FIGHTER_MAGE)
+!Class(LastTalkedToBy(Myself),FIGHTER_MAGE_THIEF)
+!Class(LastTalkedToBy(Myself),MAGE_THIEF)~ THEN BEGIN bm_scrollkit_invalid_target
+  SAY ~The scroll scribing kit can only be used on party members who cast from cleric or wizard spellbooks.~
+    IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+END
+IF ~OR(12)
+Class(LastTalkedToBy(Myself),CLERIC)
+Class(LastTalkedToBy(Myself),CLERIC_MAGE)
+Class(LastTalkedToBy(Myself),FIGHTER_CLERIC)
+Class(LastTalkedToBy(Myself),CLERIC_RANGER)
+Class(LastTalkedToBy(Myself),CLERIC_THIEF)
+Class(LastTalkedToBy(Myself),FIGHTER_MAGE_CLERIC)
+Class(LastTalkedToBy(Myself),SHAMAN)
+Class(LastTalkedToBy(Myself),MAGE)
+Class(LastTalkedToBy(Myself),SORCERER)
+Class(LastTalkedToBy(Myself),FIGHTER_MAGE)
+Class(LastTalkedToBy(Myself),FIGHTER_MAGE_THIEF)
+Class(LastTalkedToBy(Myself),MAGE_THIEF)~ THEN BEGIN bm_scrollkit_main
   SAY ~The scroll scribing kit is open.~
-    IF ~Class(MYSELF,CLERIC_ALL)~ THEN REPLY ~Craft a priest scroll.~ GOTO ~bm_scrollkit_divine_menu~
-    IF ~Class(MYSELF,MAGE_ALL)~ THEN REPLY ~Craft a wizard scroll.~ GOTO ~bm_scrollkit_arcane_menu~
+    IF ~OR(6) Class(LastTalkedToBy(Myself),CLERIC) Class(LastTalkedToBy(Myself),CLERIC_MAGE) Class(LastTalkedToBy(Myself),FIGHTER_CLERIC) Class(LastTalkedToBy(Myself),CLERIC_RANGER) Class(LastTalkedToBy(Myself),CLERIC_THIEF) Class(LastTalkedToBy(Myself),FIGHTER_MAGE_CLERIC)~ THEN REPLY ~Craft a priest scroll.~ GOTO ~bm_scrollkit_divine_menu~
+    IF ~OR(7) Class(LastTalkedToBy(Myself),MAGE) Class(LastTalkedToBy(Myself),SORCERER) Class(LastTalkedToBy(Myself),CLERIC_MAGE) Class(LastTalkedToBy(Myself),FIGHTER_MAGE) Class(LastTalkedToBy(Myself),FIGHTER_MAGE_CLERIC) Class(LastTalkedToBy(Myself),FIGHTER_MAGE_THIEF) Class(LastTalkedToBy(Myself),MAGE_THIEF)~ THEN REPLY ~Craft a wizard scroll.~ GOTO ~bm_scrollkit_arcane_menu~
+    IF ~Class(LastTalkedToBy(Myself),SHAMAN)~ THEN REPLY ~Craft a priest scroll.~ GOTO ~bm_scrollkit_divine_menu~
     IF ~~ THEN REPLY ~Put the kit away.~ EXIT
 END
 

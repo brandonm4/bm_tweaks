@@ -1,0 +1,77 @@
+IF
+  InParty(Player1)
+  OR(3)
+    SpellCastRES("BMSCRSP",Player1)
+    SpellCastInnateRES("BMSCRSP",Player1)
+    SpellCastOnMeRES("BMSCRSP",Player1)
+  GlobalTimerExpired("bmScrollKitP1","GLOBAL")
+THEN
+  RESPONSE #100
+    SetGlobalTimer("bmScrollKitP1","GLOBAL",2)
+    CreateCreatureObject("BMSCRN1",Player1,0,0,0)
+END
+
+IF
+  InParty(Player2)
+  OR(3)
+    SpellCastRES("BMSCRSP",Player2)
+    SpellCastInnateRES("BMSCRSP",Player2)
+    SpellCastOnMeRES("BMSCRSP",Player2)
+  GlobalTimerExpired("bmScrollKitP2","GLOBAL")
+THEN
+  RESPONSE #100
+    SetGlobalTimer("bmScrollKitP2","GLOBAL",2)
+    CreateCreatureObject("BMSCRN2",Player2,0,0,0)
+END
+
+IF
+  InParty(Player3)
+  OR(3)
+    SpellCastRES("BMSCRSP",Player3)
+    SpellCastInnateRES("BMSCRSP",Player3)
+    SpellCastOnMeRES("BMSCRSP",Player3)
+  GlobalTimerExpired("bmScrollKitP3","GLOBAL")
+THEN
+  RESPONSE #100
+    SetGlobalTimer("bmScrollKitP3","GLOBAL",2)
+    CreateCreatureObject("BMSCRN3",Player3,0,0,0)
+END
+
+IF
+  InParty(Player4)
+  OR(3)
+    SpellCastRES("BMSCRSP",Player4)
+    SpellCastInnateRES("BMSCRSP",Player4)
+    SpellCastOnMeRES("BMSCRSP",Player4)
+  GlobalTimerExpired("bmScrollKitP4","GLOBAL")
+THEN
+  RESPONSE #100
+    SetGlobalTimer("bmScrollKitP4","GLOBAL",2)
+    CreateCreatureObject("BMSCRN4",Player4,0,0,0)
+END
+
+IF
+  InParty(Player5)
+  OR(3)
+    SpellCastRES("BMSCRSP",Player5)
+    SpellCastInnateRES("BMSCRSP",Player5)
+    SpellCastOnMeRES("BMSCRSP",Player5)
+  GlobalTimerExpired("bmScrollKitP5","GLOBAL")
+THEN
+  RESPONSE #100
+    SetGlobalTimer("bmScrollKitP5","GLOBAL",2)
+    CreateCreatureObject("BMSCRN5",Player5,0,0,0)
+END
+
+IF
+  InParty(Player6)
+  OR(3)
+    SpellCastRES("BMSCRSP",Player6)
+    SpellCastInnateRES("BMSCRSP",Player6)
+    SpellCastOnMeRES("BMSCRSP",Player6)
+  GlobalTimerExpired("bmScrollKitP6","GLOBAL")
+THEN
+  RESPONSE #100
+    SetGlobalTimer("bmScrollKitP6","GLOBAL",2)
+    CreateCreatureObject("BMSCRN6",Player6,0,0,0)
+END

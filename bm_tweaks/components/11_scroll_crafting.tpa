@@ -1,3 +1,5 @@
+INCLUDE ~bm_tweaks/lib/spl_itm_macros.tpa~
+
 DEFINE_ACTION_FUNCTION ~BM_ADD_SCROLLKIT_TO_STORES~
   STR_VAR
     ~item_resref~ = ~~
@@ -19,6 +21,9 @@ END
 OUTER_SET bm_scrollcraft_arcane_count = 0
 OUTER_SET bm_scrollcraft_divine_count = 0
 OUTER_SPRINT bm_scrollkit_append ""
+OUTER_PATCH_SAVE bm_scrollkit_dq ~ ~ BEGIN
+  WRITE_BYTE 0 34
+END
 INCLUDE ~bm_tweaks/generated/BMSCRKIT_native_map.tpa~
 
 COPY_EXISTING_REGEXP ~^SPWI[0-9][0-9][0-9]\.spl$~ ~override~
@@ -90,14 +95,14 @@ COPY_EXISTING_REGEXP ~^SPWI[0-9][0-9][0-9]\.spl$~ ~override~
               OUTER_SET bm_scrollcraft_arcane_count = (bm_scrollcraft_arcane_count + 1)
               OUTER_SPRINT bm_scrollkit_append "%bm_scrollkit_append%APPEND ~BMSCRKIT~
   IF ~~ THEN BEGIN ~bm_scrollkit_arcane_circle_%_level%~
-    IF ~HaveKnownSpellRES(~%_spell%~)~ THEN REPLY #%_scroll_name_strref% GOTO ~bm_scrollkit_confirm_%_spell%~
+    IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES(%bm_scrollkit_dq%%_spell%%bm_scrollkit_dq%))~ THEN REPLY #%_scroll_name_strref% GOTO ~bm_scrollkit_confirm_%_spell%~
   END
 
   IF ~~ THEN BEGIN ~bm_scrollkit_confirm_%_spell%~
     SAY ~Scribe this scroll for %_craft_price% gold? This takes %_level% hours.~
       IF ~PartyGoldGT(%_gold_minus_one%)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(%_craft_price%)
 AdvanceTime(%_craft_time%)
-GiveItemCreate(~%_scroll_item%~,Myself,1,0,0)~ EXIT
+GiveItemCreate(%bm_scrollkit_dq%%_scroll_item%%bm_scrollkit_dq%,LastTalkedToBy(Myself),1,0,0)~ EXIT
       IF ~!PartyGoldGT(%_gold_minus_one%)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_%_spell%~
       IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_%_level%~
       IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
@@ -188,14 +193,14 @@ COPY_EXISTING_REGEXP ~^SPPR[0-9][0-9][0-9]\.spl$~ ~override~
               OUTER_SET bm_scrollcraft_divine_count = (bm_scrollcraft_divine_count + 1)
               OUTER_SPRINT bm_scrollkit_append "%bm_scrollkit_append%APPEND ~BMSCRKIT~
   IF ~~ THEN BEGIN ~bm_scrollkit_divine_circle_%_level%~
-    IF ~HaveKnownSpellRES(~%_spell%~)~ THEN REPLY #%_scroll_name_strref% GOTO ~bm_scrollkit_confirm_%_spell%~
+    IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES(%bm_scrollkit_dq%%_spell%%bm_scrollkit_dq%))~ THEN REPLY #%_scroll_name_strref% GOTO ~bm_scrollkit_confirm_%_spell%~
   END
 
   IF ~~ THEN BEGIN ~bm_scrollkit_confirm_%_spell%~
     SAY ~Scribe this scroll for %_craft_price% gold? This takes %_level% hours.~
       IF ~PartyGoldGT(%_gold_minus_one%)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(%_craft_price%)
 AdvanceTime(%_craft_time%)
-GiveItemCreate(~%_scroll_item%~,Myself,1,0,0)~ EXIT
+GiveItemCreate(%bm_scrollkit_dq%%_scroll_item%%bm_scrollkit_dq%,LastTalkedToBy(Myself),1,0,0)~ EXIT
       IF ~!PartyGoldGT(%_gold_minus_one%)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_%_spell%~
       IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_%_level%~
       IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
@@ -225,6 +230,8 @@ COPY_EXISTING ~MISC01.ITM~ ~override/BMSCRKIT.ITM~
   SAY NAME2 ~Scroll Scribing Kit~
   SAY UNIDENTIFIED_DESC ~A well-stocked kit for turning known wizard and priest spells into scrolls.~
   SAY IDENTIFIED_DESC ~A kit of inks, vellum, and binding tools for scribing scrolls. It creates book-facing wizard and priest scrolls for one tenth of the scroll's listed store price.~
+  WRITE_ASCIIE 0x3a ~IBOOK01~ #8
+  WRITE_ASCIIE 0x58 ~CBOOK01~ #8
   WRITE_LONG 0x34 2000
   WRITE_SHORT 0x38 1
   WRITE_SHORT 0x42 10
@@ -234,9 +241,11 @@ COPY_EXISTING ~MISC01.ITM~ ~override/BMSCRKIT.ITM~
 BUT_ONLY_IF_IT_CHANGES
 
 OUTER_SET bm_scrollkit_interact_strref = RESOLVE_STR_REF(~Use the scroll scribing kit.~)
+
 COPY_EXISTING ~ITEMDIAL.2DA~ ~override~
   COUNT_2DA_ROWS 3 _itemdial_rows
   INSERT_2DA_ROW %_itemdial_rows% 3 ~BMSCRKIT %bm_scrollkit_interact_strref% BMSCRKIT~
+BUT_ONLY_IF_IT_CHANGES
 
 LAUNCH_ACTION_FUNCTION ~BM_ADD_SCROLLKIT_TO_STORES~
   STR_VAR
