@@ -1,32 +1,10 @@
-COPY_EXISTING ~weapprof.2da~ ~override~
-  COUNT_2DA_COLS prof_col_count
-  COUNT_2DA_ROWS 1 prof_row_count
-  SET total_col_count = prof_col_count + 1
+// Replace weapprof.2da with the post-install bm_tweaks proficiency table.
+//
+// This snapshot applies the current bm_tweaks proficiency rules:
+// - PALADIN and RANGER get 3 pips in every weapon where FIGHTER gets 5
+// - fighter-derived multis, including A7 Berserker/Kensai mages, get full fighter pips
+// - CLERIC, CLERIC_MAGE, CLERIC_THIEF, HELM, OHTEMPUS, TALOS, and OHTYR get 1 pip in swords
+// - CLERIC_RANGER gets 3 pips in swords
+// - A7 God Talos and OHTYR priest variants get 1 pip in swords
 
-  SET godtalos_col = 0
-
-  FOR (col = 1; col < total_col_count; ++col) BEGIN
-    READ_2DA_ENTRY 0 col total_col_count prof_col_name
-
-    PATCH_IF (~%prof_col_name%~ STRING_EQUAL_CASE ~A7_MK_GODTALOS_NECROMANCER~) BEGIN
-      SET godtalos_col = col
-    END
-  END
-
-  PATCH_IF (godtalos_col > 0) BEGIN
-    FOR (row = 1; row < prof_row_count; ++row) BEGIN
-      READ_2DA_ENTRY row 0 total_col_count prof_row_name
-
-      PATCH_IF (
-        ~%prof_row_name%~ STRING_EQUAL_CASE ~LARGE_SWORD~
-        OR ~%prof_row_name%~ STRING_EQUAL_CASE ~SMALL_SWORD~
-        OR ~%prof_row_name%~ STRING_EQUAL_CASE ~BG1_LARGE_SWORD~
-        OR ~%prof_row_name%~ STRING_EQUAL_CASE ~BG1_SMALL_SWORD~
-      ) BEGIN
-        SET_2DA_ENTRY row godtalos_col total_col_count ~2~
-      END
-    END
-  END ELSE BEGIN
-    PATCH_PRINT ~bm_tweaks: skipping God Talos Necromancer sword proficiency tweak because A7_MK_GODTALOS_NECROMANCER was not found in weapprof.2da~
-  END
-BUT_ONLY_IF_IT_CHANGES
+COPY ~bm_tweaks/generated/weapprof_fixed.2da~ ~override/weapprof.2da~

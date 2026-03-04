@@ -9,7 +9,7 @@ END
 BEGIN ~Small/Large swords usable by Cleric + Cleric/Mage~
 INCLUDE ~bm_tweaks/components/00_swords.tpa~
 
-BEGIN ~Allow God Talos Necromancer specialization in swords~
+BEGIN ~Change Weapon Proficiencies to fit custom world, Swords for Clerics, Grandmastery for all Fighters~
 INCLUDE ~bm_tweaks/components/01_godtalos_necromancer_weapprof.tpa~
 
 BEGIN ~Standalone arcane spell failure for armor and shields~
