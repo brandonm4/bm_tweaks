@@ -60,3 +60,4 @@ Only designed for post eet_end installation.
 - `5`: add bonus random loot to containers already using `RND*`
 - `6`: add random loot to empty containers
 - `7`: add flavored random loot to filled containers lacking `RND*`
+- `14`: exceptional Strength carry-weight fix overriding CDTweaks component 2500

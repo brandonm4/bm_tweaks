@@ -1,0 +1,2759 @@
+// Generated MESpells scroll fallback creation
+COPY_EXISTING ~MEWI151.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI151X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI151.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI151.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI151~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI152.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI152X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI152.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI152.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI152~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI160.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI160X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI160.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI160.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI160~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI251.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI251X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI251.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI251.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI251~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI253.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI253X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI253.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI253.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI253~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI254.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI254X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI254.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI254.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI254~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI255.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI255X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI255.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI255.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI255~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI258.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI258X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI258.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI258.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI258~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI351.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI351X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI351.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI351.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI351~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI353.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI353X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI353.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI353.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI353~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI354.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI354X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI354.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI354.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI354~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI356.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI356X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI356.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI356.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI356~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI357.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI357X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI357.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI357.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI357~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI361.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI361X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI361.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI361.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI361~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI451.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI451X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI451.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI451.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI451~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI452.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI452X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI452.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI452.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI452~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI453.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI453X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI453.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI453.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI453~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI454.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI454X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI454.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI454.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI454~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI457.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI457X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI457.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI457.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI457~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI551.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI551X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI551.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI551.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI551~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI554.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI554X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI554.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI554.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI554~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI555.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI555X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI555.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI555.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI555~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI556.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI556X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI556.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI556.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI556~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI557.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI557X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI557.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI557.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI557~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI558.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI558X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI558.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI558.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI558~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI560.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI560X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI560.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI560.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI560~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI563.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI563X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI563.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI563.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI563~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI565.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI565X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI565.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI565.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI565~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI566.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI566X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI566.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI566.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI566~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI651.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI651X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI651.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI651.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI651~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI652.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI652X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI652.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI652.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI652~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI653.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI653X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI653.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI653.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI653~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI656.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI656X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI656.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI656.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI656~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI657.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI657X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI657.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI657.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI657~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI658.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI658X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI658.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI658.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI658~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI754.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI754X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI754.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI754.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI754~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI756.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI756X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI756.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI756.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI756~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI759.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI759X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI759.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI759.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI759~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI760.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI760X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI760.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI760.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI760~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI762.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI762X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI762.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI762.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI762~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI851.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI851X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI851.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI851.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI851~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI852.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI852X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI852.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI852.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI852~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI855.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI855X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI855.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI855.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI855~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI857.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI857X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI857.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI857.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI857~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI859.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI859X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI859.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI859.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI859~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI860.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI860X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI860.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI860.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI860~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI861.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI861X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI861.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI861.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI861~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI862.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI862X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI862.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI862.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI862~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI863.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI863X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI863.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI863.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI863~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI951.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI951X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI951.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI951.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI951~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI952.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI952X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI952.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI952.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI952~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI953.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI953X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI953.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI953.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI953~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI954.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI954X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI954.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI954.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI954~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI955.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI955X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI955.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI955.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI955~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI957.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI957X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI957.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI957.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI957~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI958.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI958X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI958.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI958.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI958~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI959.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI959X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI959.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI959.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI959~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEWI966.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEWI966X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMWI966.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMWI966.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEWI966~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEPR151.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEPR151X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMPR151.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMPR151.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEPR151~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEPR153.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEPR153X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMPR153.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMPR153.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEPR153~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEPR154.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEPR154X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMPR154.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMPR154.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEPR154~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEPR155.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEPR155X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMPR155.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMPR155.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEPR155~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEPR156.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEPR156X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMPR156.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMPR156.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEPR156~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEPR157.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEPR157X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMPR157.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMPR157.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEPR157~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEPR251.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEPR251X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMPR251.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMPR251.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEPR251~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEPR252.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEPR252X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMPR252.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMPR252.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEPR252~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEPR253.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEPR253X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMPR253.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMPR253.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEPR253~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEPR254.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEPR254X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMPR254.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMPR254.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEPR254~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEPR257.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEPR257X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMPR257.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMPR257.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEPR257~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEPR351.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEPR351X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMPR351.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMPR351.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEPR351~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEPR354.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEPR354X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMPR354.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMPR354.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEPR354~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEPR356.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEPR356X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMPR356.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMPR356.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEPR356~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEPR359.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEPR359X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMPR359.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMPR359.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEPR359~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEPR451.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEPR451X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMPR451.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMPR451.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEPR451~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEPR452.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEPR452X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMPR452.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMPR452.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEPR452~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEPR453.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEPR453X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMPR453.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMPR453.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEPR453~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEPR457.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEPR457X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMPR457.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMPR457.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEPR457~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEPR557.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEPR557X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMPR557.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMPR557.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEPR557~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEPR558.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEPR558X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMPR558.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMPR558.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEPR558~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEPR652.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEPR652X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMPR652.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMPR652.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEPR652~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEPR653.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEPR653X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMPR653.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMPR653.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEPR653~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEPR654.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEPR654X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMPR654.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMPR654.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEPR654~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEPR656.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEPR656X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMPR656.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMPR656.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEPR656~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEPR657.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEPR657X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMPR657.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMPR657.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEPR657~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEPR658.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEPR658X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMPR658.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMPR658.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEPR658~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEPR751.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEPR751X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMPR751.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMPR751.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEPR751~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEPR753.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEPR753X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMPR753.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMPR753.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEPR753~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEPR755.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEPR755X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMPR755.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMPR755.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEPR755~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEPR759.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEPR759X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMPR759.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMPR759.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEPR759~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+COPY_EXISTING ~MEPR760.spl~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      ACTION_IF (NOT FILE_EXISTS_IN_GAME ~MEPR760X.itm~) AND (NOT FILE_EXISTS_IN_GAME ~BMPR760.itm~) THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/BMPR760.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~MEPR760~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+

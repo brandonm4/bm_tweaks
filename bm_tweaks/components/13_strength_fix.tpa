@@ -1,0 +1,21 @@
+// Exceptional Strength carry-weight fix.
+//
+// CDTweaks component 2500 rewrites strmodex.2da so the exceptional rows are
+// just row_index * 2, which makes low exceptional Strength worse than normal
+// Strength. This component resets WEIGHT_ALLOWANCE so 18/01 starts just above
+// standard STR 18 carry weight and each percentile point adds 2 more units.
+//
+// In this install, STR 18 carry weight is 200 per the stock strmod.2da table.
+// If the base STR table is ever customized later, this component should be
+// updated to read that value dynamically instead of using the stock anchor.
+
+OUTER_SET bm_str18_weight_allowance = 200
+
+COPY_EXISTING ~strmodex.2da~ ~override~
+  FOR (row = 1; row <= 100; ++row) BEGIN
+    SET new_weight_allowance = bm_str18_weight_allowance + (row * 2)
+    SET_2DA_ENTRY row 4 5 new_weight_allowance
+  END
+  BUT_ONLY
+
+PRINT ~[bm_tweaks] strength_fix: set exceptional Strength weight allowance to STR 18 base (%bm_str18_weight_allowance%) + percentile*2.~

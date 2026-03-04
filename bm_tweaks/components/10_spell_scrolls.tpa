@@ -1,16 +1,14 @@
-// Component 10: Ensure all arcane (SPWI) and divine (SPPR) spells have scroll items
+// Component 10: Ensure all arcane (SPWI/MEWI) and divine (SPPR/MEPR) spells
+// have scroll items.
 //
-// Creates BMWI###.itm / BMPR###.itm for each spell that lacks one.
+// Creates BMWI###.itm / BMPR###.itm for each visible spell that lacks one.
 // Template: SCRL1R.itm (Wraithform scroll -- has cast + learn abilities)
 // Usability: arcane 0x60725e80, divine 0x004f2840
-//
-// Only create scrolls for spells that are visible in the spellbook. Hidden/internal
-// spells are listed in HIDESPL.2DA and must not get learnable scroll items.
 
 OUTER_SET _wi_created = 0
 OUTER_SET _pr_created = 0
 
-// Native scrolls should win. Only generate BM.. fallback scrolls for book-facing
+// Native scrolls should win. Only generate BM.. fallback scrolls for visible
 // spells that do not already have a non-BM scroll item pointing at them.
 COPY_EXISTING_REGEXP ~^.+\.itm$~ ~override~
   READ_SHORT 0x1c _item_type
@@ -27,8 +25,7 @@ COPY_EXISTING_REGEXP ~^.+\.itm$~ ~override~
         FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
           READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
           PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
-            // Scroll spell effects use 7-char spell resrefs plus a trailing NUL.
-            READ_ASCII  (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) _spell_ref (7)
+            READ_ASCII (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) _spell_ref (7)
             TO_UPPER _spell_ref
             PATCH_IF (~%_spell_ref%~ STRING_COMPARE_CASE ~~ != 0) BEGIN
               INNER_ACTION BEGIN
@@ -42,8 +39,7 @@ COPY_EXISTING_REGEXP ~^.+\.itm$~ ~override~
   END
 BUT_ONLY
 
-// ── Arcane scrolls ────────────────────────────────────────────────────────────
-
+// Stock wizard spells
 COPY_EXISTING_REGEXP ~^SPWI[0-9][0-9][0-9]\.spl$~ ~override~
   READ_LONG 0x08 _n
   READ_LONG 0x50 _d
@@ -84,11 +80,60 @@ COPY_EXISTING_REGEXP ~^SPWI[0-9][0-9][0-9]\.spl$~ ~override~
   END
 BUT_ONLY
 
-PRINT ~[bm_tweaks] spell_scrolls: created %_wi_created% arcane spell scrolls.~
+// MESpells wizard spells
+COPY_EXISTING_REGEXP ~^MEWI[0-9][0-9][0-9]\.spl$~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  TEXT_SPRINT _res ~%SOURCE_RES%~
+  TO_UPPER _res
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      OUTER_SET _level = 0
+      ACTION_IF ("%_res%" STRING_COMPARE_REGEXP ~^MEWI1[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 1 END
+      ACTION_IF ("%_res%" STRING_COMPARE_REGEXP ~^MEWI2[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 2 END
+      ACTION_IF ("%_res%" STRING_COMPARE_REGEXP ~^MEWI3[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 3 END
+      ACTION_IF ("%_res%" STRING_COMPARE_REGEXP ~^MEWI4[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 4 END
+      ACTION_IF ("%_res%" STRING_COMPARE_REGEXP ~^MEWI5[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 5 END
+      ACTION_IF ("%_res%" STRING_COMPARE_REGEXP ~^MEWI6[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 6 END
+      ACTION_IF ("%_res%" STRING_COMPARE_REGEXP ~^MEWI7[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 7 END
+      ACTION_IF ("%_res%" STRING_COMPARE_REGEXP ~^MEWI8[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 8 END
+      ACTION_IF ("%_res%" STRING_COMPARE_REGEXP ~^MEWI9[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 9 END
+      OUTER_PATCH_SAVE _scroll_res ~%_res%~ BEGIN
+        REPLACE_TEXTUALLY ~^ME~ ~BM~
+      END
+      ACTION_IF
+        (_level > 0) AND
+        FILE_EXISTS_IN_GAME ~MEWI%_level%.txt~ AND
+        FILE_CONTAINS_EVALUATED (~MEWI%_level%.txt~ ~^%_res%$~) AND
+        (NOT VARIABLE_IS_SET EVAL ~bm_native_scroll_%_res%~) AND
+        (NOT FILE_EXISTS_IN_GAME ~%_scroll_res%.itm~)
+      THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/%_scroll_res%.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          READ_LONG  0x64 _ab_off
+          READ_SHORT 0x68 _ab_cnt
+          READ_LONG  0x6a _fx_off
+          FOR (_ab = 0; _ab < _ab_cnt; _ab = (_ab + 1)) BEGIN
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x1e) _fx_cnt
+            READ_SHORT (_ab_off + _ab * 0x38 + 0x20) _fx_idx
+            FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+              READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+              PATCH_IF ((_op = 146) OR (_op = 147)) BEGIN
+                WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~%_res%~ #8
+              END
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _wi_created = (_wi_created + 1)
+      END
+    END
+  END
+BUT_ONLY
 
-
-// ── Divine scrolls ────────────────────────────────────────────────────────────
-
+// Stock priest spells
 COPY_EXISTING_REGEXP ~^SPPR[0-9][0-9][0-9]\.spl$~ ~override~
   READ_LONG 0x08 _n
   READ_LONG 0x50 _d
@@ -128,4 +173,57 @@ COPY_EXISTING_REGEXP ~^SPPR[0-9][0-9][0-9]\.spl$~ ~override~
   END
 BUT_ONLY
 
+// MESpells priest spells
+COPY_EXISTING_REGEXP ~^MEPR[0-9][0-9][0-9]\.spl$~ ~override~
+  READ_LONG 0x08 _n
+  READ_LONG 0x50 _d
+  TEXT_SPRINT _res ~%SOURCE_RES%~
+  TO_UPPER _res
+  PATCH_IF (_n > 0 AND _n != 0xffffffff AND _d > 0 AND _d != 0xffffffff) BEGIN
+    INNER_ACTION BEGIN
+      OUTER_SET _level = 0
+      ACTION_IF ("%_res%" STRING_COMPARE_REGEXP ~^MEPR1[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 1 END
+      ACTION_IF ("%_res%" STRING_COMPARE_REGEXP ~^MEPR2[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 2 END
+      ACTION_IF ("%_res%" STRING_COMPARE_REGEXP ~^MEPR3[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 3 END
+      ACTION_IF ("%_res%" STRING_COMPARE_REGEXP ~^MEPR4[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 4 END
+      ACTION_IF ("%_res%" STRING_COMPARE_REGEXP ~^MEPR5[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 5 END
+      ACTION_IF ("%_res%" STRING_COMPARE_REGEXP ~^MEPR6[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 6 END
+      ACTION_IF ("%_res%" STRING_COMPARE_REGEXP ~^MEPR7[0-9][0-9]$~ = 0) THEN BEGIN OUTER_SET _level = 7 END
+      OUTER_PATCH_SAVE _scroll_res ~%_res%~ BEGIN
+        REPLACE_TEXTUALLY ~^ME~ ~BM~
+      END
+      ACTION_IF
+        (_level > 0) AND
+        FILE_EXISTS_IN_GAME ~MEPR%_level%.txt~ AND
+        FILE_CONTAINS_EVALUATED (~MEPR%_level%.txt~ ~^%_res%$~) AND
+        (NOT VARIABLE_IS_SET EVAL ~bm_native_scroll_%_res%~) AND
+        (NOT FILE_EXISTS_IN_GAME ~%_scroll_res%.itm~)
+      THEN BEGIN
+        COPY_EXISTING ~SCRL1R.itm~ ~override/%_scroll_res%.itm~
+          WRITE_LONG 0x08 %_n%
+          WRITE_LONG 0x0c %_n%
+          WRITE_LONG 0x50 0xffffffff
+          WRITE_LONG 0x54 %_d%
+          WRITE_LONG 0x1e 0x004f2840
+          WRITE_SHORT 0x68 1
+          READ_LONG  0x64 _ab_off
+          READ_LONG  0x6a _fx_off
+          READ_SHORT (_ab_off + 0x1e) _fx_cnt
+          READ_SHORT (_ab_off + 0x20) _fx_idx
+          FOR (_fx = 0; _fx < _fx_cnt; _fx = (_fx + 1)) BEGIN
+            READ_SHORT (_fx_off + (_fx_idx + _fx) * 0x30) _op
+            PATCH_IF (_op = 146) BEGIN
+              WRITE_ASCIIE (_fx_off + (_fx_idx + _fx) * 0x30 + 0x14) ~%_res%~ #8
+            END
+          END
+        BUT_ONLY_IF_IT_CHANGES
+        OUTER_SET _pr_created = (_pr_created + 1)
+      END
+    END
+  END
+BUT_ONLY
+
+INCLUDE ~bm_tweaks/generated/mespells_scrolls.tpa~
+
+PRINT ~[bm_tweaks] spell_scrolls: created %_wi_created% arcane spell scrolls.~
 PRINT ~[bm_tweaks] spell_scrolls: created %_pr_created% divine spell scrolls.~

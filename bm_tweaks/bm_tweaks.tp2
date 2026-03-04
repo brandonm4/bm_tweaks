@@ -43,3 +43,9 @@ INCLUDE ~bm_tweaks/components/10_spell_scrolls.tpa~
 
 BEGIN ~Add a scroll scribing kit for known wizard and cleric spells~
 INCLUDE ~bm_tweaks/components/11_scroll_crafting.tpa~
+
+BEGIN ~Add generated low-level wizard fallback scrolls to random treasure~
+INCLUDE ~bm_tweaks/components/12_wizard_fallback_scroll_loot.tpa~
+
+BEGIN ~Exceptional Strength carry-weight fix~
+INCLUDE ~bm_tweaks/components/13_strength_fix.tpa~

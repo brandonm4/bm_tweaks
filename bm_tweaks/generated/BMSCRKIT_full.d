@@ -77,6 +77,10 @@ END
 
 IF ~~ THEN BEGIN bm_scrollkit_arcane_circle_1
   SAY ~Choose a spell to scribe.~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI151"))~ THEN REPLY ~Disruptive Surge~ GOTO ~bm_scrollkit_confirm_MEWI151~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI152"))~ THEN REPLY ~Inertia~ GOTO ~bm_scrollkit_confirm_MEWI152~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI160"))~ THEN REPLY ~Dimensional Chest~ GOTO ~bm_scrollkit_confirm_MEWI160~
+
 
   IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("SPWI101"))~ THEN REPLY #226344 GOTO ~bm_scrollkit_confirm_SPWI101~
 
@@ -137,6 +141,12 @@ END
 
 IF ~~ THEN BEGIN bm_scrollkit_arcane_circle_2
   SAY ~Choose a spell to scribe.~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI251"))~ THEN REPLY ~Power Word, Pull~ GOTO ~bm_scrollkit_confirm_MEWI251~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI253"))~ THEN REPLY ~Power Word, Push~ GOTO ~bm_scrollkit_confirm_MEWI253~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI254"))~ THEN REPLY ~Intoxicate~ GOTO ~bm_scrollkit_confirm_MEWI254~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI255"))~ THEN REPLY ~Null Healing~ GOTO ~bm_scrollkit_confirm_MEWI255~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI258"))~ THEN REPLY ~Bounce Spell~ GOTO ~bm_scrollkit_confirm_MEWI258~
+
 
   IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("SPWI201"))~ THEN REPLY #226078 GOTO ~bm_scrollkit_confirm_SPWI201~
 
@@ -199,6 +209,13 @@ END
 
 IF ~~ THEN BEGIN bm_scrollkit_arcane_circle_3
   SAY ~Choose a spell to scribe.~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI351"))~ THEN REPLY ~Absorb Spell~ GOTO ~bm_scrollkit_confirm_MEWI351~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI353"))~ THEN REPLY ~Displacement~ GOTO ~bm_scrollkit_confirm_MEWI353~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI354"))~ THEN REPLY ~Terror~ GOTO ~bm_scrollkit_confirm_MEWI354~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI356"))~ THEN REPLY ~Legend Lore~ GOTO ~bm_scrollkit_confirm_MEWI356~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI357"))~ THEN REPLY ~Glyph of Spell Storing~ GOTO ~bm_scrollkit_confirm_MEWI357~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI361"))~ THEN REPLY ~Mestil's Acid Breath~ GOTO ~bm_scrollkit_confirm_MEWI361~
+
 
   IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("SPWI301"))~ THEN REPLY #226415 GOTO ~bm_scrollkit_confirm_SPWI301~
 
@@ -257,6 +274,12 @@ END
 
 IF ~~ THEN BEGIN bm_scrollkit_arcane_circle_4
   SAY ~Choose a spell to scribe.~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI451"))~ THEN REPLY ~Wall of Fire~ GOTO ~bm_scrollkit_confirm_MEWI451~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI452"))~ THEN REPLY ~Phantasmal Killer~ GOTO ~bm_scrollkit_confirm_MEWI452~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI453"))~ THEN REPLY ~Ghoulish Feast~ GOTO ~bm_scrollkit_confirm_MEWI453~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI454"))~ THEN REPLY ~Backstab Sequencer~ GOTO ~bm_scrollkit_confirm_MEWI454~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI457"))~ THEN REPLY ~Linked Portals~ GOTO ~bm_scrollkit_confirm_MEWI457~
+
 
   IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("SPWI401"))~ THEN REPLY #225968 GOTO ~bm_scrollkit_confirm_SPWI401~
 
@@ -327,6 +350,17 @@ END
 
 IF ~~ THEN BEGIN bm_scrollkit_arcane_circle_5
   SAY ~Choose a spell to scribe.~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI551"))~ THEN REPLY ~Life Transfer~ GOTO ~bm_scrollkit_confirm_MEWI551~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI554"))~ THEN REPLY ~Ball Lightning~ GOTO ~bm_scrollkit_confirm_MEWI554~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI555"))~ THEN REPLY ~Major Mirror Image~ GOTO ~bm_scrollkit_confirm_MEWI555~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI556"))~ THEN REPLY ~Skeleton Horde~ GOTO ~bm_scrollkit_confirm_MEWI556~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI557"))~ THEN REPLY ~Commando Conjuration~ GOTO ~bm_scrollkit_confirm_MEWI557~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI558"))~ THEN REPLY ~Missile of Patience~ GOTO ~bm_scrollkit_confirm_MEWI558~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI560"))~ THEN REPLY ~Slime Drop~ GOTO ~bm_scrollkit_confirm_MEWI560~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI563"))~ THEN REPLY ~Warrior Simulacrum~ GOTO ~bm_scrollkit_confirm_MEWI563~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI565"))~ THEN REPLY ~Sacrificial Explosion~ GOTO ~bm_scrollkit_confirm_MEWI565~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI566"))~ THEN REPLY ~Gedlee's Electric Barrier~ GOTO ~bm_scrollkit_confirm_MEWI566~
+
 
   IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("SPWI501"))~ THEN REPLY #272531 GOTO ~bm_scrollkit_confirm_SPWI501~
 
@@ -387,6 +421,13 @@ END
 
 IF ~~ THEN BEGIN bm_scrollkit_arcane_circle_6
   SAY ~Choose a spell to scribe.~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI651"))~ THEN REPLY ~Isaac's Greater Missile Storm~ GOTO ~bm_scrollkit_confirm_MEWI651~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI652"))~ THEN REPLY ~Freeze Inanimates~ GOTO ~bm_scrollkit_confirm_MEWI652~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI653"))~ THEN REPLY ~Greater Nightmare~ GOTO ~bm_scrollkit_confirm_MEWI653~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI656"))~ THEN REPLY ~Mass Charm~ GOTO ~bm_scrollkit_confirm_MEWI656~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI657"))~ THEN REPLY ~Mind Fog~ GOTO ~bm_scrollkit_confirm_MEWI657~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI658"))~ THEN REPLY ~Empower Familiar~ GOTO ~bm_scrollkit_confirm_MEWI658~
+
 
   IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("SPWI601"))~ THEN REPLY #226556 GOTO ~bm_scrollkit_confirm_SPWI601~
 
@@ -455,6 +496,12 @@ END
 
 IF ~~ THEN BEGIN bm_scrollkit_arcane_circle_7
   SAY ~Choose a spell to scribe.~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI754"))~ THEN REPLY ~Stygian Ice Storm~ GOTO ~bm_scrollkit_confirm_MEWI754~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI756"))~ THEN REPLY ~Critical Sequencer~ GOTO ~bm_scrollkit_confirm_MEWI756~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI759"))~ THEN REPLY ~Extraordinary Luck~ GOTO ~bm_scrollkit_confirm_MEWI759~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI760"))~ THEN REPLY ~Lightning Stream~ GOTO ~bm_scrollkit_confirm_MEWI760~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI762"))~ THEN REPLY ~Insanity~ GOTO ~bm_scrollkit_confirm_MEWI762~
+
 
   IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("SPWI701"))~ THEN REPLY #272587 GOTO ~bm_scrollkit_confirm_SPWI701~
 
@@ -517,6 +564,16 @@ END
 
 IF ~~ THEN BEGIN bm_scrollkit_arcane_circle_8
   SAY ~Choose a spell to scribe.~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI851"))~ THEN REPLY ~Enhance Attribute~ GOTO ~bm_scrollkit_confirm_MEWI851~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI852"))~ THEN REPLY ~Globe of Invisibility~ GOTO ~bm_scrollkit_confirm_MEWI852~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI855"))~ THEN REPLY ~Omnipresence~ GOTO ~bm_scrollkit_confirm_MEWI855~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI857"))~ THEN REPLY ~Extend Vision~ GOTO ~bm_scrollkit_confirm_MEWI857~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI859"))~ THEN REPLY ~False Life~ GOTO ~bm_scrollkit_confirm_MEWI859~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI860"))~ THEN REPLY ~Enslave~ GOTO ~bm_scrollkit_confirm_MEWI860~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI861"))~ THEN REPLY ~Polar Ray~ GOTO ~bm_scrollkit_confirm_MEWI861~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI862"))~ THEN REPLY ~Clone Other~ GOTO ~bm_scrollkit_confirm_MEWI862~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI863"))~ THEN REPLY ~Metafireball~ GOTO ~bm_scrollkit_confirm_MEWI863~
+
 
   IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("SPWI801"))~ THEN REPLY #272613 GOTO ~bm_scrollkit_confirm_SPWI801~
 
@@ -565,6 +622,16 @@ END
 
 IF ~~ THEN BEGIN bm_scrollkit_arcane_circle_9
   SAY ~Choose a spell to scribe.~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI951"))~ THEN REPLY ~Perfect Invisibility~ GOTO ~bm_scrollkit_confirm_MEWI951~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI952"))~ THEN REPLY ~Mass Domination~ GOTO ~bm_scrollkit_confirm_MEWI952~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI953"))~ THEN REPLY ~Attain Perfection~ GOTO ~bm_scrollkit_confirm_MEWI953~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI954"))~ THEN REPLY ~Vampiric Feast~ GOTO ~bm_scrollkit_confirm_MEWI954~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI955"))~ THEN REPLY ~Mass Sequencer~ GOTO ~bm_scrollkit_confirm_MEWI955~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI957"))~ THEN REPLY ~Executioner's Eyes~ GOTO ~bm_scrollkit_confirm_MEWI957~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI958"))~ THEN REPLY ~Phantasmal Dragon~ GOTO ~bm_scrollkit_confirm_MEWI958~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI959"))~ THEN REPLY ~Damage Turning~ GOTO ~bm_scrollkit_confirm_MEWI959~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEWI966"))~ THEN REPLY ~Protection from Time Stop~ GOTO ~bm_scrollkit_confirm_MEWI966~
+
 
   IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("SPWI901"))~ THEN REPLY #16160 GOTO ~bm_scrollkit_confirm_SPWI901~
 
@@ -609,6 +676,13 @@ END
 
 IF ~~ THEN BEGIN bm_scrollkit_divine_circle_1
   SAY ~Choose a spell to scribe.~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEPR151"))~ THEN REPLY ~Snake's Swiftness~ GOTO ~bm_scrollkit_confirm_MEPR151~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEPR153"))~ THEN REPLY ~Hunter's Mark~ GOTO ~bm_scrollkit_confirm_MEPR153~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEPR154"))~ THEN REPLY ~Turning Weapon~ GOTO ~bm_scrollkit_confirm_MEPR154~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEPR155"))~ THEN REPLY ~Repulse~ GOTO ~bm_scrollkit_confirm_MEPR155~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEPR156"))~ THEN REPLY ~Camouflage~ GOTO ~bm_scrollkit_confirm_MEPR156~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEPR157"))~ THEN REPLY ~Searing Smite~ GOTO ~bm_scrollkit_confirm_MEPR157~
+
 
   IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("SPPR101"))~ THEN REPLY #226124 GOTO ~bm_scrollkit_confirm_SPPR101~
 
@@ -661,6 +735,12 @@ END
 
 IF ~~ THEN BEGIN bm_scrollkit_divine_circle_2
   SAY ~Choose a spell to scribe.~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEPR251"))~ THEN REPLY ~Beast Sense~ GOTO ~bm_scrollkit_confirm_MEPR251~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEPR252"))~ THEN REPLY ~Fiery Link~ GOTO ~bm_scrollkit_confirm_MEPR252~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEPR253"))~ THEN REPLY ~Null Healing~ GOTO ~bm_scrollkit_confirm_MEPR253~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEPR254"))~ THEN REPLY ~Critical Boon~ GOTO ~bm_scrollkit_confirm_MEPR254~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEPR257"))~ THEN REPLY ~Hide Campsite~ GOTO ~bm_scrollkit_confirm_MEPR257~
+
 
   IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("SPPR201"))~ THEN REPLY #226143 GOTO ~bm_scrollkit_confirm_SPPR201~
 
@@ -715,6 +795,11 @@ END
 
 IF ~~ THEN BEGIN bm_scrollkit_divine_circle_3
   SAY ~Choose a spell to scribe.~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEPR351"))~ THEN REPLY ~Call Water Weirds~ GOTO ~bm_scrollkit_confirm_MEPR351~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEPR354"))~ THEN REPLY ~Healing Curse~ GOTO ~bm_scrollkit_confirm_MEPR354~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEPR356"))~ THEN REPLY ~Wind Shots~ GOTO ~bm_scrollkit_confirm_MEPR356~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEPR359"))~ THEN REPLY ~MEPR359~ GOTO ~bm_scrollkit_confirm_MEPR359~
+
 
   IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("SPPR301"))~ THEN REPLY #226489 GOTO ~bm_scrollkit_confirm_SPPR301~
 
@@ -795,6 +880,11 @@ END
 
 IF ~~ THEN BEGIN bm_scrollkit_divine_circle_4
   SAY ~Choose a spell to scribe.~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEPR451"))~ THEN REPLY ~Disarm~ GOTO ~bm_scrollkit_confirm_MEPR451~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEPR452"))~ THEN REPLY ~Forest's Blessing~ GOTO ~bm_scrollkit_confirm_MEPR452~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEPR453"))~ THEN REPLY ~Turn Creature~ GOTO ~bm_scrollkit_confirm_MEPR453~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEPR457"))~ THEN REPLY ~MEPR457~ GOTO ~bm_scrollkit_confirm_MEPR457~
+
 
   IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("SPPR401"))~ THEN REPLY #226230 GOTO ~bm_scrollkit_confirm_SPPR401~
 
@@ -865,6 +955,9 @@ END
 
 IF ~~ THEN BEGIN bm_scrollkit_divine_circle_5
   SAY ~Choose a spell to scribe.~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEPR557"))~ THEN REPLY ~Expose to the Elements~ GOTO ~bm_scrollkit_confirm_MEPR557~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEPR558"))~ THEN REPLY ~Sphere of Security~ GOTO ~bm_scrollkit_confirm_MEPR558~
+
 
   IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("SPPR501"))~ THEN REPLY #272188 GOTO ~bm_scrollkit_confirm_SPPR501~
 
@@ -937,6 +1030,13 @@ END
 
 IF ~~ THEN BEGIN bm_scrollkit_divine_circle_6
   SAY ~Choose a spell to scribe.~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEPR652"))~ THEN REPLY ~Drown~ GOTO ~bm_scrollkit_confirm_MEPR652~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEPR653"))~ THEN REPLY ~Antiharm Shell~ GOTO ~bm_scrollkit_confirm_MEPR653~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEPR654"))~ THEN REPLY ~Living Lightning~ GOTO ~bm_scrollkit_confirm_MEPR654~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEPR656"))~ THEN REPLY ~Protection from Non-Silver Weapons~ GOTO ~bm_scrollkit_confirm_MEPR656~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEPR657"))~ THEN REPLY ~Trial By Fire~ GOTO ~bm_scrollkit_confirm_MEPR657~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEPR658"))~ THEN REPLY ~Conjure Earth Elemental~ GOTO ~bm_scrollkit_confirm_MEPR658~
+
 
   IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("SPPR601"))~ THEN REPLY #226259 GOTO ~bm_scrollkit_confirm_SPPR601~
 
@@ -993,6 +1093,12 @@ END
 
 IF ~~ THEN BEGIN bm_scrollkit_divine_circle_7
   SAY ~Choose a spell to scribe.~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEPR751"))~ THEN REPLY ~Power Word, Heal~ GOTO ~bm_scrollkit_confirm_MEPR751~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEPR753"))~ THEN REPLY ~Nonrandom Zone~ GOTO ~bm_scrollkit_confirm_MEPR753~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEPR755"))~ THEN REPLY ~Enhance Attribute~ GOTO ~bm_scrollkit_confirm_MEPR755~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEPR759"))~ THEN REPLY ~Omnipresence~ GOTO ~bm_scrollkit_confirm_MEPR759~
+  IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("MEPR760"))~ THEN REPLY ~True Dispel~ GOTO ~bm_scrollkit_confirm_MEPR760~
+
 
   IF ~TriggerOverride(LastTalkedToBy(Myself),HaveKnownSpellRES("SPPR701"))~ THEN REPLY #226286 GOTO ~bm_scrollkit_confirm_SPPR701~
 
@@ -7307,6 +7413,1446 @@ IF ~~ THEN BEGIN ~bm_scrollkit_confirm_SPPR999~
   IF ~~ THEN BEGIN ~bm_scrollkit_nogold_SPPR999~
     SAY ~You need 30 gold to scribe this scroll.~
       IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_9~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI151~
+    SAY ~Scribe this scroll for 30 gold? This takes 1 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(300) GiveItemCreate("MEWI151X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI151~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_1~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI151~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_1~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI152~
+    SAY ~Scribe this scroll for 30 gold? This takes 1 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(300) GiveItemCreate("MEWI152X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI152~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_1~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI152~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_1~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI160~
+    SAY ~Scribe this scroll for 30 gold? This takes 1 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(300) GiveItemCreate("MEWI160X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI160~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_1~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI160~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_1~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI251~
+    SAY ~Scribe this scroll for 30 gold? This takes 2 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(600) GiveItemCreate("MEWI251X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI251~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_2~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI251~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_2~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI253~
+    SAY ~Scribe this scroll for 30 gold? This takes 2 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(600) GiveItemCreate("MEWI253X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI253~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_2~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI253~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_2~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI254~
+    SAY ~Scribe this scroll for 30 gold? This takes 2 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(600) GiveItemCreate("MEWI254X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI254~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_2~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI254~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_2~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI255~
+    SAY ~Scribe this scroll for 30 gold? This takes 2 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(600) GiveItemCreate("MEWI255X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI255~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_2~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI255~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_2~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI258~
+    SAY ~Scribe this scroll for 30 gold? This takes 2 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(600) GiveItemCreate("MEWI258X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI258~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_2~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI258~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_2~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI351~
+    SAY ~Scribe this scroll for 30 gold? This takes 3 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(900) GiveItemCreate("MEWI351X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI351~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_3~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI351~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_3~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI353~
+    SAY ~Scribe this scroll for 30 gold? This takes 3 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(900) GiveItemCreate("MEWI353X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI353~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_3~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI353~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_3~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI354~
+    SAY ~Scribe this scroll for 60 gold? This takes 3 hours.~
+      IF ~PartyGoldGT(59)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(60) AdvanceTime(900) GiveItemCreate("MEWI354X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(59)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI354~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_3~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI354~
+    SAY ~You need 60 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_3~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI356~
+    SAY ~Scribe this scroll for 30 gold? This takes 3 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(900) GiveItemCreate("MEWI356X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI356~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_3~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI356~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_3~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI357~
+    SAY ~Scribe this scroll for 60 gold? This takes 3 hours.~
+      IF ~PartyGoldGT(59)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(60) AdvanceTime(900) GiveItemCreate("MEWI357X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(59)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI357~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_3~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI357~
+    SAY ~You need 60 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_3~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI361~
+    SAY ~Scribe this scroll for 30 gold? This takes 3 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(900) GiveItemCreate("MEWI361X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI361~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_3~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI361~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_3~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI451~
+    SAY ~Scribe this scroll for 50 gold? This takes 4 hours.~
+      IF ~PartyGoldGT(49)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(50) AdvanceTime(1200) GiveItemCreate("MEWI451X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(49)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI451~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_4~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI451~
+    SAY ~You need 50 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_4~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI452~
+    SAY ~Scribe this scroll for 50 gold? This takes 4 hours.~
+      IF ~PartyGoldGT(49)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(50) AdvanceTime(1200) GiveItemCreate("MEWI452X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(49)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI452~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_4~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI452~
+    SAY ~You need 50 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_4~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI453~
+    SAY ~Scribe this scroll for 50 gold? This takes 4 hours.~
+      IF ~PartyGoldGT(49)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(50) AdvanceTime(1200) GiveItemCreate("MEWI453X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(49)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI453~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_4~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI453~
+    SAY ~You need 50 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_4~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI454~
+    SAY ~Scribe this scroll for 50 gold? This takes 4 hours.~
+      IF ~PartyGoldGT(49)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(50) AdvanceTime(1200) GiveItemCreate("MEWI454X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(49)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI454~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_4~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI454~
+    SAY ~You need 50 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_4~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI457~
+    SAY ~Scribe this scroll for 75 gold? This takes 4 hours.~
+      IF ~PartyGoldGT(74)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(75) AdvanceTime(1200) GiveItemCreate("MEWI457X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(74)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI457~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_4~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI457~
+    SAY ~You need 75 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_4~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI551~
+    SAY ~Scribe this scroll for 100 gold? This takes 5 hours.~
+      IF ~PartyGoldGT(99)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(100) AdvanceTime(1500) GiveItemCreate("MEWI551X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(99)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI551~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_5~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI551~
+    SAY ~You need 100 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_5~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI554~
+    SAY ~Scribe this scroll for 100 gold? This takes 5 hours.~
+      IF ~PartyGoldGT(99)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(100) AdvanceTime(1500) GiveItemCreate("MEWI554X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(99)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI554~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_5~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI554~
+    SAY ~You need 100 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_5~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI555~
+    SAY ~Scribe this scroll for 100 gold? This takes 5 hours.~
+      IF ~PartyGoldGT(99)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(100) AdvanceTime(1500) GiveItemCreate("MEWI555X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(99)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI555~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_5~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI555~
+    SAY ~You need 100 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_5~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI556~
+    SAY ~Scribe this scroll for 150 gold? This takes 5 hours.~
+      IF ~PartyGoldGT(149)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(150) AdvanceTime(1500) GiveItemCreate("MEWI556X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(149)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI556~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_5~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI556~
+    SAY ~You need 150 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_5~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI557~
+    SAY ~Scribe this scroll for 50 gold? This takes 5 hours.~
+      IF ~PartyGoldGT(49)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(50) AdvanceTime(1500) GiveItemCreate("MEWI557X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(49)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI557~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_5~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI557~
+    SAY ~You need 50 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_5~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI558~
+    SAY ~Scribe this scroll for 150 gold? This takes 5 hours.~
+      IF ~PartyGoldGT(149)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(150) AdvanceTime(1500) GiveItemCreate("MEWI558X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(149)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI558~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_5~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI558~
+    SAY ~You need 150 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_5~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI560~
+    SAY ~Scribe this scroll for 150 gold? This takes 5 hours.~
+      IF ~PartyGoldGT(149)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(150) AdvanceTime(1500) GiveItemCreate("MEWI560X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(149)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI560~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_5~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI560~
+    SAY ~You need 150 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_5~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI563~
+    SAY ~Scribe this scroll for 100 gold? This takes 5 hours.~
+      IF ~PartyGoldGT(99)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(100) AdvanceTime(1500) GiveItemCreate("MEWI563X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(99)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI563~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_5~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI563~
+    SAY ~You need 100 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_5~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI565~
+    SAY ~Scribe this scroll for 100 gold? This takes 5 hours.~
+      IF ~PartyGoldGT(99)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(100) AdvanceTime(1500) GiveItemCreate("MEWI565X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(99)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI565~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_5~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI565~
+    SAY ~You need 100 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_5~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI566~
+    SAY ~Scribe this scroll for 100 gold? This takes 5 hours.~
+      IF ~PartyGoldGT(99)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(100) AdvanceTime(1500) GiveItemCreate("MEWI566X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(99)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI566~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_5~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI566~
+    SAY ~You need 100 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_5~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI651~
+    SAY ~Scribe this scroll for 200 gold? This takes 6 hours.~
+      IF ~PartyGoldGT(199)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(200) AdvanceTime(1800) GiveItemCreate("MEWI651X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(199)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI651~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_6~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI651~
+    SAY ~You need 200 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_6~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI652~
+    SAY ~Scribe this scroll for 200 gold? This takes 6 hours.~
+      IF ~PartyGoldGT(199)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(200) AdvanceTime(1800) GiveItemCreate("MEWI652X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(199)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI652~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_6~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI652~
+    SAY ~You need 200 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_6~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI653~
+    SAY ~Scribe this scroll for 200 gold? This takes 6 hours.~
+      IF ~PartyGoldGT(199)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(200) AdvanceTime(1800) GiveItemCreate("MEWI653X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(199)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI653~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_6~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI653~
+    SAY ~You need 200 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_6~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI656~
+    SAY ~Scribe this scroll for 200 gold? This takes 6 hours.~
+      IF ~PartyGoldGT(199)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(200) AdvanceTime(1800) GiveItemCreate("MEWI656X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(199)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI656~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_6~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI656~
+    SAY ~You need 200 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_6~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI657~
+    SAY ~Scribe this scroll for 200 gold? This takes 6 hours.~
+      IF ~PartyGoldGT(199)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(200) AdvanceTime(1800) GiveItemCreate("MEWI657X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(199)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI657~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_6~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI657~
+    SAY ~You need 200 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_6~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI658~
+    SAY ~Scribe this scroll for 200 gold? This takes 6 hours.~
+      IF ~PartyGoldGT(199)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(200) AdvanceTime(1800) GiveItemCreate("MEWI658X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(199)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI658~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_6~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI658~
+    SAY ~You need 200 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_6~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI754~
+    SAY ~Scribe this scroll for 300 gold? This takes 7 hours.~
+      IF ~PartyGoldGT(299)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(300) AdvanceTime(2100) GiveItemCreate("MEWI754X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(299)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI754~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_7~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI754~
+    SAY ~You need 300 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_7~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI756~
+    SAY ~Scribe this scroll for 300 gold? This takes 7 hours.~
+      IF ~PartyGoldGT(299)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(300) AdvanceTime(2100) GiveItemCreate("MEWI756X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(299)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI756~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_7~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI756~
+    SAY ~You need 300 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_7~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI759~
+    SAY ~Scribe this scroll for 300 gold? This takes 7 hours.~
+      IF ~PartyGoldGT(299)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(300) AdvanceTime(2100) GiveItemCreate("MEWI759X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(299)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI759~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_7~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI759~
+    SAY ~You need 300 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_7~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI760~
+    SAY ~Scribe this scroll for 300 gold? This takes 7 hours.~
+      IF ~PartyGoldGT(299)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(300) AdvanceTime(2100) GiveItemCreate("MEWI760X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(299)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI760~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_7~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI760~
+    SAY ~You need 300 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_7~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI762~
+    SAY ~Scribe this scroll for 300 gold? This takes 7 hours.~
+      IF ~PartyGoldGT(299)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(300) AdvanceTime(2100) GiveItemCreate("MEWI762X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(299)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI762~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_7~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI762~
+    SAY ~You need 300 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_7~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI851~
+    SAY ~Scribe this scroll for 400 gold? This takes 8 hours.~
+      IF ~PartyGoldGT(399)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(400) AdvanceTime(2400) GiveItemCreate("MEWI851X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(399)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI851~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_8~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI851~
+    SAY ~You need 400 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_8~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI852~
+    SAY ~Scribe this scroll for 300 gold? This takes 8 hours.~
+      IF ~PartyGoldGT(299)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(300) AdvanceTime(2400) GiveItemCreate("MEWI852X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(299)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI852~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_8~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI852~
+    SAY ~You need 300 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_8~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI855~
+    SAY ~Scribe this scroll for 600 gold? This takes 8 hours.~
+      IF ~PartyGoldGT(599)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(600) AdvanceTime(2400) GiveItemCreate("MEWI855X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(599)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI855~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_8~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI855~
+    SAY ~You need 600 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_8~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI857~
+    SAY ~Scribe this scroll for 400 gold? This takes 8 hours.~
+      IF ~PartyGoldGT(399)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(400) AdvanceTime(2400) GiveItemCreate("MEWI857X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(399)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI857~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_8~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI857~
+    SAY ~You need 400 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_8~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI859~
+    SAY ~Scribe this scroll for 400 gold? This takes 8 hours.~
+      IF ~PartyGoldGT(399)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(400) AdvanceTime(2400) GiveItemCreate("MEWI859X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(399)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI859~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_8~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI859~
+    SAY ~You need 400 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_8~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI860~
+    SAY ~Scribe this scroll for 400 gold? This takes 8 hours.~
+      IF ~PartyGoldGT(399)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(400) AdvanceTime(2400) GiveItemCreate("MEWI860X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(399)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI860~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_8~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI860~
+    SAY ~You need 400 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_8~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI861~
+    SAY ~Scribe this scroll for 400 gold? This takes 8 hours.~
+      IF ~PartyGoldGT(399)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(400) AdvanceTime(2400) GiveItemCreate("MEWI861X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(399)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI861~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_8~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI861~
+    SAY ~You need 400 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_8~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI862~
+    SAY ~Scribe this scroll for 400 gold? This takes 8 hours.~
+      IF ~PartyGoldGT(399)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(400) AdvanceTime(2400) GiveItemCreate("MEWI862X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(399)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI862~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_8~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI862~
+    SAY ~You need 400 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_8~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI863~
+    SAY ~Scribe this scroll for 400 gold? This takes 8 hours.~
+      IF ~PartyGoldGT(399)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(400) AdvanceTime(2400) GiveItemCreate("MEWI863X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(399)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI863~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_8~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI863~
+    SAY ~You need 400 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_8~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI951~
+    SAY ~Scribe this scroll for 500 gold? This takes 9 hours.~
+      IF ~PartyGoldGT(499)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(500) AdvanceTime(2700) GiveItemCreate("MEWI951X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(499)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI951~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_9~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI951~
+    SAY ~You need 500 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_9~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI952~
+    SAY ~Scribe this scroll for 500 gold? This takes 9 hours.~
+      IF ~PartyGoldGT(499)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(500) AdvanceTime(2700) GiveItemCreate("MEWI952X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(499)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI952~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_9~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI952~
+    SAY ~You need 500 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_9~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI953~
+    SAY ~Scribe this scroll for 500 gold? This takes 9 hours.~
+      IF ~PartyGoldGT(499)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(500) AdvanceTime(2700) GiveItemCreate("MEWI953X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(499)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI953~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_9~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI953~
+    SAY ~You need 500 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_9~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI954~
+    SAY ~Scribe this scroll for 500 gold? This takes 9 hours.~
+      IF ~PartyGoldGT(499)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(500) AdvanceTime(2700) GiveItemCreate("MEWI954X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(499)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI954~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_9~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI954~
+    SAY ~You need 500 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_9~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI955~
+    SAY ~Scribe this scroll for 750 gold? This takes 9 hours.~
+      IF ~PartyGoldGT(749)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(750) AdvanceTime(2700) GiveItemCreate("MEWI955X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(749)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI955~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_9~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI955~
+    SAY ~You need 750 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_9~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI957~
+    SAY ~Scribe this scroll for 500 gold? This takes 9 hours.~
+      IF ~PartyGoldGT(499)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(500) AdvanceTime(2700) GiveItemCreate("MEWI957X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(499)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI957~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_9~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI957~
+    SAY ~You need 500 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_9~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI958~
+    SAY ~Scribe this scroll for 500 gold? This takes 9 hours.~
+      IF ~PartyGoldGT(499)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(500) AdvanceTime(2700) GiveItemCreate("MEWI958X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(499)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI958~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_9~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI958~
+    SAY ~You need 500 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_9~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI959~
+    SAY ~Scribe this scroll for 500 gold? This takes 9 hours.~
+      IF ~PartyGoldGT(499)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(500) AdvanceTime(2700) GiveItemCreate("MEWI959X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(499)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI959~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_9~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI959~
+    SAY ~You need 500 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_9~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEWI966~
+    SAY ~Scribe this scroll for 500 gold? This takes 9 hours.~
+      IF ~PartyGoldGT(499)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(500) AdvanceTime(2700) GiveItemCreate("MEWI966X",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(499)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEWI966~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_9~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEWI966~
+    SAY ~You need 500 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_arcane_circle_9~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_arcane_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEPR151~
+    SAY ~Scribe this scroll for 30 gold? This takes 1 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(300) GiveItemCreate("BMPR151",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEPR151~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_1~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEPR151~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_1~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEPR153~
+    SAY ~Scribe this scroll for 30 gold? This takes 1 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(300) GiveItemCreate("BMPR153",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEPR153~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_1~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEPR153~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_1~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEPR154~
+    SAY ~Scribe this scroll for 30 gold? This takes 1 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(300) GiveItemCreate("BMPR154",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEPR154~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_1~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEPR154~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_1~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEPR155~
+    SAY ~Scribe this scroll for 30 gold? This takes 1 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(300) GiveItemCreate("BMPR155",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEPR155~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_1~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEPR155~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_1~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEPR156~
+    SAY ~Scribe this scroll for 30 gold? This takes 1 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(300) GiveItemCreate("BMPR156",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEPR156~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_1~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEPR156~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_1~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEPR157~
+    SAY ~Scribe this scroll for 30 gold? This takes 1 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(300) GiveItemCreate("BMPR157",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEPR157~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_1~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEPR157~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_1~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEPR251~
+    SAY ~Scribe this scroll for 30 gold? This takes 2 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(600) GiveItemCreate("BMPR251",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEPR251~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_2~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEPR251~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_2~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEPR252~
+    SAY ~Scribe this scroll for 30 gold? This takes 2 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(600) GiveItemCreate("BMPR252",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEPR252~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_2~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEPR252~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_2~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEPR253~
+    SAY ~Scribe this scroll for 30 gold? This takes 2 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(600) GiveItemCreate("BMPR253",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEPR253~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_2~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEPR253~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_2~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEPR254~
+    SAY ~Scribe this scroll for 30 gold? This takes 2 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(600) GiveItemCreate("BMPR254",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEPR254~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_2~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEPR254~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_2~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEPR257~
+    SAY ~Scribe this scroll for 30 gold? This takes 2 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(600) GiveItemCreate("BMPR257",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEPR257~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_2~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEPR257~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_2~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEPR351~
+    SAY ~Scribe this scroll for 30 gold? This takes 3 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(900) GiveItemCreate("BMPR351",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEPR351~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_3~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEPR351~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_3~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEPR354~
+    SAY ~Scribe this scroll for 30 gold? This takes 3 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(900) GiveItemCreate("BMPR354",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEPR354~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_3~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEPR354~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_3~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEPR356~
+    SAY ~Scribe this scroll for 30 gold? This takes 3 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(900) GiveItemCreate("BMPR356",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEPR356~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_3~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEPR356~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_3~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEPR359~
+    SAY ~Scribe this scroll for 30 gold? This takes 3 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(900) GiveItemCreate("BMPR359",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEPR359~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_3~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEPR359~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_3~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEPR451~
+    SAY ~Scribe this scroll for 30 gold? This takes 4 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(1200) GiveItemCreate("BMPR451",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEPR451~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_4~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEPR451~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_4~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEPR452~
+    SAY ~Scribe this scroll for 30 gold? This takes 4 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(1200) GiveItemCreate("BMPR452",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEPR452~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_4~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEPR452~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_4~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEPR453~
+    SAY ~Scribe this scroll for 30 gold? This takes 4 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(1200) GiveItemCreate("BMPR453",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEPR453~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_4~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEPR453~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_4~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEPR457~
+    SAY ~Scribe this scroll for 30 gold? This takes 4 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(1200) GiveItemCreate("BMPR457",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEPR457~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_4~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEPR457~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_4~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEPR557~
+    SAY ~Scribe this scroll for 30 gold? This takes 5 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(1500) GiveItemCreate("BMPR557",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEPR557~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_5~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEPR557~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_5~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEPR558~
+    SAY ~Scribe this scroll for 30 gold? This takes 5 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(1500) GiveItemCreate("BMPR558",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEPR558~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_5~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEPR558~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_5~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEPR652~
+    SAY ~Scribe this scroll for 30 gold? This takes 6 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(1800) GiveItemCreate("BMPR652",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEPR652~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_6~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEPR652~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_6~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEPR653~
+    SAY ~Scribe this scroll for 30 gold? This takes 6 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(1800) GiveItemCreate("BMPR653",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEPR653~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_6~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEPR653~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_6~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEPR654~
+    SAY ~Scribe this scroll for 30 gold? This takes 6 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(1800) GiveItemCreate("BMPR654",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEPR654~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_6~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEPR654~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_6~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEPR656~
+    SAY ~Scribe this scroll for 30 gold? This takes 6 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(1800) GiveItemCreate("BMPR656",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEPR656~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_6~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEPR656~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_6~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEPR657~
+    SAY ~Scribe this scroll for 30 gold? This takes 6 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(1800) GiveItemCreate("BMPR657",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEPR657~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_6~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEPR657~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_6~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEPR658~
+    SAY ~Scribe this scroll for 30 gold? This takes 6 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(1800) GiveItemCreate("BMPR658",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEPR658~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_6~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEPR658~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_6~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEPR751~
+    SAY ~Scribe this scroll for 30 gold? This takes 7 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(2100) GiveItemCreate("BMPR751",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEPR751~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_7~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEPR751~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_7~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEPR753~
+    SAY ~Scribe this scroll for 30 gold? This takes 7 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(2100) GiveItemCreate("BMPR753",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEPR753~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_7~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEPR753~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_7~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEPR755~
+    SAY ~Scribe this scroll for 30 gold? This takes 7 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(2100) GiveItemCreate("BMPR755",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEPR755~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_7~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEPR755~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_7~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEPR759~
+    SAY ~Scribe this scroll for 30 gold? This takes 7 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(2100) GiveItemCreate("BMPR759",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEPR759~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_7~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEPR759~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_7~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+IF ~~ THEN BEGIN ~bm_scrollkit_confirm_MEPR760~
+    SAY ~Scribe this scroll for 30 gold? This takes 7 hours.~
+      IF ~PartyGoldGT(29)~ THEN REPLY ~Scribe the scroll.~ DO ~TakePartyGold(30) AdvanceTime(2100) GiveItemCreate("BMPR760",LastTalkedToBy(Myself),1,0,0)~ EXIT
+      IF ~!PartyGoldGT(29)~ THEN REPLY ~You do not have enough gold.~ GOTO ~bm_scrollkit_nogold_MEPR760~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_7~
+      IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
+      IF ~~ THEN REPLY ~Put the kit away.~ EXIT
+  END
+
+  IF ~~ THEN BEGIN ~bm_scrollkit_nogold_MEPR760~
+    SAY ~You need 30 gold to scribe this scroll.~
+      IF ~~ THEN REPLY ~Choose another spell.~ GOTO ~bm_scrollkit_divine_circle_7~
       IF ~~ THEN REPLY ~Go back.~ GOTO ~bm_scrollkit_divine_menu~
       IF ~~ THEN REPLY ~Put the kit away.~ EXIT
   END
