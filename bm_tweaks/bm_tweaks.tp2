@@ -10,42 +10,45 @@ BEGIN ~Small/Large swords usable by Cleric + Cleric/Mage~
 INCLUDE ~bm_tweaks/components/00_swords.tpa~
 
 BEGIN ~Allow God Talos Necromancer specialization in swords~
-INCLUDE ~bm_tweaks/components/00a_godtalos_necromancer_weapprof.tpa~
+INCLUDE ~bm_tweaks/components/01_godtalos_necromancer_weapprof.tpa~
 
 BEGIN ~Standalone arcane spell failure for armor and shields~
-INCLUDE ~bm_tweaks/components/01_remove_asf.tpa~
+INCLUDE ~bm_tweaks/components/02_remove_asf.tpa~
 
 BEGIN ~Lightning Bolt: classic projectile + ground targeting (all abilities)~
-INCLUDE ~bm_tweaks/components/02_lightning_bolt.tpa~
+INCLUDE ~bm_tweaks/components/03_lightning_bolt.tpa~
 
 BEGIN ~Conservative random loot table expansion for EET~
-INCLUDE ~bm_tweaks/components/03_loot_tables.tpa~
+INCLUDE ~bm_tweaks/components/04_loot_tables.tpa~
 
 BEGIN ~Add random treasure placeholders to creatures that lack any random loot~
-INCLUDE ~bm_tweaks/components/04_creature_random_loot.tpa~
+INCLUDE ~bm_tweaks/components/05_creature_random_loot.tpa~
 
 BEGIN ~Add conservative bonus random loot to containers that already use RND*~
-INCLUDE ~bm_tweaks/components/05_container_bonus_random.tpa~
+INCLUDE ~bm_tweaks/components/06_container_bonus_random.tpa~
 
 BEGIN ~Add random loot to empty containers, scaled by area power~
-INCLUDE ~bm_tweaks/components/06_container_empty_random.tpa~
+INCLUDE ~bm_tweaks/components/07_container_empty_random.tpa~
 
 BEGIN ~Add flavored random loot to non-empty containers that lacked RND entries~
-INCLUDE ~bm_tweaks/components/07_container_filled_random.tpa~
+INCLUDE ~bm_tweaks/components/08_container_filled_random.tpa~
 
 BEGIN ~Summon duration scaling: 1 turn per caster level (level 1-20)~
-INCLUDE ~bm_tweaks/components/08_summon_duration.tpa~
+INCLUDE ~bm_tweaks/components/09_summon_duration.tpa~
 
 BEGIN ~Animate Dead duration scaling: 1 hour per caster level (level 1-20)~
-INCLUDE ~bm_tweaks/components/09_animate_duration.tpa~
+INCLUDE ~bm_tweaks/components/10_animate_duration.tpa~
 BEGIN ~Ensure all wizard and cleric spells have scroll items~
-INCLUDE ~bm_tweaks/components/10_spell_scrolls.tpa~
+INCLUDE ~bm_tweaks/components/11_spell_scrolls.tpa~
 
 BEGIN ~Add a scroll scribing kit for known wizard and cleric spells~
-INCLUDE ~bm_tweaks/components/11_scroll_crafting.tpa~
+INCLUDE ~bm_tweaks/components/12_scroll_crafting.tpa~
 
 BEGIN ~Add generated low-level wizard fallback scrolls to random treasure~
-INCLUDE ~bm_tweaks/components/12_wizard_fallback_scroll_loot.tpa~
+INCLUDE ~bm_tweaks/components/13_wizard_fallback_scroll_loot.tpa~
 
 BEGIN ~Exceptional Strength carry-weight fix~
-INCLUDE ~bm_tweaks/components/13_strength_fix.tpa~
+INCLUDE ~bm_tweaks/components/14_strength_fix.tpa~
+
+BEGIN ~Add Friendly Arm MESpells scrolls to High Hedge~
+INCLUDE ~bm_tweaks/components/15_highhedge_mes_fai_scrolls.tpa~

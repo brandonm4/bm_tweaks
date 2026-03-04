@@ -133,9 +133,14 @@ END
 // using the infer macro would leave level 9 without a correctly-timed block.
 // Pass 1 updates the formula to 1 hour/level; Pass 2 adds the missing lvl 9.
 // ===========================================================================
-COPY_EXISTING ~spwi505.spl~ ~override~
-  LPF BM_ANIMATE_SCALE INT_VAR true_min = 9 END
-BUT_ONLY
+ACTION_FOR_EACH spl IN
+  SPWI505
+  MEWI556  // MESpells: Skeleton Horde
+BEGIN
+  COPY_EXISTING ~%spl%.spl~ ~override~
+    LPF BM_ANIMATE_SCALE INT_VAR true_min = 9 END
+  BUT_ONLY
+END
 
 // ===========================================================================
 // Wizard: Create Undead (level 6)

@@ -1,0 +1,11 @@
+// Add the MESpells scrolls sold at Friendly Arm Inn to High Hedge as well.
+//
+// We intentionally skip MEWI155X (Dimension Door) because MESpells already
+// adds it to High Hedge.
+
+COPY_EXISTING ~highhedg.sto~ ~override~
+  ADD_STORE_ITEM ~mewi153x~ #1 #0 #0 ~IDENTIFIED~ #1
+  ADD_STORE_ITEM ~mewi253x~ #1 #0 #0 ~IDENTIFIED~ #1
+  ADD_STORE_ITEM ~mewi258x~ #1 #0 #0 ~IDENTIFIED~ #1
+  ADD_STORE_ITEM ~mewi561x~ #1 #0 #0 ~IDENTIFIED~ #1
+BUT_ONLY

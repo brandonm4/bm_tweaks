@@ -167,6 +167,7 @@ END
 // --- Level 5 spells (true_min 9) ---
 ACTION_FOR_EACH spl IN
   SPWI504  SPWI501  SPWI516  SPWI520  SPWI521  SPWI526  SPPR501
+  MEWI557  // MESpells: Commando Conjuration
 BEGIN
   COPY_EXISTING ~%spl%.spl~ ~override~
     LPF BM_SUMMON_SCALE INT_VAR true_min = 9 END
@@ -208,9 +209,14 @@ ACTION_FOR_EACH spl IN SPWI806  SPWI807 BEGIN
 END
 
 // --- Level 9 spells (true_min 17) ---
-COPY_EXISTING ~spwi905.spl~ ~override~
-  LPF BM_SUMMON_SCALE INT_VAR true_min = 17 END
-BUT_ONLY
+ACTION_FOR_EACH spl IN
+  SPWI905
+  MEWI958  // MESpells: Phantasmal Dragon
+BEGIN
+  COPY_EXISTING ~%spl%.spl~ ~override~
+    LPF BM_SUMMON_SCALE INT_VAR true_min = 17 END
+  BUT_ONLY
+END
 
 // --- Summon Deva / Fallen Deva innates — restricted to level 20 ---
 ACTION_FOR_EACH spl IN SPPR726  SPPR727 BEGIN
