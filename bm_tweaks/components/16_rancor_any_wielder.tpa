@@ -1,4 +1,6 @@
 // Make Rancor's on-kill blessing apply to any wielder, not only Dorn.
+// Also remove actor-only locks from Moonblade / Moonlight Walkers so the
+// same component covers all requested "personal gear" unlocks.
 //
 // We neutralize the Dorn-specific gate effect in OHDSW1.SPL:
 //   opcode 309, resource OHDORNSW
@@ -36,4 +38,76 @@ COPY_EXISTING ~OHDSW1.SPL~ ~override~
     END
   END
   PATCH_PRINT ~BM_Tweaks: neutralized Dorn-only gate in OHDSW1 (Rancor effect now works for any wielder).~
+BUT_ONLY_IF_IT_CHANGES
+
+// SW1H13 / RSBOOT only:
+// - clear usability fields
+// - neutralize actor-linked locks in both global and ability effect blocks
+DEFINE_PATCH_FUNCTION ~BM_UNLOCK_PERSONAL_ITEM~ BEGIN
+  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+    WRITE_LONG 0x1e 0
+    WRITE_LONG 0x22 0
+
+    READ_LONG  0x64 header_off
+    READ_SHORT 0x68 header_cnt
+    READ_LONG  0x6a fx_off
+    READ_SHORT 0x6e g_fx_idx
+    READ_SHORT 0x70 g_fx_cnt
+
+    FOR (i = g_fx_cnt - 1; i >= 0; --i) BEGIN
+      SET e_idx = g_fx_idx + i
+      SET e_off = fx_off + (e_idx * 0x30)
+      PATCH_IF (e_off + 0x30 <= SOURCE_SIZE) BEGIN
+        READ_SHORT e_off opcode
+        READ_ASCII (e_off + 0x14) resource (8)
+        PATCH_IF (
+          (opcode = 319) OR
+          (~%resource%~ STRING_EQUAL_CASE ~rasaad~) OR
+          (~%resource%~ STRING_EQUAL_CASE ~xan~)
+        ) BEGIN
+          WRITE_SHORT e_off 206
+          WRITE_LONG  (e_off + 0x04) 0
+          WRITE_LONG  (e_off + 0x08) 0
+          WRITE_ASCII (e_off + 0x14) ~~ (8)
+        END
+      END
+    END
+
+    PATCH_IF (header_cnt > 0) BEGIN
+      FOR (h = 0; h < header_cnt; ++h) BEGIN
+        SET h_off = header_off + (h * 0x38)
+        READ_SHORT (h_off + 0x1e) h_fx_cnt
+        READ_SHORT (h_off + 0x20) h_fx_idx
+
+        FOR (i = h_fx_cnt - 1; i >= 0; --i) BEGIN
+          SET e_idx = h_fx_idx + i
+          SET e_off = fx_off + (e_idx * 0x30)
+          PATCH_IF (e_off + 0x30 <= SOURCE_SIZE) BEGIN
+            READ_SHORT e_off opcode
+            READ_ASCII (e_off + 0x14) resource (8)
+            PATCH_IF (
+              (opcode = 319) OR
+              (~%resource%~ STRING_EQUAL_CASE ~rasaad~) OR
+              (~%resource%~ STRING_EQUAL_CASE ~xan~)
+            ) BEGIN
+              WRITE_SHORT e_off 206
+              WRITE_LONG  (e_off + 0x04) 0
+              WRITE_LONG  (e_off + 0x08) 0
+              WRITE_ASCII (e_off + 0x14) ~~ (8)
+            END
+          END
+        END
+      END
+    END
+  END
+END
+
+COPY_EXISTING ~SW1H13.ITM~ ~override~
+  LPF ~BM_UNLOCK_PERSONAL_ITEM~ END
+  PATCH_PRINT ~BM_Tweaks: unlocked SW1H13 (Moonblade).~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~RSBOOT.ITM~ ~override~
+  LPF ~BM_UNLOCK_PERSONAL_ITEM~ END
+  PATCH_PRINT ~BM_Tweaks: unlocked RSBOOT (Moonlight Walkers).~
 BUT_ONLY_IF_IT_CHANGES
