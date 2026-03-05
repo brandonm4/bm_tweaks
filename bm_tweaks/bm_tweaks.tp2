@@ -52,3 +52,6 @@ INCLUDE ~bm_tweaks/components/14_strength_fix.tpa~
 
 BEGIN ~Add Friendly Arm MESpells scrolls to High Hedge~
 INCLUDE ~bm_tweaks/components/15_highhedge_mes_fai_scrolls.tpa~
+
+BEGIN ~Rancor: make special effect apply to any wielder~
+INCLUDE ~bm_tweaks/components/16_rancor_any_wielder.tpa~
