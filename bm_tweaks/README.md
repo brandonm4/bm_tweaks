@@ -68,3 +68,5 @@ Only designed for post eet_end installation.
 - `13`: Add generated low-level wizard fallback scrolls to random treasure. Injects specific `BMWI###` scrolls into `rndscrol.2da` so otherwise-missing learnable wizard scrolls can appear in loot.
 - `14`: Exceptional Strength carry-weight fix overriding CDTweaks component `2500`. Rewrites `strmodex.2da` so exceptional Strength uses `STR 18 base + percentile * 2`, making `18/01` start above ordinary `18`.
 - `15`: Add Friendly Arm `MESpells` scrolls to High Hedge. Mirrors the Friendly Arm-only `MESpells` wizard scroll stock into `highhedg.sto`, except `Dimension Door`, which `MESpells` already adds there.
+- `16`: Rancor: make special effect apply to any wielder. Removes the original wielder restriction so the item's special behavior is not bound to a single character.
+- `17`: Defensive buff duration scaling (Phases 1+2): converts selected direct and wrapper defensive buffs to `1 turn/level` with per-level headers from `true_min..20` (including `Blur`, `Mirror Image`, and `Barkskin` wrapper chains).

@@ -1,0 +1,1095 @@
+// Party-only INT arcane bonus refresh
+// Deterministic per-slot state machine: apply only when tier changes.
+
+IF
+  GlobalLT("BMINT_VERSION","GLOBAL",3)
+THEN
+  RESPONSE #100
+    SetGlobal("BMINT_VERSION","GLOBAL",3)
+    SetGlobal("BMINT_CUR_P1","GLOBAL",-1)
+    SetGlobal("BMINT_CUR_P2","GLOBAL",-1)
+    SetGlobal("BMINT_CUR_P3","GLOBAL",-1)
+    SetGlobal("BMINT_CUR_P4","GLOBAL",-1)
+    SetGlobal("BMINT_CUR_P5","GLOBAL",-1)
+    SetGlobal("BMINT_CUR_P6","GLOBAL",-1)
+END
+
+IF
+  OR(3)
+    StateCheck(Player1,STATE_DEAD)
+    !ClassLevelGT(Player1,WIZARD,0)
+    CheckStatLT(Player1,13,INT)
+  !Global("BMINT_CUR_P1","GLOBAL",0)
+THEN
+  RESPONSE #100
+    ActionOverride(Player1,ApplySpellRES("BMINTCLR",Player1))
+    SetGlobal("BMINT_CUR_P1","GLOBAL",0)
+END
+
+IF
+  !StateCheck(Player1,STATE_DEAD)
+  ClassLevelGT(Player1,WIZARD,0)
+  CheckStatGT(Player1,12,INT)
+  CheckStatLT(Player1,14,INT)
+  !Global("BMINT_CUR_P1","GLOBAL",13)
+THEN
+  RESPONSE #100
+    ActionOverride(Player1,ApplySpellRES("BMINTCLR",Player1))
+    ActionOverride(Player1,ApplySpellRES("BMINT13",Player1))
+    SetGlobal("BMINT_CUR_P1","GLOBAL",13)
+END
+
+IF
+  !StateCheck(Player1,STATE_DEAD)
+  ClassLevelGT(Player1,WIZARD,0)
+  CheckStatGT(Player1,13,INT)
+  CheckStatLT(Player1,15,INT)
+  !Global("BMINT_CUR_P1","GLOBAL",14)
+THEN
+  RESPONSE #100
+    ActionOverride(Player1,ApplySpellRES("BMINTCLR",Player1))
+    ActionOverride(Player1,ApplySpellRES("BMINT14",Player1))
+    SetGlobal("BMINT_CUR_P1","GLOBAL",14)
+END
+
+IF
+  !StateCheck(Player1,STATE_DEAD)
+  ClassLevelGT(Player1,WIZARD,0)
+  CheckStatGT(Player1,14,INT)
+  CheckStatLT(Player1,16,INT)
+  !Global("BMINT_CUR_P1","GLOBAL",15)
+THEN
+  RESPONSE #100
+    ActionOverride(Player1,ApplySpellRES("BMINTCLR",Player1))
+    ActionOverride(Player1,ApplySpellRES("BMINT15",Player1))
+    SetGlobal("BMINT_CUR_P1","GLOBAL",15)
+END
+
+IF
+  !StateCheck(Player1,STATE_DEAD)
+  ClassLevelGT(Player1,WIZARD,0)
+  CheckStatGT(Player1,15,INT)
+  CheckStatLT(Player1,17,INT)
+  !Global("BMINT_CUR_P1","GLOBAL",16)
+THEN
+  RESPONSE #100
+    ActionOverride(Player1,ApplySpellRES("BMINTCLR",Player1))
+    ActionOverride(Player1,ApplySpellRES("BMINT16",Player1))
+    SetGlobal("BMINT_CUR_P1","GLOBAL",16)
+END
+
+IF
+  !StateCheck(Player1,STATE_DEAD)
+  ClassLevelGT(Player1,WIZARD,0)
+  CheckStatGT(Player1,16,INT)
+  CheckStatLT(Player1,18,INT)
+  !Global("BMINT_CUR_P1","GLOBAL",17)
+THEN
+  RESPONSE #100
+    ActionOverride(Player1,ApplySpellRES("BMINTCLR",Player1))
+    ActionOverride(Player1,ApplySpellRES("BMINT17",Player1))
+    SetGlobal("BMINT_CUR_P1","GLOBAL",17)
+END
+
+IF
+  !StateCheck(Player1,STATE_DEAD)
+  ClassLevelGT(Player1,WIZARD,0)
+  CheckStatGT(Player1,17,INT)
+  CheckStatLT(Player1,19,INT)
+  !Global("BMINT_CUR_P1","GLOBAL",18)
+THEN
+  RESPONSE #100
+    ActionOverride(Player1,ApplySpellRES("BMINTCLR",Player1))
+    ActionOverride(Player1,ApplySpellRES("BMINT18",Player1))
+    SetGlobal("BMINT_CUR_P1","GLOBAL",18)
+END
+
+IF
+  !StateCheck(Player1,STATE_DEAD)
+  ClassLevelGT(Player1,WIZARD,0)
+  CheckStatGT(Player1,18,INT)
+  CheckStatLT(Player1,20,INT)
+  !Global("BMINT_CUR_P1","GLOBAL",19)
+THEN
+  RESPONSE #100
+    ActionOverride(Player1,ApplySpellRES("BMINTCLR",Player1))
+    ActionOverride(Player1,ApplySpellRES("BMINT19",Player1))
+    SetGlobal("BMINT_CUR_P1","GLOBAL",19)
+END
+
+IF
+  !StateCheck(Player1,STATE_DEAD)
+  ClassLevelGT(Player1,WIZARD,0)
+  CheckStatGT(Player1,19,INT)
+  CheckStatLT(Player1,21,INT)
+  !Global("BMINT_CUR_P1","GLOBAL",20)
+THEN
+  RESPONSE #100
+    ActionOverride(Player1,ApplySpellRES("BMINTCLR",Player1))
+    ActionOverride(Player1,ApplySpellRES("BMINT20",Player1))
+    SetGlobal("BMINT_CUR_P1","GLOBAL",20)
+END
+
+IF
+  !StateCheck(Player1,STATE_DEAD)
+  ClassLevelGT(Player1,WIZARD,0)
+  CheckStatGT(Player1,20,INT)
+  CheckStatLT(Player1,22,INT)
+  !Global("BMINT_CUR_P1","GLOBAL",21)
+THEN
+  RESPONSE #100
+    ActionOverride(Player1,ApplySpellRES("BMINTCLR",Player1))
+    ActionOverride(Player1,ApplySpellRES("BMINT21",Player1))
+    SetGlobal("BMINT_CUR_P1","GLOBAL",21)
+END
+
+IF
+  !StateCheck(Player1,STATE_DEAD)
+  ClassLevelGT(Player1,WIZARD,0)
+  CheckStatGT(Player1,21,INT)
+  CheckStatLT(Player1,23,INT)
+  !Global("BMINT_CUR_P1","GLOBAL",22)
+THEN
+  RESPONSE #100
+    ActionOverride(Player1,ApplySpellRES("BMINTCLR",Player1))
+    ActionOverride(Player1,ApplySpellRES("BMINT22",Player1))
+    SetGlobal("BMINT_CUR_P1","GLOBAL",22)
+END
+
+IF
+  !StateCheck(Player1,STATE_DEAD)
+  ClassLevelGT(Player1,WIZARD,0)
+  CheckStatGT(Player1,22,INT)
+  CheckStatLT(Player1,24,INT)
+  !Global("BMINT_CUR_P1","GLOBAL",23)
+THEN
+  RESPONSE #100
+    ActionOverride(Player1,ApplySpellRES("BMINTCLR",Player1))
+    ActionOverride(Player1,ApplySpellRES("BMINT23",Player1))
+    SetGlobal("BMINT_CUR_P1","GLOBAL",23)
+END
+
+IF
+  !StateCheck(Player1,STATE_DEAD)
+  ClassLevelGT(Player1,WIZARD,0)
+  CheckStatGT(Player1,23,INT)
+  CheckStatLT(Player1,25,INT)
+  !Global("BMINT_CUR_P1","GLOBAL",24)
+THEN
+  RESPONSE #100
+    ActionOverride(Player1,ApplySpellRES("BMINTCLR",Player1))
+    ActionOverride(Player1,ApplySpellRES("BMINT24",Player1))
+    SetGlobal("BMINT_CUR_P1","GLOBAL",24)
+END
+
+IF
+  !StateCheck(Player1,STATE_DEAD)
+  ClassLevelGT(Player1,WIZARD,0)
+  CheckStatGT(Player1,24,INT)
+  !Global("BMINT_CUR_P1","GLOBAL",25)
+THEN
+  RESPONSE #100
+    ActionOverride(Player1,ApplySpellRES("BMINTCLR",Player1))
+    ActionOverride(Player1,ApplySpellRES("BMINT25",Player1))
+    SetGlobal("BMINT_CUR_P1","GLOBAL",25)
+END
+
+IF
+  OR(3)
+    StateCheck(Player2,STATE_DEAD)
+    !ClassLevelGT(Player2,WIZARD,0)
+    CheckStatLT(Player2,13,INT)
+  !Global("BMINT_CUR_P2","GLOBAL",0)
+THEN
+  RESPONSE #100
+    ActionOverride(Player2,ApplySpellRES("BMINTCLR",Player2))
+    SetGlobal("BMINT_CUR_P2","GLOBAL",0)
+END
+
+IF
+  !StateCheck(Player2,STATE_DEAD)
+  ClassLevelGT(Player2,WIZARD,0)
+  CheckStatGT(Player2,12,INT)
+  CheckStatLT(Player2,14,INT)
+  !Global("BMINT_CUR_P2","GLOBAL",13)
+THEN
+  RESPONSE #100
+    ActionOverride(Player2,ApplySpellRES("BMINTCLR",Player2))
+    ActionOverride(Player2,ApplySpellRES("BMINT13",Player2))
+    SetGlobal("BMINT_CUR_P2","GLOBAL",13)
+END
+
+IF
+  !StateCheck(Player2,STATE_DEAD)
+  ClassLevelGT(Player2,WIZARD,0)
+  CheckStatGT(Player2,13,INT)
+  CheckStatLT(Player2,15,INT)
+  !Global("BMINT_CUR_P2","GLOBAL",14)
+THEN
+  RESPONSE #100
+    ActionOverride(Player2,ApplySpellRES("BMINTCLR",Player2))
+    ActionOverride(Player2,ApplySpellRES("BMINT14",Player2))
+    SetGlobal("BMINT_CUR_P2","GLOBAL",14)
+END
+
+IF
+  !StateCheck(Player2,STATE_DEAD)
+  ClassLevelGT(Player2,WIZARD,0)
+  CheckStatGT(Player2,14,INT)
+  CheckStatLT(Player2,16,INT)
+  !Global("BMINT_CUR_P2","GLOBAL",15)
+THEN
+  RESPONSE #100
+    ActionOverride(Player2,ApplySpellRES("BMINTCLR",Player2))
+    ActionOverride(Player2,ApplySpellRES("BMINT15",Player2))
+    SetGlobal("BMINT_CUR_P2","GLOBAL",15)
+END
+
+IF
+  !StateCheck(Player2,STATE_DEAD)
+  ClassLevelGT(Player2,WIZARD,0)
+  CheckStatGT(Player2,15,INT)
+  CheckStatLT(Player2,17,INT)
+  !Global("BMINT_CUR_P2","GLOBAL",16)
+THEN
+  RESPONSE #100
+    ActionOverride(Player2,ApplySpellRES("BMINTCLR",Player2))
+    ActionOverride(Player2,ApplySpellRES("BMINT16",Player2))
+    SetGlobal("BMINT_CUR_P2","GLOBAL",16)
+END
+
+IF
+  !StateCheck(Player2,STATE_DEAD)
+  ClassLevelGT(Player2,WIZARD,0)
+  CheckStatGT(Player2,16,INT)
+  CheckStatLT(Player2,18,INT)
+  !Global("BMINT_CUR_P2","GLOBAL",17)
+THEN
+  RESPONSE #100
+    ActionOverride(Player2,ApplySpellRES("BMINTCLR",Player2))
+    ActionOverride(Player2,ApplySpellRES("BMINT17",Player2))
+    SetGlobal("BMINT_CUR_P2","GLOBAL",17)
+END
+
+IF
+  !StateCheck(Player2,STATE_DEAD)
+  ClassLevelGT(Player2,WIZARD,0)
+  CheckStatGT(Player2,17,INT)
+  CheckStatLT(Player2,19,INT)
+  !Global("BMINT_CUR_P2","GLOBAL",18)
+THEN
+  RESPONSE #100
+    ActionOverride(Player2,ApplySpellRES("BMINTCLR",Player2))
+    ActionOverride(Player2,ApplySpellRES("BMINT18",Player2))
+    SetGlobal("BMINT_CUR_P2","GLOBAL",18)
+END
+
+IF
+  !StateCheck(Player2,STATE_DEAD)
+  ClassLevelGT(Player2,WIZARD,0)
+  CheckStatGT(Player2,18,INT)
+  CheckStatLT(Player2,20,INT)
+  !Global("BMINT_CUR_P2","GLOBAL",19)
+THEN
+  RESPONSE #100
+    ActionOverride(Player2,ApplySpellRES("BMINTCLR",Player2))
+    ActionOverride(Player2,ApplySpellRES("BMINT19",Player2))
+    SetGlobal("BMINT_CUR_P2","GLOBAL",19)
+END
+
+IF
+  !StateCheck(Player2,STATE_DEAD)
+  ClassLevelGT(Player2,WIZARD,0)
+  CheckStatGT(Player2,19,INT)
+  CheckStatLT(Player2,21,INT)
+  !Global("BMINT_CUR_P2","GLOBAL",20)
+THEN
+  RESPONSE #100
+    ActionOverride(Player2,ApplySpellRES("BMINTCLR",Player2))
+    ActionOverride(Player2,ApplySpellRES("BMINT20",Player2))
+    SetGlobal("BMINT_CUR_P2","GLOBAL",20)
+END
+
+IF
+  !StateCheck(Player2,STATE_DEAD)
+  ClassLevelGT(Player2,WIZARD,0)
+  CheckStatGT(Player2,20,INT)
+  CheckStatLT(Player2,22,INT)
+  !Global("BMINT_CUR_P2","GLOBAL",21)
+THEN
+  RESPONSE #100
+    ActionOverride(Player2,ApplySpellRES("BMINTCLR",Player2))
+    ActionOverride(Player2,ApplySpellRES("BMINT21",Player2))
+    SetGlobal("BMINT_CUR_P2","GLOBAL",21)
+END
+
+IF
+  !StateCheck(Player2,STATE_DEAD)
+  ClassLevelGT(Player2,WIZARD,0)
+  CheckStatGT(Player2,21,INT)
+  CheckStatLT(Player2,23,INT)
+  !Global("BMINT_CUR_P2","GLOBAL",22)
+THEN
+  RESPONSE #100
+    ActionOverride(Player2,ApplySpellRES("BMINTCLR",Player2))
+    ActionOverride(Player2,ApplySpellRES("BMINT22",Player2))
+    SetGlobal("BMINT_CUR_P2","GLOBAL",22)
+END
+
+IF
+  !StateCheck(Player2,STATE_DEAD)
+  ClassLevelGT(Player2,WIZARD,0)
+  CheckStatGT(Player2,22,INT)
+  CheckStatLT(Player2,24,INT)
+  !Global("BMINT_CUR_P2","GLOBAL",23)
+THEN
+  RESPONSE #100
+    ActionOverride(Player2,ApplySpellRES("BMINTCLR",Player2))
+    ActionOverride(Player2,ApplySpellRES("BMINT23",Player2))
+    SetGlobal("BMINT_CUR_P2","GLOBAL",23)
+END
+
+IF
+  !StateCheck(Player2,STATE_DEAD)
+  ClassLevelGT(Player2,WIZARD,0)
+  CheckStatGT(Player2,23,INT)
+  CheckStatLT(Player2,25,INT)
+  !Global("BMINT_CUR_P2","GLOBAL",24)
+THEN
+  RESPONSE #100
+    ActionOverride(Player2,ApplySpellRES("BMINTCLR",Player2))
+    ActionOverride(Player2,ApplySpellRES("BMINT24",Player2))
+    SetGlobal("BMINT_CUR_P2","GLOBAL",24)
+END
+
+IF
+  !StateCheck(Player2,STATE_DEAD)
+  ClassLevelGT(Player2,WIZARD,0)
+  CheckStatGT(Player2,24,INT)
+  !Global("BMINT_CUR_P2","GLOBAL",25)
+THEN
+  RESPONSE #100
+    ActionOverride(Player2,ApplySpellRES("BMINTCLR",Player2))
+    ActionOverride(Player2,ApplySpellRES("BMINT25",Player2))
+    SetGlobal("BMINT_CUR_P2","GLOBAL",25)
+END
+
+IF
+  OR(3)
+    StateCheck(Player3,STATE_DEAD)
+    !ClassLevelGT(Player3,WIZARD,0)
+    CheckStatLT(Player3,13,INT)
+  !Global("BMINT_CUR_P3","GLOBAL",0)
+THEN
+  RESPONSE #100
+    ActionOverride(Player3,ApplySpellRES("BMINTCLR",Player3))
+    SetGlobal("BMINT_CUR_P3","GLOBAL",0)
+END
+
+IF
+  !StateCheck(Player3,STATE_DEAD)
+  ClassLevelGT(Player3,WIZARD,0)
+  CheckStatGT(Player3,12,INT)
+  CheckStatLT(Player3,14,INT)
+  !Global("BMINT_CUR_P3","GLOBAL",13)
+THEN
+  RESPONSE #100
+    ActionOverride(Player3,ApplySpellRES("BMINTCLR",Player3))
+    ActionOverride(Player3,ApplySpellRES("BMINT13",Player3))
+    SetGlobal("BMINT_CUR_P3","GLOBAL",13)
+END
+
+IF
+  !StateCheck(Player3,STATE_DEAD)
+  ClassLevelGT(Player3,WIZARD,0)
+  CheckStatGT(Player3,13,INT)
+  CheckStatLT(Player3,15,INT)
+  !Global("BMINT_CUR_P3","GLOBAL",14)
+THEN
+  RESPONSE #100
+    ActionOverride(Player3,ApplySpellRES("BMINTCLR",Player3))
+    ActionOverride(Player3,ApplySpellRES("BMINT14",Player3))
+    SetGlobal("BMINT_CUR_P3","GLOBAL",14)
+END
+
+IF
+  !StateCheck(Player3,STATE_DEAD)
+  ClassLevelGT(Player3,WIZARD,0)
+  CheckStatGT(Player3,14,INT)
+  CheckStatLT(Player3,16,INT)
+  !Global("BMINT_CUR_P3","GLOBAL",15)
+THEN
+  RESPONSE #100
+    ActionOverride(Player3,ApplySpellRES("BMINTCLR",Player3))
+    ActionOverride(Player3,ApplySpellRES("BMINT15",Player3))
+    SetGlobal("BMINT_CUR_P3","GLOBAL",15)
+END
+
+IF
+  !StateCheck(Player3,STATE_DEAD)
+  ClassLevelGT(Player3,WIZARD,0)
+  CheckStatGT(Player3,15,INT)
+  CheckStatLT(Player3,17,INT)
+  !Global("BMINT_CUR_P3","GLOBAL",16)
+THEN
+  RESPONSE #100
+    ActionOverride(Player3,ApplySpellRES("BMINTCLR",Player3))
+    ActionOverride(Player3,ApplySpellRES("BMINT16",Player3))
+    SetGlobal("BMINT_CUR_P3","GLOBAL",16)
+END
+
+IF
+  !StateCheck(Player3,STATE_DEAD)
+  ClassLevelGT(Player3,WIZARD,0)
+  CheckStatGT(Player3,16,INT)
+  CheckStatLT(Player3,18,INT)
+  !Global("BMINT_CUR_P3","GLOBAL",17)
+THEN
+  RESPONSE #100
+    ActionOverride(Player3,ApplySpellRES("BMINTCLR",Player3))
+    ActionOverride(Player3,ApplySpellRES("BMINT17",Player3))
+    SetGlobal("BMINT_CUR_P3","GLOBAL",17)
+END
+
+IF
+  !StateCheck(Player3,STATE_DEAD)
+  ClassLevelGT(Player3,WIZARD,0)
+  CheckStatGT(Player3,17,INT)
+  CheckStatLT(Player3,19,INT)
+  !Global("BMINT_CUR_P3","GLOBAL",18)
+THEN
+  RESPONSE #100
+    ActionOverride(Player3,ApplySpellRES("BMINTCLR",Player3))
+    ActionOverride(Player3,ApplySpellRES("BMINT18",Player3))
+    SetGlobal("BMINT_CUR_P3","GLOBAL",18)
+END
+
+IF
+  !StateCheck(Player3,STATE_DEAD)
+  ClassLevelGT(Player3,WIZARD,0)
+  CheckStatGT(Player3,18,INT)
+  CheckStatLT(Player3,20,INT)
+  !Global("BMINT_CUR_P3","GLOBAL",19)
+THEN
+  RESPONSE #100
+    ActionOverride(Player3,ApplySpellRES("BMINTCLR",Player3))
+    ActionOverride(Player3,ApplySpellRES("BMINT19",Player3))
+    SetGlobal("BMINT_CUR_P3","GLOBAL",19)
+END
+
+IF
+  !StateCheck(Player3,STATE_DEAD)
+  ClassLevelGT(Player3,WIZARD,0)
+  CheckStatGT(Player3,19,INT)
+  CheckStatLT(Player3,21,INT)
+  !Global("BMINT_CUR_P3","GLOBAL",20)
+THEN
+  RESPONSE #100
+    ActionOverride(Player3,ApplySpellRES("BMINTCLR",Player3))
+    ActionOverride(Player3,ApplySpellRES("BMINT20",Player3))
+    SetGlobal("BMINT_CUR_P3","GLOBAL",20)
+END
+
+IF
+  !StateCheck(Player3,STATE_DEAD)
+  ClassLevelGT(Player3,WIZARD,0)
+  CheckStatGT(Player3,20,INT)
+  CheckStatLT(Player3,22,INT)
+  !Global("BMINT_CUR_P3","GLOBAL",21)
+THEN
+  RESPONSE #100
+    ActionOverride(Player3,ApplySpellRES("BMINTCLR",Player3))
+    ActionOverride(Player3,ApplySpellRES("BMINT21",Player3))
+    SetGlobal("BMINT_CUR_P3","GLOBAL",21)
+END
+
+IF
+  !StateCheck(Player3,STATE_DEAD)
+  ClassLevelGT(Player3,WIZARD,0)
+  CheckStatGT(Player3,21,INT)
+  CheckStatLT(Player3,23,INT)
+  !Global("BMINT_CUR_P3","GLOBAL",22)
+THEN
+  RESPONSE #100
+    ActionOverride(Player3,ApplySpellRES("BMINTCLR",Player3))
+    ActionOverride(Player3,ApplySpellRES("BMINT22",Player3))
+    SetGlobal("BMINT_CUR_P3","GLOBAL",22)
+END
+
+IF
+  !StateCheck(Player3,STATE_DEAD)
+  ClassLevelGT(Player3,WIZARD,0)
+  CheckStatGT(Player3,22,INT)
+  CheckStatLT(Player3,24,INT)
+  !Global("BMINT_CUR_P3","GLOBAL",23)
+THEN
+  RESPONSE #100
+    ActionOverride(Player3,ApplySpellRES("BMINTCLR",Player3))
+    ActionOverride(Player3,ApplySpellRES("BMINT23",Player3))
+    SetGlobal("BMINT_CUR_P3","GLOBAL",23)
+END
+
+IF
+  !StateCheck(Player3,STATE_DEAD)
+  ClassLevelGT(Player3,WIZARD,0)
+  CheckStatGT(Player3,23,INT)
+  CheckStatLT(Player3,25,INT)
+  !Global("BMINT_CUR_P3","GLOBAL",24)
+THEN
+  RESPONSE #100
+    ActionOverride(Player3,ApplySpellRES("BMINTCLR",Player3))
+    ActionOverride(Player3,ApplySpellRES("BMINT24",Player3))
+    SetGlobal("BMINT_CUR_P3","GLOBAL",24)
+END
+
+IF
+  !StateCheck(Player3,STATE_DEAD)
+  ClassLevelGT(Player3,WIZARD,0)
+  CheckStatGT(Player3,24,INT)
+  !Global("BMINT_CUR_P3","GLOBAL",25)
+THEN
+  RESPONSE #100
+    ActionOverride(Player3,ApplySpellRES("BMINTCLR",Player3))
+    ActionOverride(Player3,ApplySpellRES("BMINT25",Player3))
+    SetGlobal("BMINT_CUR_P3","GLOBAL",25)
+END
+
+IF
+  OR(3)
+    StateCheck(Player4,STATE_DEAD)
+    !ClassLevelGT(Player4,WIZARD,0)
+    CheckStatLT(Player4,13,INT)
+  !Global("BMINT_CUR_P4","GLOBAL",0)
+THEN
+  RESPONSE #100
+    ActionOverride(Player4,ApplySpellRES("BMINTCLR",Player4))
+    SetGlobal("BMINT_CUR_P4","GLOBAL",0)
+END
+
+IF
+  !StateCheck(Player4,STATE_DEAD)
+  ClassLevelGT(Player4,WIZARD,0)
+  CheckStatGT(Player4,12,INT)
+  CheckStatLT(Player4,14,INT)
+  !Global("BMINT_CUR_P4","GLOBAL",13)
+THEN
+  RESPONSE #100
+    ActionOverride(Player4,ApplySpellRES("BMINTCLR",Player4))
+    ActionOverride(Player4,ApplySpellRES("BMINT13",Player4))
+    SetGlobal("BMINT_CUR_P4","GLOBAL",13)
+END
+
+IF
+  !StateCheck(Player4,STATE_DEAD)
+  ClassLevelGT(Player4,WIZARD,0)
+  CheckStatGT(Player4,13,INT)
+  CheckStatLT(Player4,15,INT)
+  !Global("BMINT_CUR_P4","GLOBAL",14)
+THEN
+  RESPONSE #100
+    ActionOverride(Player4,ApplySpellRES("BMINTCLR",Player4))
+    ActionOverride(Player4,ApplySpellRES("BMINT14",Player4))
+    SetGlobal("BMINT_CUR_P4","GLOBAL",14)
+END
+
+IF
+  !StateCheck(Player4,STATE_DEAD)
+  ClassLevelGT(Player4,WIZARD,0)
+  CheckStatGT(Player4,14,INT)
+  CheckStatLT(Player4,16,INT)
+  !Global("BMINT_CUR_P4","GLOBAL",15)
+THEN
+  RESPONSE #100
+    ActionOverride(Player4,ApplySpellRES("BMINTCLR",Player4))
+    ActionOverride(Player4,ApplySpellRES("BMINT15",Player4))
+    SetGlobal("BMINT_CUR_P4","GLOBAL",15)
+END
+
+IF
+  !StateCheck(Player4,STATE_DEAD)
+  ClassLevelGT(Player4,WIZARD,0)
+  CheckStatGT(Player4,15,INT)
+  CheckStatLT(Player4,17,INT)
+  !Global("BMINT_CUR_P4","GLOBAL",16)
+THEN
+  RESPONSE #100
+    ActionOverride(Player4,ApplySpellRES("BMINTCLR",Player4))
+    ActionOverride(Player4,ApplySpellRES("BMINT16",Player4))
+    SetGlobal("BMINT_CUR_P4","GLOBAL",16)
+END
+
+IF
+  !StateCheck(Player4,STATE_DEAD)
+  ClassLevelGT(Player4,WIZARD,0)
+  CheckStatGT(Player4,16,INT)
+  CheckStatLT(Player4,18,INT)
+  !Global("BMINT_CUR_P4","GLOBAL",17)
+THEN
+  RESPONSE #100
+    ActionOverride(Player4,ApplySpellRES("BMINTCLR",Player4))
+    ActionOverride(Player4,ApplySpellRES("BMINT17",Player4))
+    SetGlobal("BMINT_CUR_P4","GLOBAL",17)
+END
+
+IF
+  !StateCheck(Player4,STATE_DEAD)
+  ClassLevelGT(Player4,WIZARD,0)
+  CheckStatGT(Player4,17,INT)
+  CheckStatLT(Player4,19,INT)
+  !Global("BMINT_CUR_P4","GLOBAL",18)
+THEN
+  RESPONSE #100
+    ActionOverride(Player4,ApplySpellRES("BMINTCLR",Player4))
+    ActionOverride(Player4,ApplySpellRES("BMINT18",Player4))
+    SetGlobal("BMINT_CUR_P4","GLOBAL",18)
+END
+
+IF
+  !StateCheck(Player4,STATE_DEAD)
+  ClassLevelGT(Player4,WIZARD,0)
+  CheckStatGT(Player4,18,INT)
+  CheckStatLT(Player4,20,INT)
+  !Global("BMINT_CUR_P4","GLOBAL",19)
+THEN
+  RESPONSE #100
+    ActionOverride(Player4,ApplySpellRES("BMINTCLR",Player4))
+    ActionOverride(Player4,ApplySpellRES("BMINT19",Player4))
+    SetGlobal("BMINT_CUR_P4","GLOBAL",19)
+END
+
+IF
+  !StateCheck(Player4,STATE_DEAD)
+  ClassLevelGT(Player4,WIZARD,0)
+  CheckStatGT(Player4,19,INT)
+  CheckStatLT(Player4,21,INT)
+  !Global("BMINT_CUR_P4","GLOBAL",20)
+THEN
+  RESPONSE #100
+    ActionOverride(Player4,ApplySpellRES("BMINTCLR",Player4))
+    ActionOverride(Player4,ApplySpellRES("BMINT20",Player4))
+    SetGlobal("BMINT_CUR_P4","GLOBAL",20)
+END
+
+IF
+  !StateCheck(Player4,STATE_DEAD)
+  ClassLevelGT(Player4,WIZARD,0)
+  CheckStatGT(Player4,20,INT)
+  CheckStatLT(Player4,22,INT)
+  !Global("BMINT_CUR_P4","GLOBAL",21)
+THEN
+  RESPONSE #100
+    ActionOverride(Player4,ApplySpellRES("BMINTCLR",Player4))
+    ActionOverride(Player4,ApplySpellRES("BMINT21",Player4))
+    SetGlobal("BMINT_CUR_P4","GLOBAL",21)
+END
+
+IF
+  !StateCheck(Player4,STATE_DEAD)
+  ClassLevelGT(Player4,WIZARD,0)
+  CheckStatGT(Player4,21,INT)
+  CheckStatLT(Player4,23,INT)
+  !Global("BMINT_CUR_P4","GLOBAL",22)
+THEN
+  RESPONSE #100
+    ActionOverride(Player4,ApplySpellRES("BMINTCLR",Player4))
+    ActionOverride(Player4,ApplySpellRES("BMINT22",Player4))
+    SetGlobal("BMINT_CUR_P4","GLOBAL",22)
+END
+
+IF
+  !StateCheck(Player4,STATE_DEAD)
+  ClassLevelGT(Player4,WIZARD,0)
+  CheckStatGT(Player4,22,INT)
+  CheckStatLT(Player4,24,INT)
+  !Global("BMINT_CUR_P4","GLOBAL",23)
+THEN
+  RESPONSE #100
+    ActionOverride(Player4,ApplySpellRES("BMINTCLR",Player4))
+    ActionOverride(Player4,ApplySpellRES("BMINT23",Player4))
+    SetGlobal("BMINT_CUR_P4","GLOBAL",23)
+END
+
+IF
+  !StateCheck(Player4,STATE_DEAD)
+  ClassLevelGT(Player4,WIZARD,0)
+  CheckStatGT(Player4,23,INT)
+  CheckStatLT(Player4,25,INT)
+  !Global("BMINT_CUR_P4","GLOBAL",24)
+THEN
+  RESPONSE #100
+    ActionOverride(Player4,ApplySpellRES("BMINTCLR",Player4))
+    ActionOverride(Player4,ApplySpellRES("BMINT24",Player4))
+    SetGlobal("BMINT_CUR_P4","GLOBAL",24)
+END
+
+IF
+  !StateCheck(Player4,STATE_DEAD)
+  ClassLevelGT(Player4,WIZARD,0)
+  CheckStatGT(Player4,24,INT)
+  !Global("BMINT_CUR_P4","GLOBAL",25)
+THEN
+  RESPONSE #100
+    ActionOverride(Player4,ApplySpellRES("BMINTCLR",Player4))
+    ActionOverride(Player4,ApplySpellRES("BMINT25",Player4))
+    SetGlobal("BMINT_CUR_P4","GLOBAL",25)
+END
+
+IF
+  OR(3)
+    StateCheck(Player5,STATE_DEAD)
+    !ClassLevelGT(Player5,WIZARD,0)
+    CheckStatLT(Player5,13,INT)
+  !Global("BMINT_CUR_P5","GLOBAL",0)
+THEN
+  RESPONSE #100
+    ActionOverride(Player5,ApplySpellRES("BMINTCLR",Player5))
+    SetGlobal("BMINT_CUR_P5","GLOBAL",0)
+END
+
+IF
+  !StateCheck(Player5,STATE_DEAD)
+  ClassLevelGT(Player5,WIZARD,0)
+  CheckStatGT(Player5,12,INT)
+  CheckStatLT(Player5,14,INT)
+  !Global("BMINT_CUR_P5","GLOBAL",13)
+THEN
+  RESPONSE #100
+    ActionOverride(Player5,ApplySpellRES("BMINTCLR",Player5))
+    ActionOverride(Player5,ApplySpellRES("BMINT13",Player5))
+    SetGlobal("BMINT_CUR_P5","GLOBAL",13)
+END
+
+IF
+  !StateCheck(Player5,STATE_DEAD)
+  ClassLevelGT(Player5,WIZARD,0)
+  CheckStatGT(Player5,13,INT)
+  CheckStatLT(Player5,15,INT)
+  !Global("BMINT_CUR_P5","GLOBAL",14)
+THEN
+  RESPONSE #100
+    ActionOverride(Player5,ApplySpellRES("BMINTCLR",Player5))
+    ActionOverride(Player5,ApplySpellRES("BMINT14",Player5))
+    SetGlobal("BMINT_CUR_P5","GLOBAL",14)
+END
+
+IF
+  !StateCheck(Player5,STATE_DEAD)
+  ClassLevelGT(Player5,WIZARD,0)
+  CheckStatGT(Player5,14,INT)
+  CheckStatLT(Player5,16,INT)
+  !Global("BMINT_CUR_P5","GLOBAL",15)
+THEN
+  RESPONSE #100
+    ActionOverride(Player5,ApplySpellRES("BMINTCLR",Player5))
+    ActionOverride(Player5,ApplySpellRES("BMINT15",Player5))
+    SetGlobal("BMINT_CUR_P5","GLOBAL",15)
+END
+
+IF
+  !StateCheck(Player5,STATE_DEAD)
+  ClassLevelGT(Player5,WIZARD,0)
+  CheckStatGT(Player5,15,INT)
+  CheckStatLT(Player5,17,INT)
+  !Global("BMINT_CUR_P5","GLOBAL",16)
+THEN
+  RESPONSE #100
+    ActionOverride(Player5,ApplySpellRES("BMINTCLR",Player5))
+    ActionOverride(Player5,ApplySpellRES("BMINT16",Player5))
+    SetGlobal("BMINT_CUR_P5","GLOBAL",16)
+END
+
+IF
+  !StateCheck(Player5,STATE_DEAD)
+  ClassLevelGT(Player5,WIZARD,0)
+  CheckStatGT(Player5,16,INT)
+  CheckStatLT(Player5,18,INT)
+  !Global("BMINT_CUR_P5","GLOBAL",17)
+THEN
+  RESPONSE #100
+    ActionOverride(Player5,ApplySpellRES("BMINTCLR",Player5))
+    ActionOverride(Player5,ApplySpellRES("BMINT17",Player5))
+    SetGlobal("BMINT_CUR_P5","GLOBAL",17)
+END
+
+IF
+  !StateCheck(Player5,STATE_DEAD)
+  ClassLevelGT(Player5,WIZARD,0)
+  CheckStatGT(Player5,17,INT)
+  CheckStatLT(Player5,19,INT)
+  !Global("BMINT_CUR_P5","GLOBAL",18)
+THEN
+  RESPONSE #100
+    ActionOverride(Player5,ApplySpellRES("BMINTCLR",Player5))
+    ActionOverride(Player5,ApplySpellRES("BMINT18",Player5))
+    SetGlobal("BMINT_CUR_P5","GLOBAL",18)
+END
+
+IF
+  !StateCheck(Player5,STATE_DEAD)
+  ClassLevelGT(Player5,WIZARD,0)
+  CheckStatGT(Player5,18,INT)
+  CheckStatLT(Player5,20,INT)
+  !Global("BMINT_CUR_P5","GLOBAL",19)
+THEN
+  RESPONSE #100
+    ActionOverride(Player5,ApplySpellRES("BMINTCLR",Player5))
+    ActionOverride(Player5,ApplySpellRES("BMINT19",Player5))
+    SetGlobal("BMINT_CUR_P5","GLOBAL",19)
+END
+
+IF
+  !StateCheck(Player5,STATE_DEAD)
+  ClassLevelGT(Player5,WIZARD,0)
+  CheckStatGT(Player5,19,INT)
+  CheckStatLT(Player5,21,INT)
+  !Global("BMINT_CUR_P5","GLOBAL",20)
+THEN
+  RESPONSE #100
+    ActionOverride(Player5,ApplySpellRES("BMINTCLR",Player5))
+    ActionOverride(Player5,ApplySpellRES("BMINT20",Player5))
+    SetGlobal("BMINT_CUR_P5","GLOBAL",20)
+END
+
+IF
+  !StateCheck(Player5,STATE_DEAD)
+  ClassLevelGT(Player5,WIZARD,0)
+  CheckStatGT(Player5,20,INT)
+  CheckStatLT(Player5,22,INT)
+  !Global("BMINT_CUR_P5","GLOBAL",21)
+THEN
+  RESPONSE #100
+    ActionOverride(Player5,ApplySpellRES("BMINTCLR",Player5))
+    ActionOverride(Player5,ApplySpellRES("BMINT21",Player5))
+    SetGlobal("BMINT_CUR_P5","GLOBAL",21)
+END
+
+IF
+  !StateCheck(Player5,STATE_DEAD)
+  ClassLevelGT(Player5,WIZARD,0)
+  CheckStatGT(Player5,21,INT)
+  CheckStatLT(Player5,23,INT)
+  !Global("BMINT_CUR_P5","GLOBAL",22)
+THEN
+  RESPONSE #100
+    ActionOverride(Player5,ApplySpellRES("BMINTCLR",Player5))
+    ActionOverride(Player5,ApplySpellRES("BMINT22",Player5))
+    SetGlobal("BMINT_CUR_P5","GLOBAL",22)
+END
+
+IF
+  !StateCheck(Player5,STATE_DEAD)
+  ClassLevelGT(Player5,WIZARD,0)
+  CheckStatGT(Player5,22,INT)
+  CheckStatLT(Player5,24,INT)
+  !Global("BMINT_CUR_P5","GLOBAL",23)
+THEN
+  RESPONSE #100
+    ActionOverride(Player5,ApplySpellRES("BMINTCLR",Player5))
+    ActionOverride(Player5,ApplySpellRES("BMINT23",Player5))
+    SetGlobal("BMINT_CUR_P5","GLOBAL",23)
+END
+
+IF
+  !StateCheck(Player5,STATE_DEAD)
+  ClassLevelGT(Player5,WIZARD,0)
+  CheckStatGT(Player5,23,INT)
+  CheckStatLT(Player5,25,INT)
+  !Global("BMINT_CUR_P5","GLOBAL",24)
+THEN
+  RESPONSE #100
+    ActionOverride(Player5,ApplySpellRES("BMINTCLR",Player5))
+    ActionOverride(Player5,ApplySpellRES("BMINT24",Player5))
+    SetGlobal("BMINT_CUR_P5","GLOBAL",24)
+END
+
+IF
+  !StateCheck(Player5,STATE_DEAD)
+  ClassLevelGT(Player5,WIZARD,0)
+  CheckStatGT(Player5,24,INT)
+  !Global("BMINT_CUR_P5","GLOBAL",25)
+THEN
+  RESPONSE #100
+    ActionOverride(Player5,ApplySpellRES("BMINTCLR",Player5))
+    ActionOverride(Player5,ApplySpellRES("BMINT25",Player5))
+    SetGlobal("BMINT_CUR_P5","GLOBAL",25)
+END
+
+IF
+  OR(3)
+    StateCheck(Player6,STATE_DEAD)
+    !ClassLevelGT(Player6,WIZARD,0)
+    CheckStatLT(Player6,13,INT)
+  !Global("BMINT_CUR_P6","GLOBAL",0)
+THEN
+  RESPONSE #100
+    ActionOverride(Player6,ApplySpellRES("BMINTCLR",Player6))
+    SetGlobal("BMINT_CUR_P6","GLOBAL",0)
+END
+
+IF
+  !StateCheck(Player6,STATE_DEAD)
+  ClassLevelGT(Player6,WIZARD,0)
+  CheckStatGT(Player6,12,INT)
+  CheckStatLT(Player6,14,INT)
+  !Global("BMINT_CUR_P6","GLOBAL",13)
+THEN
+  RESPONSE #100
+    ActionOverride(Player6,ApplySpellRES("BMINTCLR",Player6))
+    ActionOverride(Player6,ApplySpellRES("BMINT13",Player6))
+    SetGlobal("BMINT_CUR_P6","GLOBAL",13)
+END
+
+IF
+  !StateCheck(Player6,STATE_DEAD)
+  ClassLevelGT(Player6,WIZARD,0)
+  CheckStatGT(Player6,13,INT)
+  CheckStatLT(Player6,15,INT)
+  !Global("BMINT_CUR_P6","GLOBAL",14)
+THEN
+  RESPONSE #100
+    ActionOverride(Player6,ApplySpellRES("BMINTCLR",Player6))
+    ActionOverride(Player6,ApplySpellRES("BMINT14",Player6))
+    SetGlobal("BMINT_CUR_P6","GLOBAL",14)
+END
+
+IF
+  !StateCheck(Player6,STATE_DEAD)
+  ClassLevelGT(Player6,WIZARD,0)
+  CheckStatGT(Player6,14,INT)
+  CheckStatLT(Player6,16,INT)
+  !Global("BMINT_CUR_P6","GLOBAL",15)
+THEN
+  RESPONSE #100
+    ActionOverride(Player6,ApplySpellRES("BMINTCLR",Player6))
+    ActionOverride(Player6,ApplySpellRES("BMINT15",Player6))
+    SetGlobal("BMINT_CUR_P6","GLOBAL",15)
+END
+
+IF
+  !StateCheck(Player6,STATE_DEAD)
+  ClassLevelGT(Player6,WIZARD,0)
+  CheckStatGT(Player6,15,INT)
+  CheckStatLT(Player6,17,INT)
+  !Global("BMINT_CUR_P6","GLOBAL",16)
+THEN
+  RESPONSE #100
+    ActionOverride(Player6,ApplySpellRES("BMINTCLR",Player6))
+    ActionOverride(Player6,ApplySpellRES("BMINT16",Player6))
+    SetGlobal("BMINT_CUR_P6","GLOBAL",16)
+END
+
+IF
+  !StateCheck(Player6,STATE_DEAD)
+  ClassLevelGT(Player6,WIZARD,0)
+  CheckStatGT(Player6,16,INT)
+  CheckStatLT(Player6,18,INT)
+  !Global("BMINT_CUR_P6","GLOBAL",17)
+THEN
+  RESPONSE #100
+    ActionOverride(Player6,ApplySpellRES("BMINTCLR",Player6))
+    ActionOverride(Player6,ApplySpellRES("BMINT17",Player6))
+    SetGlobal("BMINT_CUR_P6","GLOBAL",17)
+END
+
+IF
+  !StateCheck(Player6,STATE_DEAD)
+  ClassLevelGT(Player6,WIZARD,0)
+  CheckStatGT(Player6,17,INT)
+  CheckStatLT(Player6,19,INT)
+  !Global("BMINT_CUR_P6","GLOBAL",18)
+THEN
+  RESPONSE #100
+    ActionOverride(Player6,ApplySpellRES("BMINTCLR",Player6))
+    ActionOverride(Player6,ApplySpellRES("BMINT18",Player6))
+    SetGlobal("BMINT_CUR_P6","GLOBAL",18)
+END
+
+IF
+  !StateCheck(Player6,STATE_DEAD)
+  ClassLevelGT(Player6,WIZARD,0)
+  CheckStatGT(Player6,18,INT)
+  CheckStatLT(Player6,20,INT)
+  !Global("BMINT_CUR_P6","GLOBAL",19)
+THEN
+  RESPONSE #100
+    ActionOverride(Player6,ApplySpellRES("BMINTCLR",Player6))
+    ActionOverride(Player6,ApplySpellRES("BMINT19",Player6))
+    SetGlobal("BMINT_CUR_P6","GLOBAL",19)
+END
+
+IF
+  !StateCheck(Player6,STATE_DEAD)
+  ClassLevelGT(Player6,WIZARD,0)
+  CheckStatGT(Player6,19,INT)
+  CheckStatLT(Player6,21,INT)
+  !Global("BMINT_CUR_P6","GLOBAL",20)
+THEN
+  RESPONSE #100
+    ActionOverride(Player6,ApplySpellRES("BMINTCLR",Player6))
+    ActionOverride(Player6,ApplySpellRES("BMINT20",Player6))
+    SetGlobal("BMINT_CUR_P6","GLOBAL",20)
+END
+
+IF
+  !StateCheck(Player6,STATE_DEAD)
+  ClassLevelGT(Player6,WIZARD,0)
+  CheckStatGT(Player6,20,INT)
+  CheckStatLT(Player6,22,INT)
+  !Global("BMINT_CUR_P6","GLOBAL",21)
+THEN
+  RESPONSE #100
+    ActionOverride(Player6,ApplySpellRES("BMINTCLR",Player6))
+    ActionOverride(Player6,ApplySpellRES("BMINT21",Player6))
+    SetGlobal("BMINT_CUR_P6","GLOBAL",21)
+END
+
+IF
+  !StateCheck(Player6,STATE_DEAD)
+  ClassLevelGT(Player6,WIZARD,0)
+  CheckStatGT(Player6,21,INT)
+  CheckStatLT(Player6,23,INT)
+  !Global("BMINT_CUR_P6","GLOBAL",22)
+THEN
+  RESPONSE #100
+    ActionOverride(Player6,ApplySpellRES("BMINTCLR",Player6))
+    ActionOverride(Player6,ApplySpellRES("BMINT22",Player6))
+    SetGlobal("BMINT_CUR_P6","GLOBAL",22)
+END
+
+IF
+  !StateCheck(Player6,STATE_DEAD)
+  ClassLevelGT(Player6,WIZARD,0)
+  CheckStatGT(Player6,22,INT)
+  CheckStatLT(Player6,24,INT)
+  !Global("BMINT_CUR_P6","GLOBAL",23)
+THEN
+  RESPONSE #100
+    ActionOverride(Player6,ApplySpellRES("BMINTCLR",Player6))
+    ActionOverride(Player6,ApplySpellRES("BMINT23",Player6))
+    SetGlobal("BMINT_CUR_P6","GLOBAL",23)
+END
+
+IF
+  !StateCheck(Player6,STATE_DEAD)
+  ClassLevelGT(Player6,WIZARD,0)
+  CheckStatGT(Player6,23,INT)
+  CheckStatLT(Player6,25,INT)
+  !Global("BMINT_CUR_P6","GLOBAL",24)
+THEN
+  RESPONSE #100
+    ActionOverride(Player6,ApplySpellRES("BMINTCLR",Player6))
+    ActionOverride(Player6,ApplySpellRES("BMINT24",Player6))
+    SetGlobal("BMINT_CUR_P6","GLOBAL",24)
+END
+
+IF
+  !StateCheck(Player6,STATE_DEAD)
+  ClassLevelGT(Player6,WIZARD,0)
+  CheckStatGT(Player6,24,INT)
+  !Global("BMINT_CUR_P6","GLOBAL",25)
+THEN
+  RESPONSE #100
+    ActionOverride(Player6,ApplySpellRES("BMINTCLR",Player6))
+    ActionOverride(Player6,ApplySpellRES("BMINT25",Player6))
+    SetGlobal("BMINT_CUR_P6","GLOBAL",25)
+END

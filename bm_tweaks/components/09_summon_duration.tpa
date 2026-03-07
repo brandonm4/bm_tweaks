@@ -49,7 +49,7 @@ BEGIN
 
     // Fallback blocks (min_level 0 or 1) use true_min for the duration calc.
     SET eff_level = (ab_min_lvl <= 1) ? true_min : ab_min_lvl
-    SET new_dur   = eff_level * 60
+    SET new_dur   = eff_level * 600
 
     GET_OFFSET_ARRAY2 fx_arr ab_off SPL_V10_HEAD_EFFECTS
     PHP_EACH fx_arr AS fx_idx => fx_off BEGIN
@@ -92,7 +92,7 @@ BEGIN
       END
 
       // Patch the op-177 duration on the new header's effects.
-      SET new_dur = new_lvl * 60
+      SET new_dur = new_lvl * 600
       GET_OFFSET_ARRAY ab_arr SPL_V10_HEADERS
       SET  new_ab_off = $ab_arr("%insert_point%")
       GET_OFFSET_ARRAY2 fx_arr new_ab_off SPL_V10_HEAD_EFFECTS

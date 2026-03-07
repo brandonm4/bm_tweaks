@@ -1,0 +1,175 @@
+// INT-based arcane bonus spell slots (party-only runtime refresh)
+//
+// Design:
+// - Uses the same progression values as MXSPLWIS.2DA rows 13..25.
+// - Applies to party members only (Player1..Player6) with mage-class arcane access:
+//   MAGE, FIGHTER_MAGE, MAGE_THIEF, CLERIC_MAGE, FIGHTER_MAGE_THIEF,
+//   FIGHTER_MAGE_CLERIC, and SORCERER.
+// - Refresh cadence is low-frequency via BALDUR.BCS:
+//   - immediate refresh trigger after Rested()
+//   - periodic refresh every 300 seconds per party slot
+// - Bonus effects are applied by hidden helper spells BMINT13..BMINT25.
+// - BMINTCLR removes prior BMINT* effects before applying current tier.
+
+DEFINE_PATCH_FUNCTION BM_INT_RESET_TO_SINGLE_EMPTY_HEADER
+BEGIN
+  READ_LONG  0x64 ho
+  READ_SHORT 0x68 hc
+
+  // Clear all existing ability effect counts/indexes.
+  FOR (i = 0; i < hc; ++i) BEGIN
+    SET h_off = ho + (0x28 * i)
+    WRITE_SHORT (h_off + 0x1e) 0
+    WRITE_SHORT (h_off + 0x20) 0
+  END
+
+  // Keep only the first ability block and make it a plain self-target spell.
+  PATCH_IF (hc > 0) BEGIN
+    WRITE_SHORT 0x68 1
+    WRITE_BYTE  (ho + 0x00) 1
+    WRITE_BYTE  (ho + 0x02) 4
+    WRITE_BYTE  (ho + 0x0c) 1
+    WRITE_BYTE  (ho + 0x0d) 0
+    WRITE_SHORT (ho + 0x0e) 0
+    WRITE_SHORT (ho + 0x10) 1
+    WRITE_LONG  (ho + 0x12) 0
+    WRITE_SHORT (ho + 0x1e) 0
+    WRITE_SHORT (ho + 0x20) 0
+    WRITE_SHORT (ho + 0x26) 1
+  END
+
+  // No global effects.
+  WRITE_SHORT 0x6e 0
+  WRITE_SHORT 0x70 0
+END
+
+DEFINE_PATCH_FUNCTION BM_INT_ADD_SIMPLE_EFFECT
+  INT_VAR opcode = 0
+          param1 = 0
+          param2 = 0
+          timing = 0
+          duration = 0
+          resist_dispel = 2
+  STR_VAR resource = ~~
+BEGIN
+  READ_LONG  0x64 ho
+  READ_LONG  0x6a fx_off
+  READ_SHORT 0x70 fx_cnt
+
+  SET h_off = ho
+  READ_SHORT (h_off + 0x1e) h_cnt
+
+  INSERT_BYTES (fx_off + (fx_cnt * 0x30)) 0x30
+  SET e_off = fx_off + (fx_cnt * 0x30)
+
+  WRITE_SHORT (e_off + 0x00) opcode
+  WRITE_BYTE  (e_off + 0x02) 1
+  WRITE_BYTE  (e_off + 0x03) 0
+  WRITE_LONG  (e_off + 0x04) param1
+  WRITE_LONG  (e_off + 0x08) param2
+  WRITE_BYTE  (e_off + 0x0c) timing
+  WRITE_BYTE  (e_off + 0x0d) resist_dispel
+  WRITE_LONG  (e_off + 0x0e) duration
+
+  PATCH_IF ("%resource%" STRING_COMPARE_CASE ~~ != 0) BEGIN
+    WRITE_ASCIIE (e_off + 0x14) ~%resource%~ #8
+  END
+
+  WRITE_SHORT (h_off + 0x1e) (h_cnt + 1)
+  WRITE_SHORT 0x70 (fx_cnt + 1)
+END
+
+DEFINE_ACTION_FUNCTION BM_INT_BUILD_BONUS_SPELL
+  INT_VAR int_score = 13
+          b1 = 0
+          b2 = 0
+          b3 = 0
+          b4 = 0
+          b5 = 0
+          b6 = 0
+          b7 = 0
+BEGIN
+  OUTER_SPRINT bm_res ~BMINT%int_score%~
+
+  COPY_EXISTING ~SPWI112.SPL~ ~override/%bm_res%.spl~
+    LPF BM_INT_RESET_TO_SINGLE_EMPTY_HEADER END
+
+    // Opcode 42 (learned wizard spells bonus): use param2 to target spell level.
+    // Level 1 uses param2=0 (Evermemory pattern); levels 2..7 use bit flags.
+    PATCH_IF (b1 > 0) BEGIN
+      LPF BM_INT_ADD_SIMPLE_EFFECT INT_VAR opcode = 42 param1 = b1 param2 = 0 timing = 1 duration = 0 END
+    END
+    PATCH_IF (b2 > 0) BEGIN
+      LPF BM_INT_ADD_SIMPLE_EFFECT INT_VAR opcode = 42 param1 = b2 param2 = 1 timing = 1 duration = 0 END
+    END
+    PATCH_IF (b3 > 0) BEGIN
+      LPF BM_INT_ADD_SIMPLE_EFFECT INT_VAR opcode = 42 param1 = b3 param2 = 2 timing = 1 duration = 0 END
+    END
+    PATCH_IF (b4 > 0) BEGIN
+      LPF BM_INT_ADD_SIMPLE_EFFECT INT_VAR opcode = 42 param1 = b4 param2 = 4 timing = 1 duration = 0 END
+    END
+    PATCH_IF (b5 > 0) BEGIN
+      LPF BM_INT_ADD_SIMPLE_EFFECT INT_VAR opcode = 42 param1 = b5 param2 = 8 timing = 1 duration = 0 END
+    END
+    PATCH_IF (b6 > 0) BEGIN
+      LPF BM_INT_ADD_SIMPLE_EFFECT INT_VAR opcode = 42 param1 = b6 param2 = 16 timing = 1 duration = 0 END
+    END
+    PATCH_IF (b7 > 0) BEGIN
+      LPF BM_INT_ADD_SIMPLE_EFFECT INT_VAR opcode = 42 param1 = b7 param2 = 32 timing = 1 duration = 0 END
+    END
+  BUT_ONLY
+END
+
+// Build tier spells by reusing MXSPLWIS.2DA rows 13..25 directly.
+// Column mapping: 1..7 bonus slots -> opcodes 33..39.
+COPY_EXISTING ~MXSPLWIS.2DA~ ~override~
+  FOR (bm_int = 13; bm_int <= 25; ++bm_int) BEGIN
+    SET bm_row = bm_int - 12
+
+    // MXSPLWIS includes a row-label column at index 0.
+    // Bonus slots live in columns 1..7.
+    READ_2DA_ENTRY bm_row 1 8 bm_b1
+    READ_2DA_ENTRY bm_row 2 8 bm_b2
+    READ_2DA_ENTRY bm_row 3 8 bm_b3
+    READ_2DA_ENTRY bm_row 4 8 bm_b4
+    READ_2DA_ENTRY bm_row 5 8 bm_b5
+    READ_2DA_ENTRY bm_row 6 8 bm_b6
+    READ_2DA_ENTRY bm_row 7 8 bm_b7
+
+    INNER_ACTION BEGIN
+      LAF BM_INT_BUILD_BONUS_SPELL
+        INT_VAR int_score = %bm_int%
+                b1 = %bm_b1%
+                b2 = %bm_b2%
+                b3 = %bm_b3%
+                b4 = %bm_b4%
+                b5 = %bm_b5%
+                b6 = %bm_b6%
+                b7 = %bm_b7%
+      END
+    END
+  END
+BUT_ONLY
+
+// Build clear spell that strips prior BMINT* effects by source resource.
+COPY_EXISTING ~SPWI112.SPL~ ~override/BMINTCLR.spl~
+  LPF BM_INT_RESET_TO_SINGLE_EMPTY_HEADER END
+
+  LPF BM_INT_ADD_SIMPLE_EFFECT INT_VAR opcode = 321 param1 = 0 param2 = 0 timing = 1 duration = 0 STR_VAR resource = ~BMINT13~ END
+  LPF BM_INT_ADD_SIMPLE_EFFECT INT_VAR opcode = 321 param1 = 0 param2 = 0 timing = 1 duration = 0 STR_VAR resource = ~BMINT14~ END
+  LPF BM_INT_ADD_SIMPLE_EFFECT INT_VAR opcode = 321 param1 = 0 param2 = 0 timing = 1 duration = 0 STR_VAR resource = ~BMINT15~ END
+  LPF BM_INT_ADD_SIMPLE_EFFECT INT_VAR opcode = 321 param1 = 0 param2 = 0 timing = 1 duration = 0 STR_VAR resource = ~BMINT16~ END
+  LPF BM_INT_ADD_SIMPLE_EFFECT INT_VAR opcode = 321 param1 = 0 param2 = 0 timing = 1 duration = 0 STR_VAR resource = ~BMINT17~ END
+  LPF BM_INT_ADD_SIMPLE_EFFECT INT_VAR opcode = 321 param1 = 0 param2 = 0 timing = 1 duration = 0 STR_VAR resource = ~BMINT18~ END
+  LPF BM_INT_ADD_SIMPLE_EFFECT INT_VAR opcode = 321 param1 = 0 param2 = 0 timing = 1 duration = 0 STR_VAR resource = ~BMINT19~ END
+  LPF BM_INT_ADD_SIMPLE_EFFECT INT_VAR opcode = 321 param1 = 0 param2 = 0 timing = 1 duration = 0 STR_VAR resource = ~BMINT20~ END
+  LPF BM_INT_ADD_SIMPLE_EFFECT INT_VAR opcode = 321 param1 = 0 param2 = 0 timing = 1 duration = 0 STR_VAR resource = ~BMINT21~ END
+  LPF BM_INT_ADD_SIMPLE_EFFECT INT_VAR opcode = 321 param1 = 0 param2 = 0 timing = 1 duration = 0 STR_VAR resource = ~BMINT22~ END
+  LPF BM_INT_ADD_SIMPLE_EFFECT INT_VAR opcode = 321 param1 = 0 param2 = 0 timing = 1 duration = 0 STR_VAR resource = ~BMINT23~ END
+  LPF BM_INT_ADD_SIMPLE_EFFECT INT_VAR opcode = 321 param1 = 0 param2 = 0 timing = 1 duration = 0 STR_VAR resource = ~BMINT24~ END
+  LPF BM_INT_ADD_SIMPLE_EFFECT INT_VAR opcode = 321 param1 = 0 param2 = 0 timing = 1 duration = 0 STR_VAR resource = ~BMINT25~ END
+BUT_ONLY
+
+EXTEND_TOP ~BALDUR.BCS~ ~bm_tweaks/generated/bm_int_bonus_party.baf~
+
+PRINT ~[bm_tweaks] int_arcane_bonus_slots: generated BMINT13..BMINT25 + BMINTCLR and extended BALDUR.BCS for party refresh.~
