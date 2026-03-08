@@ -57,13 +57,13 @@ BEGIN ~Rancor: make special effect apply to any wielder~
 INCLUDE ~bm_tweaks/components/16_rancor_any_wielder.tpa~
 
 BEGIN ~Defensive buff duration scaling (Phases 1+2): direct + wrapper spells to 1 turn/level~
-INCLUDE ~bm_tweaks/components/17_defensive_duration_phase1.tpa~
+PRINT ~[bm_tweaks] Obsolete, disabled~
 
 BEGIN ~INT grants arcane bonus spell slots (party-only periodic/rest refresh)~
-INCLUDE ~bm_tweaks/components/18_int_arcane_bonus_slots.tpa~
+PRINT ~[Disabled, nonfunctional] bm_tweaks/components/18_int_arcane_bonus_slots.tpa~
 
 BEGIN ~Make all shields usable by cleric classes and cleric multiclasses~
 INCLUDE ~bm_tweaks/components/19_cleric_shields_usable.tpa~
 
-BEGIN ~Unified spell duration scaling (replacement for old 09/10/17 components)~
+BEGIN ~Unified spell duration scaling (replacement for old 09/10/17 components). True Duration per caster level scaling to 20~
 INCLUDE ~bm_tweaks/components/20_spell_duration_unified.tpa~
