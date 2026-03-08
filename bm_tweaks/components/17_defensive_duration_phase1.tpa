@@ -6,7 +6,7 @@
 // - Rework selected flat 5-turn style durations into 1 turn/level from true_min..20
 //
 // Formula:
-//   new_duration_seconds = caster_level * 60
+//   new_duration = caster_level * 9000
 //
 // Safety:
 // - Only effects with duration exactly 300 are touched
@@ -23,7 +23,7 @@ BEGIN
   PHP_EACH ab_arr AS ab_idx => ab_off BEGIN
     READ_SHORT (ab_off + 0x10) ab_min_lvl
     SET eff_level = (ab_min_lvl <= 1) ? true_min : ab_min_lvl
-    SET new_dur = eff_level * 600
+    SET new_dur = eff_level * 9000
 
     GET_OFFSET_ARRAY2 fx_arr ab_off SPL_V10_HEAD_EFFECTS
     PHP_EACH fx_arr AS fx_idx => fx_off BEGIN
@@ -36,20 +36,30 @@ BEGIN
   END
 
   // Pass 2: add one header for each missing level in [true_min..20].
+  // Clone the nearest-lower existing level block to preserve tier behavior.
   FOR (new_lvl = true_min; new_lvl <= 20; ++new_lvl) BEGIN
     SET already_present = 0
+    SET template_idx = "-1"
+    SET template_lvl = "-1"
     GET_OFFSET_ARRAY ab_arr SPL_V10_HEADERS
     PHP_EACH ab_arr AS ab_idx => ab_off BEGIN
-      PATCH_IF (SHORT_AT (ab_off + 0x10) = new_lvl) BEGIN
+      READ_SHORT (ab_off + 0x10) ab_lvl
+      PATCH_IF (ab_lvl = new_lvl) BEGIN
         SET already_present = 1
+      END
+      PATCH_IF (ab_lvl <= new_lvl AND ab_lvl > template_lvl) BEGIN
+        SET template_lvl = ab_lvl
+        SET template_idx = ab_idx
       END
     END
 
     PATCH_IF (already_present = 0) BEGIN
-      READ_SHORT 0x68 hc
+      PATCH_IF (template_idx < 0) BEGIN
+        SET template_idx = 0
+      END
 
       LPF ADD_SPELL_HEADER
-        INT_VAR copy_header = hc
+        INT_VAR copy_header = template_idx + 1
       RET insert_point
       END
 
@@ -59,7 +69,7 @@ BEGIN
                 silent = 1
       END
 
-      SET new_dur = new_lvl * 600
+      SET new_dur = new_lvl * 9000
       GET_OFFSET_ARRAY ab_arr SPL_V10_HEADERS
       SET new_ab_off = $ab_arr("%insert_point%")
       GET_OFFSET_ARRAY2 fx_arr new_ab_off SPL_V10_HEAD_EFFECTS
@@ -77,11 +87,11 @@ BEGIN
 END
 
 // Round-timing variant for effects that store duration in rounds.
-// Example 1 turn/level => 10 rounds/level.
+// Example 1 turn/level => 100 rounds/level (10 minutes at 6s/round).
 DEFINE_PATCH_FUNCTION BM_PHASE1_SCALE_DIRECT_ROUNDS
   INT_VAR true_min = 1
           target_opcode = "-1"
-          rounds_per_level = 10
+          rounds_per_level = 100
           base_rounds = 0
 BEGIN
   LPF FJ_SPL_ITM_REINDEX END
@@ -104,20 +114,30 @@ BEGIN
   END
 
   // Pass 2: add one header for each missing level in [true_min..20].
+  // Clone the nearest-lower existing level block to preserve tier behavior.
   FOR (new_lvl = true_min; new_lvl <= 20; ++new_lvl) BEGIN
     SET already_present = 0
+    SET template_idx = "-1"
+    SET template_lvl = "-1"
     GET_OFFSET_ARRAY ab_arr SPL_V10_HEADERS
     PHP_EACH ab_arr AS ab_idx => ab_off BEGIN
-      PATCH_IF (SHORT_AT (ab_off + 0x10) = new_lvl) BEGIN
+      READ_SHORT (ab_off + 0x10) ab_lvl
+      PATCH_IF (ab_lvl = new_lvl) BEGIN
         SET already_present = 1
+      END
+      PATCH_IF (ab_lvl <= new_lvl AND ab_lvl > template_lvl) BEGIN
+        SET template_lvl = ab_lvl
+        SET template_idx = ab_idx
       END
     END
 
     PATCH_IF (already_present = 0) BEGIN
-      READ_SHORT 0x68 hc
+      PATCH_IF (template_idx < 0) BEGIN
+        SET template_idx = 0
+      END
 
       LPF ADD_SPELL_HEADER
-        INT_VAR copy_header = hc
+        INT_VAR copy_header = template_idx + 1
       RET insert_point
       END
 
@@ -169,20 +189,30 @@ BEGIN
   END
 
   // Pass 2: add one header for each missing level in [true_min..20].
+  // Clone the nearest-lower existing level block to preserve tier behavior.
   FOR (new_lvl = true_min; new_lvl <= 20; ++new_lvl) BEGIN
     SET already_present = 0
+    SET template_idx = "-1"
+    SET template_lvl = "-1"
     GET_OFFSET_ARRAY ab_arr SPL_V10_HEADERS
     PHP_EACH ab_arr AS ab_idx => ab_off BEGIN
-      PATCH_IF (SHORT_AT (ab_off + 0x10) = new_lvl) BEGIN
+      READ_SHORT (ab_off + 0x10) ab_lvl
+      PATCH_IF (ab_lvl = new_lvl) BEGIN
         SET already_present = 1
+      END
+      PATCH_IF (ab_lvl <= new_lvl AND ab_lvl > template_lvl) BEGIN
+        SET template_lvl = ab_lvl
+        SET template_idx = ab_idx
       END
     END
 
     PATCH_IF (already_present = 0) BEGIN
-      READ_SHORT 0x68 hc
+      PATCH_IF (template_idx < 0) BEGIN
+        SET template_idx = 0
+      END
 
       LPF ADD_SPELL_HEADER
-        INT_VAR copy_header = hc
+        INT_VAR copy_header = template_idx + 1
       RET insert_point
       END
 
@@ -220,7 +250,7 @@ BEGIN
   PHP_EACH ab_arr AS ab_idx => ab_off BEGIN
     READ_SHORT (ab_off + 0x10) ab_min_lvl
     SET eff_level = (ab_min_lvl <= 1) ? true_min : ab_min_lvl
-    SET new_dur = (eff_level + bonus_turns) * 60
+    SET new_dur = (eff_level + bonus_turns) * 9000
 
     GET_OFFSET_ARRAY2 fx_arr ab_off SPL_V10_HEAD_EFFECTS
     PHP_EACH fx_arr AS fx_idx => fx_off BEGIN
@@ -265,7 +295,7 @@ BEGIN
                 silent = 1
       END
 
-      SET new_dur = (new_lvl + bonus_turns) * 600
+      SET new_dur = (new_lvl + bonus_turns) * 9000
       GET_OFFSET_ARRAY ab_arr SPL_V10_HEADERS
       SET new_ab_off = $ab_arr("%insert_point%")
       GET_OFFSET_ARRAY2 fx_arr new_ab_off SPL_V10_HEAD_EFFECTS
@@ -364,7 +394,7 @@ COPY_EXISTING ~spwi210.spl~ ~override~
   LPF BM_PHASE1_SCALE_DIRECT_ROUNDS
     INT_VAR true_min = 3
             target_opcode = 23
-            rounds_per_level = 10
+            rounds_per_level = 100
             base_rounds = 0
   END
 BUT_ONLY
@@ -381,6 +411,26 @@ BUT_ONLY
 COPY_EXISTING ~spwi113.spl~ ~override~
   LPF BM_PHASE1_SCALE_DIRECT_SECONDS
     INT_VAR true_min = 1
+            target_opcode = 215
+            seconds_per_level = 600
+            base_seconds = 0
+  END
+BUT_ONLY
+
+// Protection from Evil (Priest 1) - true_min 1, 1 turn/level
+COPY_EXISTING ~sppr107.spl~ ~override~
+  LPF BM_PHASE1_SCALE_DIRECT_SECONDS
+    INT_VAR true_min = 1
+            target_opcode = 215
+            seconds_per_level = 600
+            base_seconds = 0
+  END
+BUT_ONLY
+
+// Magic Circle Against Evil (Priest 4) - true_min 7, 1 turn/level
+COPY_EXISTING ~sppr408.spl~ ~override~
+  LPF BM_PHASE1_SCALE_DIRECT_SECONDS
+    INT_VAR true_min = 7
             target_opcode = 215
             seconds_per_level = 600
             base_seconds = 0
@@ -451,7 +501,7 @@ BEGIN
 END
 
 ACTION_FOR_EACH dsr IN
-  272418 272207 272214 272493 272307 272557 272579 272588 272456 272466 272226 272464 276188 276241 276249 272417 272515 272554
+  272418 272206 272207 272214 272301 272493 272307 272557 272579 272588 272456 272466 272226 272464 276188 276241 276249 272417 272515 272554
 BEGIN
   LAF BM_PHASE17_UPDATE_DESC INT_VAR desc_strref = %dsr% END
 END

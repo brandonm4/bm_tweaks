@@ -1,20 +1,20 @@
 // Animate Dead / Create Undead Duration Scaling
 //
 // Animate and undead-creation spells are reworked so every caster level from
-// true_min to 20 has its own ability block with duration = level * 300 seconds
-// (1 hour per caster level, since BG2 displays 1 hour = 300 s).
+// true_min to 20 has its own ability block with duration = level * 54000
+// (1 hour per caster level in effect duration units).
 //
 // Spell Revisions is already installed and has done two things to some of
 // these spells:
 //   - Added per-level ability blocks (SPWI505, SPWI801) at 1 round/level
-//     (level * 6 s).  We update those durations to level * 300.
+//     (level * 6 s).  We update those durations to level * 54000.
 //   - Replaced simple op177 structures with large inline creature-property
 //     effect blocks (SPWI801, SPWI802) where EVERY effect shares the same
 //     duration.  We update all of them uniformly.
 //
-// Duration formula:  dur = caster_level * 300  (seconds)
-// Example:           level 11 ->  3300 s -> 11 hours
-//                    level 20 ->  6000 s -> 20 hours
+// Duration formula:  dur = caster_level * 54000
+// Example:           level 11 -> 594000
+//                    level 20 -> 1080000
 //
 // Threshold rule: only effects with dur > 30 are touched.
 // This preserves animation / sound effects (dur 1, 2, 6, 24 s) while
@@ -55,7 +55,7 @@ BEGIN
   PHP_EACH ab_arr AS ab_idx => ab_off BEGIN
     READ_SHORT (ab_off + 0x10) ab_min_lvl
     SET eff_level = (ab_min_lvl <= 1) ? true_min : ab_min_lvl
-    SET new_dur   = eff_level * 3600
+    SET new_dur   = eff_level * 54000
 
     GET_OFFSET_ARRAY2 fx_arr ab_off SPL_V10_HEAD_EFFECTS
     PHP_EACH fx_arr AS fx_idx => fx_off BEGIN
@@ -68,21 +68,31 @@ BEGIN
 
   // ------------------------------------------------------------------
   // Pass 2: add one ability block per missing level in [true_min..20].
+  // Clone the nearest-lower existing level block to preserve tier behavior.
   // ------------------------------------------------------------------
   FOR (new_lvl = true_min; new_lvl <= 20; ++new_lvl) BEGIN
     SET already_present = 0
+    SET template_idx = "-1"
+    SET template_lvl = "-1"
     GET_OFFSET_ARRAY ab_arr SPL_V10_HEADERS
     PHP_EACH ab_arr AS ab_idx => ab_off BEGIN
-      PATCH_IF (SHORT_AT (ab_off + 0x10) = new_lvl) BEGIN
+      READ_SHORT (ab_off + 0x10) ab_lvl
+      PATCH_IF (ab_lvl = new_lvl) BEGIN
         SET already_present = 1
+      END
+      PATCH_IF (ab_lvl <= new_lvl AND ab_lvl > template_lvl) BEGIN
+        SET template_lvl = ab_lvl
+        SET template_idx = ab_idx
       END
     END
 
     PATCH_IF (already_present = 0) BEGIN
-      READ_SHORT 0x68 hc
+      PATCH_IF (template_idx < 0) BEGIN
+        SET template_idx = 0
+      END
 
       LPF ADD_SPELL_HEADER
-        INT_VAR copy_header = hc
+        INT_VAR copy_header = template_idx + 1
       RET insert_point
       END
 
@@ -93,7 +103,7 @@ BEGIN
       END
 
       // Update all non-trivial durations in the new block.
-      SET new_dur   = new_lvl * 3600
+      SET new_dur   = new_lvl * 54000
       GET_OFFSET_ARRAY ab_arr SPL_V10_HEADERS
       SET new_ab_off = $ab_arr("%insert_point%")
       GET_OFFSET_ARRAY2 fx_arr new_ab_off SPL_V10_HEAD_EFFECTS
@@ -175,7 +185,7 @@ BUT_ONLY
 // Minimum caster level = 5.  SR added tier blocks at 7 / 9 / 12 for creature
 // quality (SPANDEAD -> SPANDL12), all flat 8h.  We add blocks for 5-20,
 // filling the gaps 5, 6, 8, 10, 11, 13-20, and update all durations.
-// New blocks clone the last existing block (SPANDL12 tier) with scaled dur.
+// New blocks clone the nearest-lower level block with scaled duration.
 // true_min is explicit (5) because SR's first tier block at 7 does not
 // reflect cast eligibility.
 // ===========================================================================

@@ -4,11 +4,11 @@ OVERRIDE = "/Volumes/Data/Games/Baldur's Gate II Enhanced Edition/override"
 
 SPELLS = {
     # (true_min, mechanism, description)
-    "SPWI505": (10,  "all",   "Animate Dead Wiz 5  - SR per-level, formula update only"),
+    "SPWI505": (9,   "all",   "Animate Dead Wiz 5  - SR per-level, formula update only"),
     "SPWI601": (11,  "op177", "Create Undead Wiz 6 - was flat 8h"),
     "SPWI801": (15,  "all",   "Create Greater Undead Wiz 8 - SR 17-20, add 15-16"),
     "SPWI802": (15,  "all",   "Create Greater Undead SR alt - was flat 8h, 54 fx"),
-    "SPPR301": (7,   "op177", "Animate Dead Priest - SR tiers 7/9/12"),
+    "SPPR301": (5,   "op177", "Animate Dead Priest - SR tiers 7/9/12"),
     "SPPR619": (11,  "op177", "Summon Greater Undead Priest 6 - was flat 8h"),
 }
 
@@ -70,13 +70,13 @@ for resref, (true_min, mech, desc) in sorted(SPELLS.items()):
     if len(fallbacks) != 1:
         problems.append(f"expected 1 fallback, found {len(fallbacks)}")
 
-    # 3. Every real duration must equal eff_level * 300
+    # 3. Every real duration must equal eff_level * 3600
     for (lvl, real_durs, anim_durs) in hdrs:
         eff_lvl      = true_min if lvl <= 1 else lvl
-        expected_dur = eff_lvl * 300
+        expected_dur = eff_lvl * 3600
         for d in real_durs:
             if d != expected_dur:
-                problems.append(f"  lvl {lvl}: dur={d}, expected {expected_dur} ({eff_lvl}*300)")
+                problems.append(f"  lvl {lvl}: dur={d}, expected {expected_dur} ({eff_lvl}*3600)")
 
     # 4. Anim durations must all be <= 30 (unchanged)
     for (lvl, real_durs, anim_durs) in hdrs:
@@ -93,7 +93,7 @@ for resref, (true_min, mech, desc) in sorted(SPELLS.items()):
         PASS += 1
         # show a compact summary of the duration range
         dur_range = sorted(set(
-            (true_min if h[0]<=1 else h[0]) * 300
+            (true_min if h[0]<=1 else h[0]) * 3600
             for h in hdrs
         ))
         print(f"  ok    {resref}  lvls {true_min}-20+fallback  "

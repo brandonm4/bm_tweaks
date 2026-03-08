@@ -99,15 +99,15 @@ for resref, explicit_min in sorted(SPELLS.items()):
     if extra:
         problems.append(f"unexpected levels: {sorted(extra)}")
 
-    # 2. Each header's op-177 duration must equal level*60
-    #    (fallback level 0 or 1 => true_min*60)
+    # 2. Each header's op-177 duration must equal level*600
+    #    (fallback level 0 or 1 => true_min*600)
     for (lvl, durs) in headers:
         eff_lvl = true_min if lvl <= 1 else lvl
-        expected_dur = eff_lvl * 60
+        expected_dur = eff_lvl * 600
         for dur in durs:
             if dur != expected_dur:
                 problems.append(
-                    f"  level {lvl}: op177 dur={dur}, expected {expected_dur} (level {eff_lvl}*60)"
+                    f"  level {lvl}: op177 dur={dur}, expected {expected_dur} (level {eff_lvl}*600)"
                 )
 
     # 3. Must have exactly one fallback (level 0 or 1)

@@ -2,7 +2,7 @@
 //
 // All summoning spells with a flat 3-turn duration, or with coarse round-based
 // level scaling, are reworked so every caster level from true_min to 20 has its
-// own ability block with duration = level * 60 seconds (1 turn per caster level).
+// own ability block with duration = level * 9000 ticks (1 turn per caster level).
 //
 // Spells that already have full per-level coverage simply have their existing
 // durations recalculated by the same formula (converting rounds/level to turns/level).
@@ -11,9 +11,9 @@
 // duration as the true_min block so a caster below the minimum who somehow
 // casts the spell still gets a sensible duration.
 //
-// Duration formula:  dur = caster_level * 60  (seconds)
-// Example:           level 10 -> 600 s -> 2 turns
-//                    level 17 -> 1020 s -> ~3.4 turns
+// Duration formula:  dur = caster_level * 9000
+// Example:           level 10 -> 90000 (100 turns)
+//                    level 17 -> 153000 (170 turns)
 //
 // Implementation uses:
 //   FJ_SPL_ITM_REINDEX  - normalise SPL layout before any structural changes
@@ -29,9 +29,9 @@
 //
 // The function:
 //   Pass 1 - Update op-177 duration on ALL existing ability blocks.
-//             Blocks with min_level <= 1 (fallback) get true_min * 60.
+//             Blocks with min_level <= 1 (fallback) get true_min * 9000.
 //   Pass 2 - For each level in [true_min..20] that has no ability block,
-//             clone the last existing block via ADD_SPELL_HEADER and then
+//             clone the nearest-lower existing block via ADD_SPELL_HEADER and then
 //             set its required_level and op-177 duration.
 // ---------------------------------------------------------------------------
 DEFINE_PATCH_FUNCTION BM_SUMMON_SCALE
@@ -49,7 +49,7 @@ BEGIN
 
     // Fallback blocks (min_level 0 or 1) use true_min for the duration calc.
     SET eff_level = (ab_min_lvl <= 1) ? true_min : ab_min_lvl
-    SET new_dur   = eff_level * 600
+    SET new_dur   = eff_level * 9000
 
     GET_OFFSET_ARRAY2 fx_arr ab_off SPL_V10_HEAD_EFFECTS
     PHP_EACH fx_arr AS fx_idx => fx_off BEGIN
@@ -61,26 +61,33 @@ BEGIN
 
   // ------------------------------------------------------------------
   // Pass 2: add one ability block per missing level in [true_min..20].
-  // We re-read abil_num each iteration because ADD_SPELL_HEADER grows it.
-  // We use the LAST header as the copy template each time (copy_header = hc).
+  // Clone the nearest-lower existing level block to preserve tier behavior.
   // ------------------------------------------------------------------
   FOR (new_lvl = true_min; new_lvl <= 20; ++new_lvl) BEGIN
     // Check whether a block for this level already exists.
     SET already_present = 0
+    SET template_idx = "-1"
+    SET template_lvl = "-1"
     GET_OFFSET_ARRAY ab_arr SPL_V10_HEADERS
     PHP_EACH ab_arr AS ab_idx => ab_off BEGIN
-      PATCH_IF (SHORT_AT (ab_off + 0x10) = new_lvl) BEGIN
+      READ_SHORT (ab_off + 0x10) ab_lvl
+      PATCH_IF (ab_lvl = new_lvl) BEGIN
         SET already_present = 1
+      END
+      PATCH_IF (ab_lvl <= new_lvl AND ab_lvl > template_lvl) BEGIN
+        SET template_lvl = ab_lvl
+        SET template_idx = ab_idx
       END
     END
 
     PATCH_IF (already_present = 0) BEGIN
-      // Read the current header count to use as copy_header (1-based last).
-      READ_SHORT 0x68 hc
+      PATCH_IF (template_idx < 0) BEGIN
+        SET template_idx = 0
+      END
 
-      // Clone the last header (and all its effects) as a new appended block.
+      // Clone nearest-lower header (and all its effects) as a new appended block.
       LPF ADD_SPELL_HEADER
-        INT_VAR copy_header = hc   // 1-based: clone the current last header
+        INT_VAR copy_header = template_idx + 1
       RET insert_point             // 0-based index of the newly added header
       END
 
@@ -92,7 +99,7 @@ BEGIN
       END
 
       // Patch the op-177 duration on the new header's effects.
-      SET new_dur = new_lvl * 600
+      SET new_dur = new_lvl * 9000
       GET_OFFSET_ARRAY ab_arr SPL_V10_HEADERS
       SET  new_ab_off = $ab_arr("%insert_point%")
       GET_OFFSET_ARRAY2 fx_arr new_ab_off SPL_V10_HEAD_EFFECTS

@@ -34,10 +34,10 @@ BEGIN ~Add flavored random loot to non-empty containers that lacked RND entries~
 INCLUDE ~bm_tweaks/components/08_container_filled_random.tpa~
 
 BEGIN ~Summon duration scaling: 1 turn per caster level (level 1-20)~
-INCLUDE ~bm_tweaks/components/09_summon_duration.tpa~
+PRINT ~[bm_tweaks] Component disabled (superseded by unified duration component).~
 
 BEGIN ~Animate Dead duration scaling: 1 hour per caster level (level 1-20)~
-INCLUDE ~bm_tweaks/components/10_animate_duration.tpa~
+PRINT ~[bm_tweaks] Component disabled (superseded by unified duration component).~
 BEGIN ~Ensure all wizard and cleric spells have scroll items~
 INCLUDE ~bm_tweaks/components/11_spell_scrolls.tpa~
 
@@ -48,7 +48,7 @@ BEGIN ~Add generated low-level wizard fallback scrolls to random treasure~
 INCLUDE ~bm_tweaks/components/13_wizard_fallback_scroll_loot.tpa~
 
 BEGIN ~Exceptional Strength carry-weight fix~
-INCLUDE ~bm_tweaks/components/14_strength_fix.tpa~
+PRINT ~[bm_tweaks] Component disabled by config.~
 
 BEGIN ~Add Friendly Arm MESpells scrolls to High Hedge~
 INCLUDE ~bm_tweaks/components/15_highhedge_mes_fai_scrolls.tpa~
@@ -64,3 +64,6 @@ INCLUDE ~bm_tweaks/components/18_int_arcane_bonus_slots.tpa~
 
 BEGIN ~Make all shields usable by cleric classes and cleric multiclasses~
 INCLUDE ~bm_tweaks/components/19_cleric_shields_usable.tpa~
+
+BEGIN ~Unified spell duration scaling (replacement for old 09/10/17 components)~
+INCLUDE ~bm_tweaks/components/20_spell_duration_unified.tpa~
