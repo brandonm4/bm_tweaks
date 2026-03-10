@@ -3,10 +3,13 @@
 // Duration units are exposed as top-level variables to keep tuning centralized.
 // Defaults below follow project convention for real-time scaling.
 
-OUTER_SET OneRoundPerLevel = 6 * 15
+OUTER_SET OneRoundPerLevel = 60 * 15
 OUTER_SET OneTurnPerLevel  = OneRoundPerLevel * 10
 OUTER_SET OneHourPerLevel  = OneTurnPerLevel * 6
 OUTER_SET RoundsPerTurn    = OneTurnPerLevel / OneRoundPerLevel
+// Opcode 201 (Spell Deflection family) appears to consume duration in a coarser unit
+// than op321 in this install; divide by 15 to align real-time behavior.
+OUTER_SET OneTurnPerLevel_Op201 = OneTurnPerLevel / 15
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -513,8 +516,8 @@ COPY_EXISTING ~sppr101.spl~ ~override~ // Bless
 BUT_ONLY
 
 COPY_EXISTING ~spwi318.spl~ ~override~ // Minor Spell Deflection
-  LPF BM_SCALE_DIRECT_EXACT
-    INT_VAR true_min = 5 target_opcode = 201 exact_duration = 300 units_per_level = %OneTurnPerLevel%
+  LPF BM_SCALE_DIRECT_UNITS
+    INT_VAR true_min = 5 target_opcode = 201 units_per_level = %OneTurnPerLevel_Op201% base_units = 0
   END
 BUT_ONLY
 
@@ -525,20 +528,20 @@ COPY_EXISTING ~sppr413.spl~ ~override~ // Negative Plane Protection
 BUT_ONLY
 
 COPY_EXISTING ~spwi522.spl~ ~override~ // Spell Deflection
-  LPF BM_SCALE_DIRECT_EXACT
-    INT_VAR true_min = 9 target_opcode = 201 exact_duration = 300 units_per_level = %OneTurnPerLevel%
+  LPF BM_SCALE_DIRECT_UNITS
+    INT_VAR true_min = 9 target_opcode = 201 units_per_level = %OneTurnPerLevel_Op201% base_units = 0
   END
 BUT_ONLY
 
 COPY_EXISTING ~spwi618.spl~ ~override~ // Spell Deflection
-  LPF BM_SCALE_DIRECT_EXACT
-    INT_VAR true_min = 11 target_opcode = 201 exact_duration = 300 units_per_level = %OneTurnPerLevel%
+  LPF BM_SCALE_DIRECT_UNITS
+    INT_VAR true_min = 11 target_opcode = 201 units_per_level = %OneTurnPerLevel_Op201% base_units = 0
   END
 BUT_ONLY
 
 COPY_EXISTING ~spwi701.spl~ ~override~ // Greater Spell Deflection
-  LPF BM_SCALE_DIRECT_EXACT
-    INT_VAR true_min = 13 target_opcode = 201 exact_duration = 300 units_per_level = %OneTurnPerLevel%
+  LPF BM_SCALE_DIRECT_UNITS
+    INT_VAR true_min = 13 target_opcode = 201 units_per_level = %OneTurnPerLevel_Op201% base_units = 0
   END
 BUT_ONLY
 
@@ -889,6 +892,8 @@ BEGIN
       REPLACE_TEXTUALLY ~Duration: 8 rounds \+ 1 round/level~ ~Duration: 1 turn/level~
       REPLACE_TEXTUALLY ~Duration: 4 rounds + 1 round/level~ ~Duration: 1 turn/level~
       REPLACE_TEXTUALLY ~Duration: 4 rounds \+ 1 round/level~ ~Duration: 1 turn/level~
+      REPLACE_TEXTUALLY ~/level/level/level~ ~/level~
+      REPLACE_TEXTUALLY ~/level/level~ ~/level~
     END
     ACTION_IF NOT (~%cur_text%~ STRING_EQUAL ~%new_text%~) BEGIN
       STRING_SET_EVALUATE desc_strref ~%new_text%~
@@ -908,8 +913,16 @@ BEGIN
   ACTION_IF (desc_strref > 0) BEGIN
     ACTION_GET_STRREF desc_strref cur_text
     OUTER_PATCH_SAVE new_text ~%cur_text%~ BEGIN
+      REPLACE_TEXTUALLY ~Duration: 1 turn/level~ ~Duration: 1 round/level~
+      REPLACE_TEXTUALLY ~Duration : 1 turn/level~ ~Duration: 1 round/level~
+      REPLACE_TEXTUALLY ~Duration: 5 turns~ ~Duration: 1 round/level~
+      REPLACE_TEXTUALLY ~Duration : 5 turns~ ~Duration: 1 round/level~
+      REPLACE_TEXTUALLY ~Duration: 10 turns~ ~Duration: 1 round/level~
+      REPLACE_TEXTUALLY ~Duration : 10 turns~ ~Duration: 1 round/level~
       REPLACE_TEXTUALLY ~Duration: 4 rounds~ ~Duration: 1 round/level~
       REPLACE_TEXTUALLY ~Duration : 4 rounds~ ~Duration: 1 round/level~
+      REPLACE_TEXTUALLY ~/level/level/level~ ~/level~
+      REPLACE_TEXTUALLY ~/level/level~ ~/level~
     END
     ACTION_IF NOT (~%cur_text%~ STRING_EQUAL ~%new_text%~) BEGIN
       STRING_SET_EVALUATE desc_strref ~%new_text%~
@@ -937,6 +950,8 @@ BEGIN
       REPLACE_TEXTUALLY ~Duration : 1 turn/level~ ~Duration: 1 hour/level~
       REPLACE_TEXTUALLY ~Duration: 1 round/level~ ~Duration: 1 hour/level~
       REPLACE_TEXTUALLY ~Duration : 1 round/level~ ~Duration: 1 hour/level~
+      REPLACE_TEXTUALLY ~/level/level/level~ ~/level~
+      REPLACE_TEXTUALLY ~/level/level~ ~/level~
     END
     ACTION_IF NOT (~%cur_text%~ STRING_EQUAL ~%new_text%~) BEGIN
       STRING_SET_EVALUATE desc_strref ~%new_text%~

@@ -1,0 +1,248 @@
+// Extra bonus random loot rolls for creatures.
+// Scaling:
+// - Creatures: based on creature XP.
+//
+// Chance model:
+// Each RNDBM*** row has 40 slots. Filled slots are real items, "*" means no item.
+// More filled slots = higher real drop chance when this extra roll is triggered.
+
+DEFINE_ACTION_FUNCTION ~BM_UPSERT_RNDTRES_ROW~
+  STR_VAR
+    row_name = ~~
+    row_text = ~~
+BEGIN
+  ACTION_IF FILE_CONTAINS_EVALUATED (~rndtres.2da~ ~(?i)^%row_name%[ %TAB%]~) BEGIN
+    COPY_EXISTING ~rndtres.2da~ ~override~
+      REPLACE_TEXTUALLY ~(?i)^%row_name%[^\r\n]*$~ ~%row_text%~
+    BUT_ONLY_IF_IT_CHANGES
+  END ELSE BEGIN
+    APPEND ~rndtres.2da~ ~%row_text%~
+  END
+END
+
+// Build custom Ring of Wizardry variants for random loot tables.
+// Base template: BDRING08 (Ring of Wizardry, doubles level-1 spells).
+DEFINE_PATCH_FUNCTION ~BM_RING_SET_BASE_OP42~
+  INT_VAR mask = 0
+BEGIN
+  READ_LONG  0x6a fx_off
+  READ_SHORT 0x6e eq_idx
+
+  // Keep equip effects at 3 (the template has two class-gates + one opcode-42 effect).
+  WRITE_SHORT 0x70 3
+
+  SET base_off = fx_off + ((eq_idx + 2) * 0x30)
+  WRITE_SHORT (base_off + 0x00) 42
+  WRITE_BYTE  (base_off + 0x02) 1
+  WRITE_BYTE  (base_off + 0x03) 0
+  WRITE_LONG  (base_off + 0x04) 1
+  WRITE_LONG  (base_off + 0x08) mask
+  WRITE_BYTE  (base_off + 0x0c) 2
+  WRITE_BYTE  (base_off + 0x0d) 0
+  WRITE_LONG  (base_off + 0x0e) 0
+END
+
+DEFINE_PATCH_FUNCTION ~BM_RING_APPEND_OP42~
+  INT_VAR mask = 0
+BEGIN
+  READ_LONG  0x6a fx_off
+  READ_SHORT 0x6e eq_idx
+  READ_SHORT 0x70 eq_cnt
+
+  SET base_off   = fx_off + ((eq_idx + 2) * 0x30)
+  SET insert_off = fx_off + ((eq_idx + eq_cnt) * 0x30)
+  INSERT_BYTES insert_off 0x30
+
+  // Clone the existing opcode-42 effect, then change only the level mask.
+  FOR (i = 0 ; i < 0x30 ; ++i) BEGIN
+    READ_BYTE (base_off + i) ring_byte
+    WRITE_BYTE (insert_off + i) ring_byte
+  END
+  WRITE_LONG (insert_off + 0x04) 1
+  WRITE_LONG (insert_off + 0x08) mask
+
+  WRITE_SHORT 0x70 (eq_cnt + 1)
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BDRING08.ITM~ BEGIN
+  COPY_EXISTING ~BDRING08.ITM~ ~override/BMRING01.ITM~
+    SAY NAME1 ~Ring of Wizardry~
+    SAY NAME2 ~Ring of Wizardry~
+    SAY DESC ~This ring doubles the number of 1st-level spells a wizard may prepare each day.
+
+STATISTICS:
+
+Equipped abilities:
+- Can memorize double the amount of 1st-level wizard spells
+
+Weight: 0~
+    LPF BM_RING_SET_BASE_OP42 INT_VAR mask = 0 END
+  BUT_ONLY
+
+  COPY_EXISTING ~BDRING08.ITM~ ~override/BMRING02.ITM~
+    SAY NAME1 ~Ring of Wizardry~
+    SAY NAME2 ~Ring of Wizardry~
+    SAY DESC ~This ring doubles the number of 2nd-level spells a wizard may prepare each day.
+
+STATISTICS:
+
+Equipped abilities:
+- Can memorize double the amount of 2nd-level wizard spells
+
+Weight: 0~
+    LPF BM_RING_SET_BASE_OP42 INT_VAR mask = 2 END
+  BUT_ONLY
+
+  COPY_EXISTING ~BDRING08.ITM~ ~override/BMRING03.ITM~
+    SAY NAME1 ~Ring of Wizardry~
+    SAY NAME2 ~Ring of Wizardry~
+    SAY DESC ~This ring doubles the number of 3rd-level spells a wizard may prepare each day.
+
+STATISTICS:
+
+Equipped abilities:
+- Can memorize double the amount of 3rd-level wizard spells
+
+Weight: 0~
+    LPF BM_RING_SET_BASE_OP42 INT_VAR mask = 4 END
+  BUT_ONLY
+
+  COPY_EXISTING ~BDRING08.ITM~ ~override/BMRING04.ITM~
+    SAY NAME1 ~Ring of Wizardry~
+    SAY NAME2 ~Ring of Wizardry~
+    SAY DESC ~This ring doubles the number of 1st-level and 2nd-level spells a wizard may prepare each day.
+
+STATISTICS:
+
+Equipped abilities:
+- Can memorize double the amount of 1st-level wizard spells
+- Can memorize double the amount of 2nd-level wizard spells
+
+Weight: 0~
+    LPF BM_RING_SET_BASE_OP42 INT_VAR mask = 0 END
+    LPF BM_RING_APPEND_OP42   INT_VAR mask = 2 END
+  BUT_ONLY
+
+  COPY_EXISTING ~BDRING08.ITM~ ~override/BMRING05.ITM~
+    SAY NAME1 ~Ring of Wizardry~
+    SAY NAME2 ~Ring of Wizardry~
+    SAY DESC ~This ring doubles the number of 4th-level spells a wizard may prepare each day.
+
+STATISTICS:
+
+Equipped abilities:
+- Can memorize double the amount of 4th-level wizard spells
+
+Weight: 0~
+    LPF BM_RING_SET_BASE_OP42 INT_VAR mask = 8 END
+  BUT_ONLY
+
+  COPY_EXISTING ~BDRING08.ITM~ ~override/BMRING06.ITM~
+    SAY NAME1 ~Ring of Wizardry~
+    SAY NAME2 ~Ring of Wizardry~
+    SAY DESC ~This ring doubles the number of 5th-level spells a wizard may prepare each day.
+
+STATISTICS:
+
+Equipped abilities:
+- Can memorize double the amount of 5th-level wizard spells
+
+Weight: 0~
+    LPF BM_RING_SET_BASE_OP42 INT_VAR mask = 16 END
+  BUT_ONLY
+
+  COPY_EXISTING ~BDRING08.ITM~ ~override/BMRING07.ITM~
+    SAY NAME1 ~Ring of Wizardry~
+    SAY NAME2 ~Ring of Wizardry~
+    SAY DESC ~This ring doubles the number of 1st-level, 2nd-level, and 3rd-level spells a wizard may prepare each day.
+
+STATISTICS:
+
+Equipped abilities:
+- Can memorize double the amount of 1st-level wizard spells
+- Can memorize double the amount of 2nd-level wizard spells
+- Can memorize double the amount of 3rd-level wizard spells
+
+Weight: 0~
+    LPF BM_RING_SET_BASE_OP42 INT_VAR mask = 0 END
+    LPF BM_RING_APPEND_OP42   INT_VAR mask = 2 END
+    LPF BM_RING_APPEND_OP42   INT_VAR mask = 4 END
+  BUT_ONLY
+
+  COPY_EXISTING ~BDRING08.ITM~ ~override/BMRING08.ITM~
+    SAY NAME1 ~Ring of Wizardry~
+    SAY NAME2 ~Ring of Wizardry~
+    SAY DESC ~This ring doubles the number of 4th-level and 5th-level spells a wizard may prepare each day.
+
+STATISTICS:
+
+Equipped abilities:
+- Can memorize double the amount of 4th-level wizard spells
+- Can memorize double the amount of 5th-level wizard spells
+
+Weight: 0~
+    LPF BM_RING_SET_BASE_OP42 INT_VAR mask = 8 END
+    LPF BM_RING_APPEND_OP42   INT_VAR mask = 16 END
+  BUT_ONLY
+END
+
+INCLUDE ~bm_tweaks/generated/21_rndbm_rows.tpa~
+
+PRINT ~[bm_tweaks] bonus_randomiser_extra_rolls: updated full RNDBM category/tier tables in RNDTRES.2DA~
+
+COPY_EXISTING_REGEXP GLOB ~^.+\.[cC][rR][eE]$~ ~override~
+  PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
+    READ_LONG 0x14 xp
+    READ_LONG 0x2bc item_off
+    READ_LONG 0x2c0 item_num
+
+    SET has_bonus_roll = 0
+    FOR (index = 0 ; index < item_num ; ++index) BEGIN
+      READ_ASCII (item_off + (index * 0x14)) item_check (8) NULL
+      PATCH_IF ("%item_check%" STRING_COMPARE_REGEXP ~^[Rr][Nn][Dd][Bb][Mm]00[1-7]$~ = 0) BEGIN
+        SET has_bonus_roll = 1
+        SET index = item_num
+      END
+    END
+
+    PATCH_IF (has_bonus_roll = 0) BEGIN
+      SPRINT bonus_roll ~RNDBM007~
+      PATCH_IF (xp < 15000) BEGIN SPRINT bonus_roll ~RNDBM006~ END
+      PATCH_IF (xp <  7000) BEGIN SPRINT bonus_roll ~RNDBM005~ END
+      PATCH_IF (xp <  3000) BEGIN SPRINT bonus_roll ~RNDBM004~ END
+      PATCH_IF (xp <  1500) BEGIN SPRINT bonus_roll ~RNDBM003~ END
+      PATCH_IF (xp <   500) BEGIN SPRINT bonus_roll ~RNDBM002~ END
+      PATCH_IF (xp <   100) BEGIN SPRINT bonus_roll ~RNDBM001~ END
+
+      ADD_CRE_ITEM ~%bonus_roll%~ #0 #0 #0 ~NONE~ ~INV~
+    END
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING_REGEXP GLOB ~^.+\.[aA][rR][eE]$~ ~override~
+  PATCH_IF (SOURCE_SIZE > 0xcc) BEGIN
+    READ_SHORT 0x74 cont_num ELSE 0
+    READ_LONG  0x70 cont_off ELSE 0
+    READ_LONG  0x78 item_off ELSE 0
+
+    FOR (container_index = 0 ; container_index < cont_num ; ++container_index) BEGIN
+      SET cont_base = cont_off + (container_index * 0xc0)
+      READ_LONG (cont_base + 0x40) idx_items
+      READ_LONG (cont_base + 0x44) num_items
+
+      FOR (item_index = num_items - 1 ; item_index >= 0 ; --item_index) BEGIN
+        READ_ASCII (item_off + ((idx_items + item_index) * 0x14)) item_ref (8) NULL
+        PATCH_IF ("%item_ref%" STRING_COMPARE_REGEXP ~^[Rr][Nn][Dd][Bb][Mm]00[1-7]$~ = 0) BEGIN
+          LPM BM_REMOVE_CONTAINER_ITEM
+          READ_LONG 0x70 cont_off
+          READ_LONG 0x78 item_off
+          SET cont_base = cont_off + (container_index * 0xc0)
+          READ_LONG (cont_base + 0x40) idx_items
+          READ_LONG (cont_base + 0x44) num_items
+        END
+      END
+    END
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+PRINT ~[bm_tweaks] bonus_randomiser_extra_rolls: added creature RNDBM*** rolls (XP scaled) and removed static container RNDBM*** entries.~

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import csv
+import os
 import statistics
 import zlib
 from collections import Counter, defaultdict
@@ -23,7 +24,13 @@ class AreaStats:
 
 
 def source_are_dir() -> Path:
-    if SOURCE_BACKUP_DIR.exists() and any(SOURCE_BACKUP_DIR.glob("*.ARE")):
+    # Default to live override so generators track the current install state.
+    # Optional fallback for reproducible debugging snapshots.
+    if (
+        os.environ.get("BM_USE_BACKUP_ARE", "0") == "1"
+        and SOURCE_BACKUP_DIR.exists()
+        and any(SOURCE_BACKUP_DIR.glob("*.ARE"))
+    ):
         return SOURCE_BACKUP_DIR
     return OVERRIDE
 

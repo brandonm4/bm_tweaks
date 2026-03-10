@@ -1,0 +1,92 @@
+// Fix MESpells scroll item names that point to bad/irrelevant dialog.tlk strings.
+// Preferred label: "Scroll of <Spell Name>" from linked spell resource.
+// Fallback label: "Scroll of <Spell ResRef>".
+
+OUTER_SET bm_mes_name_fix_count = 0
+OUTER_SET bm_mes_name_fix_fallback_count = 0
+OUTER_SET bm_mes_spell_name_fix_count = 0
+
+INCLUDE ~bm_tweaks/generated/22_mespells_name_overrides.tpa~
+
+// First fix MEWI spell names themselves so downstream references are coherent.
+COPY_EXISTING_REGEXP GLOB ~^MEWI[0-9][0-9][0-9]\.[sS][pP][lL]$~ ~override~
+  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+    PATCH_IF VARIABLE_IS_SET EVAL ~bm_mes_name_override_%SOURCE_RES%~ BEGIN
+      SPRINT bm_mes_spell_fixed_name EVAL ~%bm_mes_name_override_%SOURCE_RES%%~
+      SAY 0x08 ~%bm_mes_spell_fixed_name%~
+      SAY 0x0c ~%bm_mes_spell_fixed_name%~
+      SET bm_mes_spell_name_fix_count += 1
+    END
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING_REGEXP GLOB ~^ME[A-Z0-9_]+\.[iI][tT][mM]$~ ~override~
+  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+    READ_SHORT 0x1c item_type
+    // Scroll/document-like items only.
+    PATCH_IF (item_type = 11 OR item_type = 37 OR item_type = 50) BEGIN
+      READ_LONG  0x64 ab_off
+      READ_SHORT 0x68 ab_num
+      READ_LONG  0x6a fx_off
+
+      SET linked_found = 0
+      SPRINT linked_spell ~~
+
+      FOR (i = 0; i < ab_num; ++i) BEGIN
+        SET this_ab = ab_off + (i * 0x38)
+        PATCH_IF (this_ab + 0x22 <= SOURCE_SIZE) BEGIN
+          READ_SHORT (this_ab + 0x1e) fx_idx
+          READ_SHORT (this_ab + 0x20) fx_cnt
+
+          FOR (j = 0; j < fx_cnt; ++j) BEGIN
+            SET this_fx = fx_off + ((fx_idx + j) * 0x30)
+            PATCH_IF (this_fx + 0x1c <= SOURCE_SIZE) BEGIN
+              READ_SHORT this_fx op
+              PATCH_IF (op = 146 OR op = 147) BEGIN
+                READ_ASCII (this_fx + 0x14) linked_spell (8) NULL
+                PATCH_IF ("%linked_spell%" STRING_COMPARE_CASE ~~ != 0) BEGIN
+                  SET linked_found = 1
+                  SET j = fx_cnt
+                  SET i = ab_num
+                END
+              END
+            END
+          END
+        END
+      END
+
+      PATCH_IF (linked_found = 1) BEGIN
+        SPRINT bm_mes_spell_name ~~
+        PATCH_IF VARIABLE_IS_SET EVAL ~bm_mes_name_override_%linked_spell%~ BEGIN
+          SPRINT bm_mes_spell_name EVAL ~%bm_mes_name_override_%linked_spell%%~
+        END
+        PATCH_IF FILE_EXISTS_IN_GAME ~%linked_spell%.spl~ BEGIN
+          INNER_PATCH_FILE ~%linked_spell%.spl~ BEGIN
+            READ_STRREF 0x08 _spell_name
+            PATCH_IF ("%_spell_name%" STRING_COMPARE_REGEXP ~<Invalid Strref -?[0-9]+>~ = 0) BEGIN
+              SPRINT _spell_name ~~
+            END
+            PATCH_IF ("%bm_mes_spell_name%" STRING_COMPARE_CASE ~~ = 0) BEGIN
+              SPRINT bm_mes_spell_name ~%_spell_name%~
+            END
+          END
+        END
+
+        PATCH_IF ("%bm_mes_spell_name%" STRING_COMPARE_CASE ~~ != 0) BEGIN
+          SPRINT fixed_name ~Scroll of %bm_mes_spell_name%~
+        END ELSE BEGIN
+          SPRINT fixed_name ~Scroll of %linked_spell%~
+          SET bm_mes_name_fix_fallback_count += 1
+        END
+
+        SAY 0x08 ~%fixed_name%~
+        SAY 0x0c ~%fixed_name%~
+        SET bm_mes_name_fix_count += 1
+      END
+    END
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+PRINT ~[bm_tweaks] mespell_name_fix: renamed %bm_mes_name_fix_count% MESpells scroll item names to "Scroll of <Spell Name>" labels.~
+PRINT ~[bm_tweaks] mespell_name_fix: %bm_mes_name_fix_fallback_count% used resref fallback (missing/invalid linked spell name).~
+PRINT ~[bm_tweaks] mespell_name_fix: renamed %bm_mes_spell_name_fix_count% MEWI spell display names to canonical labels.~

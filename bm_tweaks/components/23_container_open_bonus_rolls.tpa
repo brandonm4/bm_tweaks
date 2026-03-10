@@ -1,0 +1,10 @@
+// Runtime container bonus rolls via area-init script blocks.
+// Each area seeds its containers once per game via BMCO_INIT_<AREA>.
+// Generated install helper routes each area to its ARE-declared script resource.
+
+ACTION_IF FILE_EXISTS ~bm_tweaks/generated/23_install_area_open_rolls.tpa~ BEGIN
+  INCLUDE ~bm_tweaks/generated/23_install_area_open_rolls.tpa~
+  PRINT ~[bm_tweaks] container_open_bonus_rolls: installed area-init container seed blocks on area scripts.~
+END ELSE BEGIN
+  FAIL ~[bm_tweaks] Missing bm_tweaks/generated/23_install_area_open_rolls.tpa.~
+END

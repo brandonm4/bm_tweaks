@@ -43,3 +43,45 @@ DEFINE_PATCH_MACRO BM_ADD_CONTAINER_ITEM BEGIN
     END
   END
 END
+
+DEFINE_PATCH_MACRO BM_REMOVE_CONTAINER_ITEM BEGIN
+  PATCH_IF (container_index >= 0) BEGIN
+    READ_SHORT 0x74 cont_num ELSE 0
+    READ_SHORT 0x76 item_num_total ELSE 0
+    READ_LONG  0x70 cont_off ELSE 0
+    READ_LONG  0x78 item_off ELSE 0
+
+    PATCH_IF (container_index < cont_num) BEGIN
+      SET cont_base = cont_off + (container_index * 0xc0)
+      READ_LONG (cont_base + 0x40) idx_items
+      READ_LONG (cont_base + 0x44) num_items
+
+      PATCH_IF (item_index >= 0 AND item_index < num_items) BEGIN
+        SET remove_idx = idx_items + item_index
+        SET remove_off = item_off + (remove_idx * 0x14)
+
+        DELETE_BYTES remove_off 0x14
+
+        WRITE_SHORT 0x76 (item_num_total - 1)
+        WRITE_LONG  (cont_base + 0x44) (num_items - 1)
+
+        FOR (other_index = 0 ; other_index < cont_num ; ++other_index) BEGIN
+          PATCH_IF (other_index != container_index) BEGIN
+            SET other_base = cont_off + (other_index * 0xc0)
+            READ_LONG (other_base + 0x40) other_idx
+            PATCH_IF (other_idx > remove_idx) BEGIN
+              WRITE_LONG (other_base + 0x40) (other_idx - 1)
+            END
+          END
+        END
+
+        PATCH_FOR_EACH off IN 0x7c 0x84 0x88 0x90 0xa0 0xa8 0xb0 0xb8 0xbc 0xc0 0xc4 0xcc BEGIN
+          READ_LONG off off_check
+          PATCH_IF (off_check > remove_off AND off_check > 0) BEGIN
+            WRITE_LONG off (off_check - 0x14)
+          END
+        END
+      END
+    END
+  END
+END

@@ -67,3 +67,12 @@ INCLUDE ~bm_tweaks/components/19_cleric_shields_usable.tpa~
 
 BEGIN ~Unified spell duration scaling (replacement for old 09/10/17 components). True Duration per caster level scaling to 20~
 INCLUDE ~bm_tweaks/components/20_spell_duration_unified.tpa~
+
+BEGIN ~Extra randomiser-style bonus loot roll for all creatures and containers (XP/area scaled)~
+INCLUDE ~bm_tweaks/components/21_bonus_randomiser_extra_rolls.tpa~
+
+BEGIN ~Fix MESpells scroll item names that point to bad dialog strings~
+INCLUDE ~bm_tweaks/components/22_fix_mespell_scroll_names.tpa~
+
+BEGIN ~Container bonus loot on open (one roll per container, global-gated)~
+INCLUDE ~bm_tweaks/components/23_container_open_bonus_rolls.tpa~
