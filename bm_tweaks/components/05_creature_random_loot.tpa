@@ -3,17 +3,20 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.[cC][rR][eE]$~ ~override~
     READ_LONG  0x14 xp
     READ_LONG  0x2bc item_off
     READ_LONG  0x2c0 item_num
-    SET has_rnd_loot = 0
+    SET has_tiered_loot = 0
 
     FOR (index = 0 ; index < item_num ; ++index) BEGIN
-      READ_ASCII (item_off + (index * 0x14)) item_check
-      PATCH_IF ("%item_check%" STRING_COMPARE_REGEXP ~^[Rr][Nn][Dd]~ = 0) BEGIN
-        SET has_rnd_loot = 1
+      READ_ASCII (item_off + (index * 0x14)) item_check (8) NULL
+      PATCH_IF (
+        ("%item_check%" STRING_COMPARE_REGEXP ~^[Rr][Nn][Dd][Tt][Rr][Ee]0[1-9]$~ = 0) OR
+        ("%item_check%" STRING_COMPARE_REGEXP ~^[Ss][Oo][Dd][Tt][Rr][Ee]0[7-9]$~ = 0)
+      ) BEGIN
+        SET has_tiered_loot = 1
         SET index = item_num
       END
     END
 
-    PATCH_IF (has_rnd_loot = 0) BEGIN
+    PATCH_IF (has_tiered_loot = 0) BEGIN
       SPRINT rnd_item ~RNDTRE09~
       PATCH_IF (xp <  7000) BEGIN SPRINT rnd_item ~RNDTRE08~ END
       PATCH_IF (xp <  3000) BEGIN SPRINT rnd_item ~SODTRE09~ END

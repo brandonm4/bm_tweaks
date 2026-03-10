@@ -11,6 +11,8 @@
 // - Bonus effects are applied by hidden helper spells BMINT13..BMINT25.
 // - BMINTCLR removes prior BMINT* effects before applying current tier.
 
+// Disabled because it doesn't apply slots correctly.
+
 DEFINE_PATCH_FUNCTION BM_INT_RESET_TO_SINGLE_EMPTY_HEADER
 BEGIN
   READ_LONG  0x64 ho

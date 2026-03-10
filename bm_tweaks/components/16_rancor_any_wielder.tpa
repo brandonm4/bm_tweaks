@@ -104,6 +104,8 @@ END
 
 COPY_EXISTING ~SW1H13.ITM~ ~override~
   LPF ~BM_UNLOCK_PERSONAL_ITEM~ END
+  // Moonblade is a longsword; use large sword proficiency bucket.
+  WRITE_SHORT 0x1c 20
   PATCH_PRINT ~BM_Tweaks: unlocked SW1H13 (Moonblade).~
 BUT_ONLY_IF_IT_CHANGES
 

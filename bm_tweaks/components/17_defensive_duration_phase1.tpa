@@ -12,6 +12,8 @@
 // - Only effects with duration exactly 300 are touched
 // - Optional opcode gate per spell prevents collateral edits
 
+// Disabled - obsoleted by component 20
+
 DEFINE_PATCH_FUNCTION BM_PHASE1_SCALE_DIRECT_300
   INT_VAR true_min = 1
           target_opcode = "-1"
