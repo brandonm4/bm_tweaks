@@ -5,9 +5,8 @@ from __future__ import annotations
 import struct
 from pathlib import Path
 
+from lib.paths import OVERRIDE
 
-ROOT = Path("/Volumes/Data/Games/Baldur's Gate II Enhanced Edition")
-OVERRIDE = ROOT / "override"
 CLABPR02 = OVERRIDE / "CLABPR02.2da"
 KIT_IDS = OVERRIDE / "KIT.IDS"
 

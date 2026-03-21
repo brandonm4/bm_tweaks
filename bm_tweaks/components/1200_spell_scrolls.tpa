@@ -231,5 +231,18 @@ ACTION_IF FILE_EXISTS_IN_GAME ~MEWI151.spl~ BEGIN
   INCLUDE ~bm_tweaks/generated/mespells_scrolls.tpa~
 END
 
+// Fix broken Summon Monster I scroll icon in this install stack:
+// SCRL72 points to SPWI127A (missing BAM), which renders as a blank icon.
+ACTION_IF FILE_EXISTS_IN_GAME ~SCRL72.ITM~ BEGIN
+  COPY_EXISTING ~SCRL72.ITM~ ~override~
+    READ_ASCII 0x3a _inv_icon (8)
+    TO_UPPER _inv_icon
+    PATCH_IF (~%_inv_icon%~ STRING_EQUAL_CASE ~SPWI127A~) BEGIN
+      WRITE_ASCIIE 0x3a ~ISCRL1R~ #8
+      PATCH_PRINT ~BM_Tweaks: fixed SCRL72 icon (SPWI127A -> ISCRL1R).~
+    END
+  BUT_ONLY_IF_IT_CHANGES
+END
+
 PRINT ~[bm_tweaks] spell_scrolls: created %_wi_created% arcane spell scrolls.~
 PRINT ~[bm_tweaks] spell_scrolls: created %_pr_created% divine spell scrolls.~

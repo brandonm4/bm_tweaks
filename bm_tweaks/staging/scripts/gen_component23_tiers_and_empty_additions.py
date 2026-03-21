@@ -5,9 +5,10 @@ from pathlib import Path
 import re
 from collections import defaultdict
 
-ROOT = Path('/Volumes/Data/Games/Baldur\'s Gate II Enhanced Edition'.replace("\\'", "'"))
-OVERRIDE = ROOT / 'override'
-GEN = ROOT / 'bm_tweaks' / 'generated'
+from lib.paths import OVERRIDE, GENERATED_DIR
+
+ROOT = Path(__file__).resolve().parents[3]
+GEN = GENERATED_DIR
 IN_TPA = GEN / 'empty_container_assignments.tpa'
 
 OUT_TIER_DIR = GEN / '23_tier_scripts'

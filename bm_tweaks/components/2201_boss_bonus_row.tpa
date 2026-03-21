@@ -1,0 +1,47 @@
+DEFINE_ACTION_FUNCTION ~BM_2201_APPLY_BOSS_ROW~
+  STR_VAR
+    cre_res = ~~
+BEGIN
+  COPY_EXISTING ~%cre_res%.CRE~ ~override~
+    PATCH_IF (SOURCE_SIZE > 0x2d3) BEGIN
+      READ_LONG 0x2bc item_off
+      READ_LONG 0x2c0 item_num
+
+      SET has_any_bonus = 0
+      SET has_boss_bonus = 0
+
+      FOR (idx = 0 ; idx < item_num ; ++idx) BEGIN
+        SET ent = item_off + (idx * 0x14)
+        READ_ASCII ent item_ref (8) NULL
+
+        PATCH_IF (~%item_ref%~ STRING_COMPARE_REGEXP ~^[Rr][Nn][Dd][Bb][Mm]00[1-7]$~ = 0) BEGIN
+          SET has_any_bonus = 1
+          WRITE_ASCIIE ent ~RNDBMBOS~ #8
+        END
+
+        PATCH_IF (~%item_ref%~ STRING_COMPARE_CASE ~RNDBMBOS~ = 0) BEGIN
+          SET has_boss_bonus = 1
+        END
+      END
+
+      PATCH_IF (has_any_bonus = 0 AND has_boss_bonus = 0) BEGIN
+        ADD_CRE_ITEM ~RNDBMBOS~ #0 #0 #0 ~NONE~ ~INV~
+      END
+    END
+  BUT_ONLY_IF_IT_CHANGES
+END
+
+INCLUDE ~bm_tweaks/generated/2201_boss_cre_resrefs.tpa~
+
+// Manual boss exceptions for encounters that are not reliably discoverable
+// from area actor/spawn scans (scripted/variant paths).
+ACTION_FOR_EACH bm_boss_cre IN
+  ~KAHRK~ ~BDKHARM~ ~BDKHARM2~ ~BDKHARMY~
+  ~TAZOK2~ ~TAZOK_~ ~VENKT~ ~RAEMON~ ~HAKT~ ~HAREIS~
+BEGIN
+  ACTION_IF FILE_EXISTS_IN_GAME ~%bm_boss_cre%.CRE~ OR FILE_EXISTS_IN_GAME ~%bm_boss_cre%.cre~ BEGIN
+    LAF BM_2201_APPLY_BOSS_ROW STR_VAR cre_res = ~%bm_boss_cre%~ END
+  END
+END
+
+PRINT ~[bm_tweaks] 2201_boss_bonus_row: upgraded curated boss CRE bonus rows to RNDBMBOS.~

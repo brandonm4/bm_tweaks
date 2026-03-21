@@ -106,8 +106,49 @@ COPY_EXISTING ~SW1H13.ITM~ ~override~
   LPF ~BM_UNLOCK_PERSONAL_ITEM~ END
   // Moonblade is a longsword; use large sword proficiency bucket.
   WRITE_SHORT 0x1c 20
+  // Weapon proficiency selector byte: 0x66=short sword, 0x67=long sword.
+  WRITE_BYTE  0x31 0x67
   PATCH_PRINT ~BM_Tweaks: unlocked SW1H13 (Moonblade).~
 BUT_ONLY_IF_IT_CHANGES
+
+// BG1-style Moonblade variant used by some loot tables.
+ACTION_IF FILE_EXISTS_IN_GAME ~BDSW1H13.ITM~ BEGIN
+  COPY_EXISTING ~BDSW1H13.ITM~ ~override~
+    WRITE_SHORT 0x1c 20
+    WRITE_BYTE  0x31 0x67
+    PATCH_PRINT ~BM_Tweaks: set BDSW1H13 (Moonblade variant) to large sword proficiency.~
+  BUT_ONLY_IF_IT_CHANGES
+END
+
+// Custom Moonblade copy found in some saves/install states.
+ACTION_IF FILE_EXISTS_IN_GAME ~BMSW113.ITM~ BEGIN
+  COPY_EXISTING ~BMSW113.ITM~ ~override~
+    WRITE_SHORT 0x1c 20
+    WRITE_BYTE  0x31 0x67
+    PATCH_PRINT ~BM_Tweaks: set BMSW113 (Moonblade copy) to large sword proficiency.~
+  BUT_ONLY_IF_IT_CHANGES
+END
+
+// Keep item descriptions aligned with the proficiency change.
+DEFINE_ACTION_FUNCTION BM_FIX_MOONBLADE_DESC
+  INT_VAR desc_strref = 0
+BEGIN
+  ACTION_IF (desc_strref > 0) BEGIN
+    ACTION_GET_STRREF desc_strref cur_text
+    OUTER_PATCH_SAVE new_text ~%cur_text%~ BEGIN
+      REPLACE_TEXTUALLY ~Proficiency Type: Small Sword~ ~Proficiency Type: Large Sword~
+      REPLACE_TEXTUALLY ~Proficiency Type: Short Sword~ ~Proficiency Type: Large Sword~
+    END
+    ACTION_IF NOT (~%cur_text%~ STRING_EQUAL ~%new_text%~) BEGIN
+      STRING_SET_EVALUATE desc_strref ~%new_text%~
+      PRINT ~BM_Tweaks: updated Moonblade description strref %desc_strref% to Large Sword.~
+    END
+  END
+END
+
+ACTION_FOR_EACH dsr IN 273790 273792 274129 274130 BEGIN
+  LAF BM_FIX_MOONBLADE_DESC INT_VAR desc_strref = %dsr% END
+END
 
 COPY_EXISTING ~RSBOOT.ITM~ ~override~
   LPF ~BM_UNLOCK_PERSONAL_ITEM~ END

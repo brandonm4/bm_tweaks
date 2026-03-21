@@ -1,0 +1,348 @@
+LOAD_TRA ~bm_tweaks/data/1750/strings.tra~
+
+DEFINE_PATCH_MACRO ~bm_2h_descripts~ BEGIN
+  SPRINT match_1h @202003
+  SPRINT text_2h  @202004
+  REPLACE_TEXTUALLY ~%match_1h%~ ~%text_2h%~
+END
+
+DEFINE_ACTION_FUNCTION ~bm_build_toggle_family~
+  INT_VAR prof_check = 89
+          overhead = 60
+          slashing = 40
+          thrusting = 0
+          two_dice_thrown = 1
+          two_dice_sides = 10
+  STR_VAR map_file = ~cdbastrd_final.2da~
+          one_prefix = ~cdbs~
+          two_prefix = ~c!bs~
+          one_bam = ~isw1h01~
+          two_bam = ~isw2h01~
+          two_paperdoll = ~S2~
+BEGIN
+  MKDIR ~weidu_external/bm_tweaks/1750~
+
+  ACTION_IF FILE_EXISTS ~weidu_external/bm_tweaks/1750/%map_file%~ BEGIN
+    COPY ~weidu_external/bm_tweaks/1750/%map_file%~ ~weidu_external/bm_tweaks/1750/%map_file%~
+  END ELSE BEGIN
+    COPY ~bm_tweaks/data/1750/%map_file%~ ~weidu_external/bm_tweaks/1750/%map_file%~
+  END
+
+  ACTION_CLEAR_ARRAY bm_toggle_known
+  COPY ~weidu_external/bm_tweaks/1750/%map_file%~ ~weidu_external/bm_tweaks/1750/%map_file%~
+    COUNT_2DA_ROWS 3 bm_toggle_count
+    FOR (row = 0; row < bm_toggle_count; ++row) BEGIN
+      READ_2DA_ENTRY row 0 3 orig
+      READ_2DA_ENTRY row 1 3 one
+      READ_2DA_ENTRY row 2 3 two
+      TO_LOWER orig
+      TO_LOWER one
+      TO_LOWER two
+      SET $bm_toggle_known("%orig%") = 1
+      SET $bm_toggle_known("%one%") = 1
+      SET $bm_toggle_known("%two%") = 1
+    END
+    BUT_ONLY
+
+  COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+    READ_BYTE 0x31 prof
+    PATCH_IF (prof = prof_check) BEGIN
+      READ_BYTE 0x18 flags
+      PATCH_IF ((flags BAND BIT2) = BIT2) BEGIN
+        SET melee = 0
+        READ_LONG  0x64 abil_off
+        READ_SHORT 0x68 abil_num
+        FOR (index = 0; index < abil_num; ++index) BEGIN
+          READ_SHORT (abil_off + (index * 0x38)) type
+          PATCH_IF (type = 1) BEGIN
+            SET melee = 1
+          END
+          PATCH_IF (type = 2) BEGIN
+            SET melee = 0
+            SET index = abil_num
+          END
+        END
+        PATCH_IF melee BEGIN
+          SPRINT item ~%SOURCE_RES%~
+          TO_LOWER item
+          PATCH_IF !VARIABLE_IS_SET $bm_toggle_known("%item%") BEGIN
+            INNER_ACTION BEGIN
+              OUTER_SET bm_toggle_count += 1
+              APPEND_OUTER ~weidu_external/bm_tweaks/1750/%map_file%~ ~%item%  %one_prefix%%bm_toggle_count%  %two_prefix%%bm_toggle_count%~
+            END
+          END
+        END
+      END
+    END
+    BUT_ONLY
+
+  ACTION_CLEAR_ARRAY bm_toggle_working
+  COPY ~weidu_external/bm_tweaks/1750/%map_file%~ ~weidu_external/bm_tweaks/1750/%map_file%~
+    COUNT_2DA_ROWS 3 rows
+    FOR (index = 0; index < rows; ++index) BEGIN
+      READ_2DA_ENTRY index 0 3 orig
+      READ_2DA_ENTRY index 1 3 one
+      READ_2DA_ENTRY index 2 3 two
+      DEFINE_ASSOCIATIVE_ARRAY bm_toggle_working BEGIN ~%one%~, ~%two%~ => ~%orig%~ END
+    END
+    BUT_ONLY
+
+  ACTION_PHP_EACH bm_toggle_working AS val => orig BEGIN
+    ACTION_IF FILE_EXISTS_IN_GAME ~%orig%.itm~ BEGIN
+      OUTER_SET prof_ok = 0
+      OUTER_SET toggle_present = 0
+      OUTER_SET lore = 0
+
+      COPY_EXISTING ~%orig%.itm~ ~override~
+        READ_BYTE  0x31 prof
+        READ_SHORT 0x42 lore
+        PATCH_IF (prof = prof_check) BEGIN
+          SET prof_ok = 1
+        END
+        READ_LONG  0x64 abil_off
+        READ_SHORT 0x68 abil_num
+        READ_LONG  0x6a fx_off
+        FOR (abil_idx = 0; abil_idx < abil_num; ++abil_idx) BEGIN
+          SET hdr_off = abil_off + (abil_idx * 0x38)
+          READ_SHORT (hdr_off + 0x02) location
+          READ_SHORT (hdr_off + 0x1e) fx_num
+          READ_SHORT (hdr_off + 0x20) fx_idx
+          PATCH_IF (location = 3 AND fx_num = 2) BEGIN
+            SET fx1_off = fx_off + (fx_idx * 0x30)
+            SET fx2_off = fx_off + ((fx_idx + 1) * 0x30)
+            READ_SHORT fx1_off fx1_opcode
+            READ_SHORT fx2_off fx2_opcode
+            PATCH_IF (fx1_opcode = 122 AND fx2_opcode = 123) BEGIN
+              SET toggle_present = 1
+            END
+          END
+        END
+        BUT_ONLY
+
+      ACTION_IF (prof_ok = 1) AND (!toggle_present OR !FILE_EXISTS_IN_GAME ~%val_1%.itm~ OR ((lore > 0) AND !FILE_EXISTS_IN_GAME ~%val_0%.itm~)) BEGIN
+        COPY_EXISTING ~%orig%.itm~ ~override~
+          PATCH_IF (lore = 0) BEGIN
+            SPRINT one ~%orig%~
+          END ELSE BEGIN
+            SPRINT one ~%val_0%~
+          END
+          SPRINT two ~%val_1%~
+          READ_SHORT 0x68 abil_num
+          READ_LONG  0x6a fx_off
+          WRITE_SHORT 0x68 (abil_num + 1)
+          WRITE_LONG  0x6a (fx_off + 0x38)
+          PATCH_IF (abil_num > 0) BEGIN
+            READ_LONG  0x64 abil_off
+            READ_SHORT (abil_off + 0x1e + ((abil_num - 1) * 0x38)) last_fx_num
+            READ_SHORT (abil_off + 0x20 + ((abil_num - 1) * 0x38)) last_fx_idx
+            SET new_fx = last_fx_idx + last_fx_num
+          END ELSE BEGIN
+            READ_SHORT 0x70 new_fx
+          END
+
+          INSERT_BYTES   (fx_off + (new_fx * 0x30)) 0x30
+            WRITE_SHORT  (fx_off + (new_fx * 0x30)) 123
+            WRITE_BYTE   (fx_off + 0x02 + (new_fx * 0x30)) 1
+            WRITE_BYTE   (fx_off + 0x0c + (new_fx * 0x30)) 1
+            WRITE_BYTE   (fx_off + 0x12 + (new_fx * 0x30)) 100
+            WRITE_ASCIIE (fx_off + 0x14 + (new_fx * 0x30)) ~%orig%~ #8
+          INSERT_BYTES   (fx_off + (new_fx * 0x30)) 0x30
+            WRITE_SHORT  (fx_off + (new_fx * 0x30)) 122
+            WRITE_BYTE   (fx_off + 0x02 + (new_fx * 0x30)) 1
+            WRITE_BYTE   (fx_off + 0x0c + (new_fx * 0x30)) 1
+            WRITE_BYTE   (fx_off + 0x12 + (new_fx * 0x30)) 100
+            WRITE_ASCIIE (fx_off + 0x14 + (new_fx * 0x30)) ~%two%~ #8
+          INSERT_BYTES   fx_off 0x38
+            WRITE_BYTE   fx_off 1
+            WRITE_BYTE   (fx_off + 0x01) 1
+            WRITE_SHORT  (fx_off + 0x02) 3
+            WRITE_ASCIIE (fx_off + 0x04) ~%two_bam%~ #8
+            WRITE_SHORT  (fx_off + 0x0c) 5
+            WRITE_SHORT  (fx_off + 0x0e) 1
+            WRITE_SHORT  (fx_off + 0x1e) 2
+            WRITE_SHORT  (fx_off + 0x20) new_fx
+            WRITE_SHORT  (fx_off + 0x22) 1
+            WRITE_BYTE   (fx_off + 0x24) 0
+            WRITE_LONG   (fx_off + 0x26) BIT11
+            WRITE_SHORT  (fx_off + 0x2a) 1
+          BUT_ONLY
+
+        ACTION_IF (FILE_CONTAINS_EVALUATED (~tooltip.2da~ ~^%orig% ~)) BEGIN
+          COPY_EXISTING ~tooltip.2da~ ~override~
+            PATCH_IF (abil_num = 0) BEGIN
+              REPLACE_TEXTUALLY ~^\(%orig%\)\([ %TAB%]+\)\(-?[0-9]+\)\(.+\)~ ~\1\2CDTWOHANDED\3
+%two%\2CDONEHANDED\3~
+              PATCH_IF ("%one%" STRING_COMPARE_CASE "%orig%" != 0) BEGIN
+                REPLACE_TEXTUALLY ~^$~ ~~ // no-op to keep parser happy
+              END
+            END
+            PATCH_IF (abil_num = 1) BEGIN
+              REPLACE_TEXTUALLY ~^\(%orig%\)\([ %TAB%]+-?[0-9]+[ %TAB%]+\)\(-?[0-9]+\)\(.+\)~ ~\1\2CDTWOHANDED\3
+%two%\2CDONEHANDED\3~
+            END
+            PATCH_IF (abil_num = 2) BEGIN
+              REPLACE_TEXTUALLY ~^\(%orig%\)\([ %TAB%]+-?[0-9]+[ %TAB%]+-?[0-9]+[ %TAB%]+\)\(-?[0-9]+\)~ ~\1\2CDTWOHANDED
+%two%\2CDONEHANDED~
+            END
+          BUT_ONLY
+        END ELSE BEGIN
+          ACTION_IF (abil_num = 0) BEGIN
+            APPEND ~tooltip.2da~ ~%orig% CDTWOHANDED -1 -1
+%two% CDONEHANDED -1 -1~
+          END
+          ACTION_IF (abil_num = 1) BEGIN
+            APPEND ~tooltip.2da~ ~%orig% -1 CDTWOHANDED -1
+%two% -1 CDONEHANDED -1~
+          END
+          ACTION_IF (abil_num = 2) BEGIN
+            APPEND ~tooltip.2da~ ~%orig% -1 -1 CDTWOHANDED
+%two% -1 -1 CDONEHANDED~
+          END
+        END
+
+        ACTION_IF ("%one%" STRING_COMPARE_CASE "%orig%" != 0) BEGIN
+          COPY_EXISTING ~%orig%.itm~ ~override/%two%.itm~
+                        ~%orig%.itm~ ~override/%one%.itm~
+            WRITE_SHORT 0x42 0
+            WRITE_ASCIIE (fx_off + 0x4c + ((new_fx + 1) * 0x30)) ~%DEST_RES%~ #8
+            BUT_ONLY
+        END ELSE BEGIN
+          COPY_EXISTING ~%orig%.itm~ ~override/%two%.itm~
+            WRITE_ASCIIE (fx_off + 0x4c + ((new_fx + 1) * 0x30)) ~%DEST_RES%~ #8
+            BUT_ONLY
+        END
+
+        COPY_EXISTING ~%two%.itm~ ~override~
+          WRITE_ASCIIE (fx_off + 0x4c + (new_fx * 0x30)) ~%one%~ #8
+          WRITE_ASCIIE (fx_off + 0x04) ~%one_bam%~ #8
+          WRITE_BYTE   0x18 THIS | BIT1
+          WRITE_ASCIIE 0x22 ~%two_paperdoll%~ #2
+          READ_LONG    0x64 abil_off
+          READ_SHORT   0x68 abil_num
+          FOR (loops = 0; loops < abil_num; ++loops) BEGIN
+            READ_BYTE (abil_off + (loops * 0x38)) type
+            PATCH_IF (type = 1) BEGIN
+              WRITE_BYTE  (abil_off + 0x16 + (loops * 0x38)) two_dice_sides
+              WRITE_BYTE  (abil_off + 0x18 + (loops * 0x38)) two_dice_thrown
+              WRITE_SHORT (abil_off + 0x2c + (loops * 0x38)) overhead
+              WRITE_SHORT (abil_off + 0x2e + (loops * 0x38)) slashing
+              WRITE_SHORT (abil_off + 0x30 + (loops * 0x38)) thrusting
+            END
+          END
+          PATCH_FOR_EACH offset IN 0x50 0x54 BEGIN
+            READ_STRREF ~%offset%~ desc
+            PATCH_IF ("%desc%" STRING_COMPARE_REGEXP ~<Invalid Strref -?[0-9]+>~) BEGIN
+              INNER_PATCH_SAVE desc ~%desc%~ BEGIN
+                LAUNCH_PATCH_MACRO ~bm_2h_descripts~
+              END
+              SAY_EVALUATED ~%offset%~ ~%desc%~
+            END
+          END
+          BUT_ONLY
+      END
+
+      ACTION_IF FILE_EXISTS_IN_GAME ~%val_1%.itm~ BEGIN
+        COPY_EXISTING ~%val_1%.itm~ ~override~
+          READ_LONG  0x64 abil_off
+          READ_SHORT 0x68 abil_num
+          WRITE_BYTE   0x18 THIS | BIT1
+          WRITE_ASCIIE 0x22 ~%two_paperdoll%~ #2
+          FOR (loops = 0; loops < abil_num; ++loops) BEGIN
+            READ_BYTE (abil_off + (loops * 0x38)) type
+            PATCH_IF (type = 1) BEGIN
+              WRITE_BYTE  (abil_off + 0x16 + (loops * 0x38)) two_dice_sides
+              WRITE_BYTE  (abil_off + 0x18 + (loops * 0x38)) two_dice_thrown
+              WRITE_SHORT (abil_off + 0x2c + (loops * 0x38)) overhead
+              WRITE_SHORT (abil_off + 0x2e + (loops * 0x38)) slashing
+              WRITE_SHORT (abil_off + 0x30 + (loops * 0x38)) thrusting
+            END
+          END
+          BUT_ONLY
+      END
+    END
+  END
+END
+
+LAF ~bm_build_toggle_family~
+  INT_VAR prof_check = 89
+          two_dice_thrown = 1
+          two_dice_sides = 10
+  STR_VAR map_file = ~cdbastrd_final.2da~
+          one_prefix = ~cdbs~
+          two_prefix = ~c!bs~
+          one_bam = ~isw1h01~
+          two_bam = ~isw2h01~
+          two_paperdoll = ~S2~
+END
+
+LAF ~bm_build_toggle_family~
+  INT_VAR prof_check = 94
+          two_dice_thrown = 2
+          two_dice_sides = 6
+  STR_VAR map_file = ~cdkatana_final.2da~
+          one_prefix = ~cdkt~
+          two_prefix = ~c!kt~
+          one_bam = ~isw1h43~
+          two_bam = ~isw2h01~
+          two_paperdoll = ~S2~
+END
+
+LAF ~bm_build_toggle_family~
+  INT_VAR prof_check = 92
+          overhead = 0
+          slashing = 35
+          thrusting = 65
+          two_dice_thrown = 1
+          two_dice_sides = 12
+  STR_VAR map_file = ~cdaxe_final.2da~
+          one_prefix = ~cdax~
+          two_prefix = ~c!ax~
+          one_bam = ~iax1h01~
+          two_bam = ~ihalb01~
+          two_paperdoll = ~hb~
+END
+
+OUTER_SET bm_toggle_fix_count = 0
+
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+    READ_LONG  0x64 abil_off
+    READ_SHORT 0x68 abil_num
+    READ_LONG  0x6a fx_off
+
+    FOR (index = 0; index < abil_num; ++index) BEGIN
+      SET hdr_off = abil_off + (index * 0x38)
+      READ_SHORT (hdr_off + 0x02) location
+      READ_SHORT (hdr_off + 0x1e) fx_num
+      READ_SHORT (hdr_off + 0x20) fx_idx
+
+      PATCH_IF (location = 3 AND fx_num = 2) BEGIN
+        SET fx1_off = fx_off + (fx_idx * 0x30)
+        SET fx2_off = fx_off + ((fx_idx + 1) * 0x30)
+        READ_SHORT fx1_off fx1_opcode
+        READ_SHORT fx2_off fx2_opcode
+
+        PATCH_IF (fx1_opcode = 122 AND fx2_opcode = 123) BEGIN
+          READ_SHORT (hdr_off + 0x22) max_charges
+          READ_SHORT (hdr_off + 0x24) depletion
+          PATCH_IF (max_charges != 1 OR depletion != 0) BEGIN
+            WRITE_SHORT (hdr_off + 0x22) 1
+            WRITE_SHORT (hdr_off + 0x24) 0
+            SET bm_toggle_fix_count += 1
+          END
+        END
+      END
+    END
+
+    PATCH_IF (bm_toggle_fix_count > 0) BEGIN
+      PATCH_PRINT ~[bm_tweaks] 1750_fix_toggle_weapons: fixed %SOURCE_RES% toggle header(s).~
+    END
+  END
+  SET bm_toggle_fix_count = 0
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~tooltip.2da~ ~override~
+  REPLACE ~CDONEHANDED~ @202001
+  REPLACE ~CDTWOHANDED~ @202002
+  PRETTY_PRINT_2DA
+BUT_ONLY_IF_IT_CHANGES

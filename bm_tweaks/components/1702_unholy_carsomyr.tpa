@@ -1,0 +1,216 @@
+DEFINE_PATCH_MACRO ~bm_1702_add_toggle~ BEGIN
+  READ_LONG  0x64 abil_off
+  READ_SHORT 0x68 abil_num
+  READ_LONG  0x6a fx_off
+
+  PATCH_IF (abil_num > 0) BEGIN
+    READ_SHORT (abil_off + 0x1e + ((abil_num - 1) * 0x38)) last_fx_num
+    READ_SHORT (abil_off + 0x20 + ((abil_num - 1) * 0x38)) last_fx_idx
+    SET new_fx = last_fx_idx + last_fx_num
+  END ELSE BEGIN
+    READ_SHORT 0x70 new_fx
+  END
+
+  WRITE_SHORT 0x68 (abil_num + 1)
+  WRITE_LONG  0x6a (fx_off + 0x38)
+
+  INSERT_BYTES (fx_off + (new_fx * 0x30)) 0x30
+    WRITE_SHORT  (fx_off + (new_fx * 0x30)) 123
+    WRITE_BYTE   (fx_off + 0x02 + (new_fx * 0x30)) 1
+    WRITE_BYTE   (fx_off + 0x0c + (new_fx * 0x30)) 1
+    WRITE_BYTE   (fx_off + 0x12 + (new_fx * 0x30)) 100
+    WRITE_ASCIIE (fx_off + 0x14 + (new_fx * 0x30)) ~%bm_1702_toggle_self%~ #8
+
+  INSERT_BYTES (fx_off + (new_fx * 0x30)) 0x30
+    WRITE_SHORT  (fx_off + (new_fx * 0x30)) 122
+    WRITE_BYTE   (fx_off + 0x02 + (new_fx * 0x30)) 1
+    WRITE_BYTE   (fx_off + 0x0c + (new_fx * 0x30)) 1
+    WRITE_BYTE   (fx_off + 0x12 + (new_fx * 0x30)) 100
+    WRITE_ASCIIE (fx_off + 0x14 + (new_fx * 0x30)) ~%bm_1702_toggle_other%~ #8
+
+  INSERT_BYTES fx_off 0x38
+    WRITE_BYTE   fx_off 1
+    WRITE_BYTE   (fx_off + 0x01) 1
+    WRITE_SHORT  (fx_off + 0x02) 3
+    WRITE_ASCIIE (fx_off + 0x04) ~%bm_1702_toggle_icon%~ #8
+    WRITE_SHORT  (fx_off + 0x0c) 5
+    WRITE_SHORT  (fx_off + 0x0e) 1
+    WRITE_SHORT  (fx_off + 0x1e) 2
+    WRITE_SHORT  (fx_off + 0x20) new_fx
+    WRITE_SHORT  (fx_off + 0x22) 1
+    WRITE_BYTE   (fx_off + 0x24) 0
+    WRITE_LONG   (fx_off + 0x26) BIT11
+    WRITE_SHORT  (fx_off + 0x2a) 1
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~CARSOMYR.ITM~
+       AND FILE_EXISTS_IN_GAME ~SW2H19.ITM~
+       AND FILE_EXISTS_IN_GAME ~BOTSMITH.DLG~
+       AND FILE_EXISTS_IN_GAME ~tooltip.2da~ BEGIN
+
+  COPY_EXISTING ~CARSOMYR.ITM~ ~override/BMCARS5.ITM~
+    SAY NAME1 ~Corrupted Carsomyr +5~
+    SAY NAME2 ~Corrupted Carsomyr +5~
+    SAY DESC ~Once sanctified as a holy avenger, this blade has been profaned and turned toward spite. The sword still tears enchantments from its victims, but its grace has curdled into malice. Evil wielders alone can bear its will. In this corrupted form the blade may be wielded in one hand, or shifted back into a two-handed stance at need.
+
+Combat abilities:
+- +5 bonus to attack rolls
+- +5 bonus to damage
+- 50% Magic Resistance
+- Dispel magic on every hit
+- Cast Dispel Magic once per day
+- May be wielded one-handed or two-handed
+
+THAC0: +5
+Damage: 1d10 + 5
+Damage type: Slashing
+Weight: 7
+Speed Factor: 5
+Proficiency Type: Large Sword
+Type: One-handed
+Requires: Evil alignment~
+    WRITE_LONG  0x1e 1617951820
+    WRITE_BYTE  0x18 108
+    WRITE_SHORT 0x42 0
+    WRITE_ASCIIE 0x22 ~S0~ #2
+    WRITE_ASCIIE 0x3a ~ISW1H64~ #8
+    WRITE_ASCIIE 0x44 ~GSW1H01~ #8
+    WRITE_ASCIIE 0x4c ~PSW1H64~ #8
+    SPRINT bm_1702_toggle_self  ~BMCARS5~
+    SPRINT bm_1702_toggle_other ~BMCAR25~
+    SPRINT bm_1702_toggle_icon  ~ISW2H10~
+    LAUNCH_PATCH_MACRO ~bm_1702_add_toggle~
+  BUT_ONLY_IF_IT_CHANGES
+
+  COPY_EXISTING ~CARSOMYR.ITM~ ~override/BMCAR25.ITM~
+    SAY NAME1 ~Corrupted Carsomyr +5~
+    SAY NAME2 ~Corrupted Carsomyr +5~
+    SAY DESC ~Once sanctified as a holy avenger, this blade has been profaned and turned toward spite. The sword still tears enchantments from its victims, but its grace has curdled into malice. Evil wielders alone can bear its will. In this form the weapon is braced in both hands for the full ruinous sweep of the original Carsomyr.
+
+Combat abilities:
+- +5 bonus to attack rolls
+- +5 bonus to damage
+- 50% Magic Resistance
+- Dispel magic on every hit
+- Cast Dispel Magic once per day
+- May be wielded one-handed or two-handed
+
+THAC0: +5
+Damage: 1d10 + 5
+Damage type: Slashing
+Weight: 7
+Speed Factor: 5
+Proficiency Type: Large Sword
+Type: Two-handed
+Requires: Evil alignment~
+    WRITE_LONG  0x1e 1617951820
+    WRITE_BYTE  0x18 110
+    WRITE_SHORT 0x42 0
+    WRITE_ASCIIE 0x22 ~S2~ #2
+    WRITE_ASCIIE 0x3a ~ISW2H06~ #8
+    WRITE_ASCIIE 0x44 ~GSW2H01~ #8
+    WRITE_ASCIIE 0x4c ~CSW2H06~ #8
+    SPRINT bm_1702_toggle_self  ~BMCAR25~
+    SPRINT bm_1702_toggle_other ~BMCARS5~
+    SPRINT bm_1702_toggle_icon  ~ISW1H64~
+    LAUNCH_PATCH_MACRO ~bm_1702_add_toggle~
+  BUT_ONLY_IF_IT_CHANGES
+
+  COPY_EXISTING ~SW2H19.ITM~ ~override/BMCARS6.ITM~
+    SAY NAME1 ~Corrupted Carsomyr +6~
+    SAY NAME2 ~Corrupted Carsomyr +6~
+    SAY DESC ~This is the final profaned form of Carsomyr. The Eye of Tyr still empowers the blade, but its sanctity has been inverted into a hateful, unclean brilliance. The sword remains an exceptional mage-killer, now fit only for evil hands. In this corrupted form the blade may be wielded in one hand, or shifted back into a two-handed stance at need.
+
+Combat abilities:
+- +6 bonus to attack rolls
+- +6 bonus to damage
+- 50% Magic Resistance
+- Dispel magic on every hit
+- Cast Dispel Magic once per day
+- May be wielded one-handed or two-handed
+
+THAC0: +6
+Damage: 1d10 + 6
+Damage type: Slashing
+Weight: 7
+Speed Factor: 5
+Proficiency Type: Large Sword
+Type: One-handed
+Requires: Evil alignment~
+    WRITE_LONG  0x1e 1617951820
+    WRITE_BYTE  0x18 108
+    WRITE_SHORT 0x42 0
+    WRITE_ASCIIE 0x22 ~S0~ #2
+    WRITE_ASCIIE 0x3a ~ISW1H65~ #8
+    WRITE_ASCIIE 0x44 ~GSW1H01~ #8
+    WRITE_ASCIIE 0x4c ~PSW1H64~ #8
+    SPRINT bm_1702_toggle_self  ~BMCARS6~
+    SPRINT bm_1702_toggle_other ~BMCAR26~
+    SPRINT bm_1702_toggle_icon  ~ISW2H10~
+    LAUNCH_PATCH_MACRO ~bm_1702_add_toggle~
+  BUT_ONLY_IF_IT_CHANGES
+
+  COPY_EXISTING ~SW2H19.ITM~ ~override/BMCAR26.ITM~
+    SAY NAME1 ~Corrupted Carsomyr +6~
+    SAY NAME2 ~Corrupted Carsomyr +6~
+    SAY DESC ~This is the final profaned form of Carsomyr. The Eye of Tyr still empowers the blade, but its sanctity has been inverted into a hateful, unclean brilliance. The sword remains an exceptional mage-killer, now fit only for evil hands. In this form the weapon is braced in both hands for the full ruinous sweep of the original Carsomyr.
+
+Combat abilities:
+- +6 bonus to attack rolls
+- +6 bonus to damage
+- 50% Magic Resistance
+- Dispel magic on every hit
+- Cast Dispel Magic once per day
+- May be wielded one-handed or two-handed
+
+THAC0: +6
+Damage: 1d10 + 6
+Damage type: Slashing
+Weight: 7
+Speed Factor: 5
+Proficiency Type: Large Sword
+Type: Two-handed
+Requires: Evil alignment~
+    WRITE_LONG  0x1e 1617951820
+    WRITE_BYTE  0x18 110
+    WRITE_SHORT 0x42 0
+    WRITE_ASCIIE 0x22 ~S2~ #2
+    WRITE_ASCIIE 0x3a ~ISW2H10~ #8
+    WRITE_ASCIIE 0x44 ~GSW2H01~ #8
+    WRITE_ASCIIE 0x4c ~CSW2H10~ #8
+    SPRINT bm_1702_toggle_self  ~BMCAR26~
+    SPRINT bm_1702_toggle_other ~BMCARS6~
+    SPRINT bm_1702_toggle_icon  ~ISW1H65~
+    LAUNCH_PATCH_MACRO ~bm_1702_add_toggle~
+  BUT_ONLY_IF_IT_CHANGES
+
+  COPY_EXISTING ~MISC12.ITM~ ~override/BMCRPTK.ITM~
+    SAY NAME1 ~Profane Unguent~
+    SAY NAME2 ~Profane Unguent~
+    SAY DESC ~Cespenar distills this foul black unguent from infernal reagents and old workshop filth. Smeared across Carsomyr, it can profane the holy avenger and turn it into its corrupted counterpart. Cespenar can also use it to corrupt the upgraded Carsomyr +6.
+
+This item is consumed in the corruption ritual.~
+    WRITE_SHORT 0x1c 0
+    WRITE_SHORT 0x42 0
+    WRITE_LONG  0x60 0
+    WRITE_LONG  0x64 0
+    WRITE_SHORT 0x68 0
+    WRITE_LONG  0x6a 0
+    WRITE_SHORT 0x70 0
+    WRITE_LONG  0x1e 0
+    WRITE_ASCIIE 0x3a ~IMISC12~ #8
+    WRITE_ASCIIE 0x44 ~GMISC12~ #8
+    WRITE_ASCIIE 0x4c ~CMISC12~ #8
+  BUT_ONLY_IF_IT_CHANGES
+
+  APPEND ~tooltip.2da~ ~BMCARS5 -1 12026 273589 -1~ UNLESS ~^BMCARS5[ %TAB%]~
+  APPEND ~tooltip.2da~ ~BMCAR25 -1 12026 273588 -1~ UNLESS ~^BMCAR25[ %TAB%]~
+  APPEND ~tooltip.2da~ ~BMCARS6 -1 12026 273589 -1~ UNLESS ~^BMCARS6[ %TAB%]~
+  APPEND ~tooltip.2da~ ~BMCAR26 -1 12026 273588 -1~ UNLESS ~^BMCAR26[ %TAB%]~
+
+  COMPILE ~bm_tweaks/components/dialogs/1702_unholy_carsomyr.d~
+
+  PRINT ~[bm_tweaks] 1702_unholy_carsomyr: built corrupted Carsomyr +5/+6 bastard-sword variants, added Cespenar corruption hooks, and added fixed one-/two-handed toggles.~
+END ELSE BEGIN
+  PRINT ~[bm_tweaks] 1702_unholy_carsomyr: skipped (Carsomyr/Cespenar resources not present in this install).~
+END

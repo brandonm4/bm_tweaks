@@ -1,0 +1,32 @@
+// Lowers trap detection/disarm thresholds without removing traps.
+// Leaves special traps at difficulty 100 unchanged.
+
+COPY_EXISTING_REGEXP GLOB ~^.+\.are$~ ~override~
+  READ_ASCII 0x04 ver (4)
+  SET off = (~%ver%~ STR_EQ ~V9.1~) ? 0x10 : 0x00
+
+  GET_OFFSET_ARRAY trig (0x5c + off) 4 (0x5a + off) 2 0 0 0xc4
+  GET_OFFSET_ARRAY cont (0x70 + off) 4 (0x74 + off) 2 0 0 0xc0
+  GET_OFFSET_ARRAY door (0xa8 + off) 4 (0xa4 + off) 4 0 0 0xc8
+
+  PHP_EACH trig AS _ => trig_off BEGIN
+    READ_SHORT (trig_off + 0x6a) trap_diff
+    PATCH_IF ((trap_diff > 0) AND (trap_diff < 100)) BEGIN
+      WRITE_SHORT (trig_off + 0x6a) ((trap_diff + 1) / 2)
+    END
+  END
+
+  PHP_EACH cont AS _ => cont_off BEGIN
+    READ_SHORT (cont_off + 0x2c) trap_diff
+    PATCH_IF ((trap_diff > 0) AND (trap_diff < 100)) BEGIN
+      WRITE_SHORT (cont_off + 0x2c) ((trap_diff + 1) / 2)
+    END
+  END
+
+  PHP_EACH door AS _ => door_off BEGIN
+    READ_SHORT (door_off + 0x6e) trap_diff
+    PATCH_IF ((trap_diff > 0) AND (trap_diff < 100)) BEGIN
+      WRITE_SHORT (door_off + 0x6e) ((trap_diff + 1) / 2)
+    END
+  END
+BUT_ONLY
